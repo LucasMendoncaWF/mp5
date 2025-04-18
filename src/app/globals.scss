@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+$themes: (
+  light: (
+    background: #dfdfdf,
+    contrastColor: #303030,
+  ),
+  dark: (
+    background: #2e2e2e,
+    contrastColor: #ffffff,
+  )
+);
+
+@mixin apply-theme($theme-name) {
+  $theme-map: map-get($themes, $theme-name);
+
+  @each $key in map-keys($theme-map) {
+    $value: map-get($theme-map, $key);
+    --#{$key}: #{$value};
+  }
+}
+
+html[data-theme='light'] {
+  @include apply-theme(light);
+}
+
+html[data-theme='dark'] {
+  @include apply-theme(dark);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  color: var(--contrastColor);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
