@@ -25,14 +25,15 @@ export default async function LocaleLayout({
   if (hasLocale(routing.locales, locale)) {
     newLocale = locale;
   }
-  console.log(theme)
 
   return (
     <html lang={newLocale} data-theme={theme} className={theme}>
       <body>
         <NextIntlClientProvider>
           <Header />
+          <div className='main-container'>
             {children}
+          </div>
           <Footer />
         </NextIntlClientProvider >
       </body>

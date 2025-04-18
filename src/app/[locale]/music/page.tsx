@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 const MusicPage = () => {
   const t = useTranslations('music_layout');
   return (
-    <div>
+    <div className='text-primary'>
       {t('title')}
       about
     </div>

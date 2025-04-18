@@ -1,5 +1,19 @@
 @import "tailwindcss";
+@font-face {
+  font-family: LemonMilk;
+  src: url('/fonts/LemonMilk.otf');
+}
+
+@font-face {
+  font-family: Creamer;
+  src: url('/fonts/Creamer.otf');
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #ff7f16;
+}
 
 $themes: (
   light: (
@@ -23,6 +37,7 @@ $themes: (
 
 html[data-theme='light'] {
   @include apply-theme(light);
+  color: #ff7f16;
 }
 
 html[data-theme='dark'] {
@@ -38,7 +53,32 @@ body {
 body {
   color: var(--contrastColor);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  transition: 0.3s;
+  font-family: LemonMilk;
+  letter-spacing: 1.4px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+// Custom general classes
+.main-container {
+  height: calc(100vh - 68px);
+}
+
+
+// Custom animations
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s;
 }
