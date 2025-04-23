@@ -1,6 +1,6 @@
 const nextIntlConfig = {
   locales: ['en', 'pt'],
-  defaultLocale: 'en'
+  defaultLocale: 'en',
 };
 
 export default nextIntlConfig;

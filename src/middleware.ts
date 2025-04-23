@@ -1,18 +1,24 @@
+import type { NextRequest } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
+
 import { routing } from './i18n/routing';
-import { NextRequest } from 'next/server';
 
 const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request: NextRequest) {
-  const response = intlMiddleware(request); // trata localização
+  const response = intlMiddleware(request);
 
-  const theme = request.cookies.get('theme')?.value === 'dark' ? 'dark' : 'light';
-  response.headers.set('x-theme', theme); // adiciona info do tema
+  const initialTheme = request.cookies.get('theme')?.value;
+  let theme = 'dark';
+  if (initialTheme === 'light') {
+    theme = 'light';
+  }
+
+  response.headers.set('x-theme', theme);
 
   return response;
 }
 
 export const config = {
-  matcher: ['/((?!api|trpc|_next|_vercel|.*\\..*).*)'],
+  matcher: ['/((?!api|trpc|netlify|_next|_vercel|.*\\..*).*)'],
 };

@@ -11,33 +11,53 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  --color-primary: #ff7f16;
-}
-
 $themes: (
   light: (
-    background: #dfdfdf,
-    contrastColor: #303030,
+    textColor: black,
+    primary: #e8f0f2,
+    primarySoft: #e0e0e0,
+    secondary: #35524a,
+    tertiary: #f4a261,
+    textContrastColor: #f6efdd,
+    quaternary: black,
+    borderColor: black,
   ),
   dark: (
-    background: #2e2e2e,
-    contrastColor: #ffffff,
+    textColor: #f0e7d5,
+    primary: #1d1d1d,
+    primarySoft: #2b2b2b,
+    secondary: #2d3a38,
+    tertiary: #e6471f,
+    textContrastColor: #f6efdd,
+    quaternary: #d6e3e3,
+    borderColor: #f6efdd,
   )
 );
 
-@mixin apply-theme($theme-name) {
-  $theme-map: map-get($themes, $theme-name);
 
-  @each $key in map-keys($theme-map) {
-    $value: map-get($theme-map, $key);
+@mixin apply-theme($theme-name) {
+  $theme-list: map.get($themes, $theme-name);
+
+  @each $key, $value in $theme-list {
     --#{$key}: #{$value};
+  }
+
+  @each $key, $value in $theme-list {
+    .bg-#{$key} {
+      background-color: #{$value};
+    }
+    .text-#{$key} {
+      color: #{$value};
+    }
+
+    .border-#{$key} {
+      border-color: #{$value};
+    }
   }
 }
 
 html[data-theme='light'] {
   @include apply-theme(light);
-  color: #ff7f16;
 }
 
 html[data-theme='dark'] {

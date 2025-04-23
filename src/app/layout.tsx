@@ -1,9 +1,13 @@
+import { headers } from 'next/headers';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import React from 'react';
+
 import Footer from '@/components/PageStructure/Footer';
 import Header from '@/components/PageStructure/Header';
 import { routing } from '@/i18n/routing';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import nextIntlConfig from '../../next-intl.config'
-import { headers } from 'next/headers';
+
+import nextIntlConfig from '../../next-intl.config';
+
 import './globals.scss';
 
 async function getThemeFromHeaders() {
@@ -14,13 +18,13 @@ async function getThemeFromHeaders() {
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }) {
   const theme = await getThemeFromHeaders();
-  const {locale} = await params;
+  const { locale } = await params;
   let newLocale = nextIntlConfig.defaultLocale;
   if (hasLocale(routing.locales, locale)) {
     newLocale = locale;
@@ -31,11 +35,9 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider>
           <Header />
-          <div className='main-container'>
-            {children}
-          </div>
+          <div className="main-container">{children}</div>
           <Footer />
-        </NextIntlClientProvider >
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -1,33 +1,70 @@
-'use client'
+import Link from 'next/link';
 
-import { useState } from "react"
-import ThemeSelector from "../ThemeSelector"
-import LanguageSwitcher from "../LanguageSwitcher"
-import Link from "next/link"
+import LanguageSwitcher from '../LanguageSwitcher';
+import ThemeSelector from '../ThemeSelector';
 
-export default function MobileMenu() {
-  const [isMenuOpen, setMenuOpen] = useState(false)
+interface Props {
+  // eslint-disable-next-line no-unused-vars
+  setMenuOpen: (_value: boolean) => void;
+  isMenuOpen: boolean;
+  onClickLink: () => void;
+}
+
+export default function MobileMenu({ setMenuOpen, isMenuOpen, onClickLink }: Props) {
   return (
-    <div className="flex content-center h-full" onMouseLeave={() => setMenuOpen(false)}>
-      <button onClick={() => setMenuOpen(true)} className="cursor-pointer hover:opacity-60 transition">
-        <div className="bg-white w-8 h-1"></div>
-        <div className="bg-white w-8 h-1 mt-1"></div>
-        <div className="bg-white w-8 h-1 mt-1"></div>
+    <div className="flex content-center h-full">
+      <button
+        onClick={() => setMenuOpen(true)}
+        className="cursor-pointer hover:opacity-60 transition"
+      >
+        <div className="bg-textColor w-8 h-1"></div>
+        <div className="bg-textColor w-8 h-1 mt-1"></div>
+        <div className="bg-textColor w-8 h-1 mt-1"></div>
       </button>
 
-      {isMenuOpen && 
-        <div className="fixed fade-in w-40 top-15 right-0 bg-white dark:bg-gray-950 p-4">
-          <Link href="#"><div className="mb-3 text-sm text-right">Home</div></Link>
-          <Link href="#"><div className="mb-3 text-sm text-right">Playlists</div></Link>
-          <Link href="#"><div className="mb-3 text-sm text-right">Explore</div></Link>
-          <Link href="#"><div className="mb-5 text-sm text-right">Settings</div></Link>
-          <div className="flex gap-3 justify-end mb-3">
-            <ThemeSelector />
-            <LanguageSwitcher/>
+      {isMenuOpen && (
+        <div className="fixed text-right fade-in w-40 top-13 right-0 bg-primary border-b-4 border-l-4 p-4">
+          <div className="text-lg py-1 hover:opacity-80 transition">
+            <Link onClick={onClickLink} href="#about-section">
+              About
+            </Link>
           </div>
-          
+          <div className="text-lg py-1 hover:opacity-80 transition">
+            <Link onClick={onClickLink} href="#main-projects-section">
+              Projects
+            </Link>
+          </div>
+          <div className="text-lg py-1 hover:opacity-80 transition">
+            <Link onClick={onClickLink} href="#intranets-section">
+              Intranets
+            </Link>
+          </div>
+          <div className="text-lg py-1 hover:opacity-80 transition">
+            <Link onClick={onClickLink} href="#skills-section">
+              Skills
+            </Link>
+          </div>
+          <div className="text-lg py-1 hover:opacity-80 transition">
+            <Link onClick={onClickLink} href="#experience-section">
+              Experience
+            </Link>
+          </div>
+          <div className="text-lg py-1 hover:opacity-80 transition">
+            <Link onClick={onClickLink} href="#design-section">
+              Design
+            </Link>
+          </div>
+          <div className="text-lg py-1 hover:opacity-80 transition">
+            <Link onClick={onClickLink} href="#contact-section">
+              Contact
+            </Link>
+          </div>
+          <div className="flex gap-3 justify-center mb-3 mt-3">
+            <ThemeSelector />
+            <LanguageSwitcher />
+          </div>
         </div>
-      }
+      )}
     </div>
-  )
+  );
 }
