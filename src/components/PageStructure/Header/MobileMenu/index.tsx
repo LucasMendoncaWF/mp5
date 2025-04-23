@@ -17,13 +17,13 @@ export default function MobileMenu({ setMenuOpen, isMenuOpen, onClickLink }: Pro
         onClick={() => setMenuOpen(true)}
         className="cursor-pointer hover:opacity-60 transition"
       >
-        <div className="bg-textColor w-8 h-1"></div>
-        <div className="bg-textColor w-8 h-1 mt-1"></div>
-        <div className="bg-textColor w-8 h-1 mt-1"></div>
+        <div className="bg-primary w-8 h-1"></div>
+        <div className="bg-primary w-8 h-1 mt-1"></div>
+        <div className="bg-primary w-8 h-1 mt-1"></div>
       </button>
 
       {isMenuOpen && (
-        <div className="fixed text-right fade-in w-40 top-13 right-0 bg-primary border-b-4 border-l-4 p-4">
+        <div className="fixed text-right fade-in w-40 top-15 right-0 bg-background border-b-4 border-l-4 p-4">
           <div className="text-lg py-1 hover:opacity-80 transition">
             <Link onClick={onClickLink} href="#about-section">
               About

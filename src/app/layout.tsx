@@ -35,7 +35,7 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider>
           <Header />
-          <div className="main-container">{children}</div>
+          <div className="main-container bg-background">{children}</div>
           <Footer />
         </NextIntlClientProvider>
       </body>

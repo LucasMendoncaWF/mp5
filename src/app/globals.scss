@@ -1,4 +1,6 @@
+@use "sass:map";
 @import "tailwindcss";
+
 @font-face {
   font-family: LemonMilk;
   src: url('/fonts/LemonMilk.otf');
@@ -13,24 +15,20 @@
 
 $themes: (
   light: (
-    textColor: black,
-    primary: #e8f0f2,
-    primarySoft: #e0e0e0,
-    secondary: #35524a,
-    tertiary: #f4a261,
-    textContrastColor: #f6efdd,
-    quaternary: black,
-    borderColor: black,
+    text-color: #2e1e17,
+    contrast-color: #310000,
+    primary: #ff580b,
+    border-color: #dcd2cb,
+    background: #fef9f6,
+    background-secondary: #f0eae7,
   ),
   dark: (
-    textColor: #f0e7d5,
-    primary: #1d1d1d,
-    primarySoft: #2b2b2b,
-    secondary: #2d3a38,
-    tertiary: #e6471f,
-    textContrastColor: #f6efdd,
-    quaternary: #d6e3e3,
-    borderColor: #f6efdd,
+    text-color: #f5eee9,
+    contrast-color: #ff8833,
+    primary: #ff5100,
+    border-color: #2c1f18,
+    background: #14100e,
+    background-secondary: #1c1512,
   )
 );
 
@@ -71,7 +69,7 @@ body {
 }
 
 body {
-  color: var(--contrastColor);
+  color: var(--contrast-color);
   background: var(--background);
   transition: 0.3s;
   font-family: LemonMilk;

@@ -1,5 +1,5 @@
 .theme-toggle-button {
-  background-color: black;
+  background-color: var(--contrast-color);
   width: 34px;
   height: 20px;
   border-radius: 20px;
@@ -19,15 +19,14 @@
   &__inner-icon {
     background-image: url('/images/sun.png');
     background-position: center;
-    background-size: 12px;
+    background-size: 10px;
     background-repeat: no-repeat;
-    background-color: white;
     width: 100%;
     height: 100%;
+    background-color: var(--background);
   }
 
   &--light {
-    background-color: white;
 
     .theme-toggle-button__inner-circle {
       transform: translateX(16px);
@@ -35,7 +34,6 @@
 
     .theme-toggle-button__inner-icon {
       background-image: url('/images/moon.png');
-      background-color: black;
     }
     
   }
