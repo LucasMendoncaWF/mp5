@@ -1,0 +1,118 @@
+
+.play-button {
+  &__icon {
+    width: 0; 
+    height: 0; 
+    border-top: solid transparent;
+    border-bottom: solid transparent;
+    border-left: solid var(--background);
+    position: absolute;
+  }
+
+  &__notes-animation {
+    position: relative;
+
+    &::before, &::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      bottom: calc(100% + 15px);
+      left: calc(50% - 10px);
+      transform: scale(0.5);
+      background-image: url('/images/note_1.png');
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      z-index: 9;
+      opacity: 0;
+    }
+
+    &::before {
+      animation: ClickNoteB 1s;
+    }
+
+    &::after {
+      background-image: url('/images/note_2.png');
+      animation: ClickNoteA 1s;
+    }
+  }
+
+  &__element {
+    &.pressed {
+      animation: PlayButtonPress 0.4s;
+    }
+  }
+
+  @keyframes PlayButtonPress {
+    0% {
+      transform: scale(1);
+    }
+
+    40% {
+      transform: scale(0.7);
+    }
+
+    80% {
+      transform: scale(1.2);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes ClickNoteA {
+    0% {
+      opacity: 0;
+      bottom: calc(100% + 14px);
+    }
+
+    20% {
+      opacity: 1;
+    }
+
+    50% {
+      left: 50%;
+      transform: scale(1);
+    }
+
+    80% {
+      opacity: 1;
+    }
+
+    100% {
+      left: calc(50% - 3px);
+      bottom: calc(100% + 36px);
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+
+  @keyframes ClickNoteB {
+    20% {
+      opacity: 0;
+      left: 0px;
+      bottom: calc(100% + 12px);
+    }
+
+    30% {
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1);
+    }
+
+    80% {
+      opacity: 1;
+    }
+
+    100% {
+      left: -5px;
+      bottom: calc(100% + 30px);
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+}

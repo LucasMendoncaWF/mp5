@@ -2,8 +2,7 @@ import { headers } from 'next/headers';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
-import Footer from '@/components/PageStructure/Footer';
-import Header from '@/components/PageStructure/Header';
+import Header from '@/components/Header';
 import { routing } from '@/i18n/routing';
 
 import nextIntlConfig from '../../next-intl.config';
@@ -35,8 +34,7 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider>
           <Header />
-          <div className="main-container bg-background">{children}</div>
-          <Footer />
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

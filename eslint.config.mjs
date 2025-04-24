@@ -33,6 +33,7 @@ const config = [
       'prettier/prettier': [
         'error',
         {
+          endOfLine: 'auto',
           semi: true,
           singleQuote: true,
           trailingComma: 'all',

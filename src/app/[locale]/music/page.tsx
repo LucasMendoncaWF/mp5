@@ -1,8 +1,5 @@
-import { useTranslations } from 'next-intl';
-
 const MusicPage = () => {
-  const t = useTranslations('music_layout');
-  return <div className="text-primary">{t('title')}</div>;
+  return <div className="text-primary pt-10"></div>;
 };
 
 export default MusicPage;

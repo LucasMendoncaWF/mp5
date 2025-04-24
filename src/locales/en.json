@@ -1,5 +1,12 @@
 {
-  "music_layout": {
-    "title": "test en"
-  }
+  "settings": "Settings",
+  "profile": "Profile",
+  "playlists": "Your Playlists",
+  "english": "English",
+  "portuguese": "Portuguese",
+  "footer": "Developed by Lucas Mendonça (2025)",
+  "edit": "Edit",
+  "delete": "Delete",
+  "addFavorite": "Add to favorites",
+  "addToPlaylist": "Add to a Playlist"
 }
