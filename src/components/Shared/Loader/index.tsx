@@ -16,7 +16,7 @@ export default function Loader({
   return (
     <div
       style={{ width, height, backgroundColor, position }}
-      className="flex flex-wrap justify-center content-center top-0 left-0"
+      className="flex flex-wrap justify-center content-center top-0 left-0 z-999"
     >
       <div className="loader">
         <div className="loader__notes"></div>

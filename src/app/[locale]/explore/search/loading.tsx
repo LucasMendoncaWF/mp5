@@ -1,4 +1,4 @@
-import LoaderExplore from '@/components/Loader/LoaderExplore';
+import LoaderExplore from '@/components/Shared/Loader/LoaderExplore';
 
 export default function ExploreSubLoading() {
   return <LoaderExplore />;

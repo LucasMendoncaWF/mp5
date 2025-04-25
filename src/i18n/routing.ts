@@ -1,5 +1,5 @@
 import { defineRouting } from 'next-intl/routing';
 
-import nextIntlConfig from '../../next-intl.config';
+import nextIntlConfig from '@/locales/languages';
 
 export const routing = defineRouting(nextIntlConfig);

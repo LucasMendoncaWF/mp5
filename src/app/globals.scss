@@ -1,5 +1,5 @@
 @use "sass:map";
-@import "tailwindcss";
+@use "tailwindcss";
 
 @font-face {
   font-family: terminal;
@@ -56,10 +56,15 @@ $themes: (
 
 html[data-theme='light'] {
   @include apply-theme(light);
+  --right-shadow-carousel: linear-gradient(90deg,rgba(40, 40, 40, 0) 30%, rgba(40, 40, 40, 0.3) 100%);
+  --left-shadow-carousel: linear-gradient(90deg,rgba(40, 40, 40, 0.3) 0%, rgba(40, 40, 40, 0) 50%);
+  
 }
 
 html[data-theme='dark'] {
   @include apply-theme(dark);
+  --right-shadow-carousel: linear-gradient(90deg,rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.8) 100%);
+  --left-shadow-carousel: linear-gradient(90deg,rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
 }
 
 html,
@@ -91,6 +96,27 @@ body {
   }
 }
 
+.explore-container {
+  width: 100%;
+  @media screen and (min-width: 768px) { 
+    width: calc(100% - 320px);
+  }
+}
+
+button {
+  &:active {
+    transform: scale(0.8);
+  }
+}
+
+.gradient-right {
+  background: var(--right-shadow-carousel);
+  transition: 0.4s;
+}
+.gradient-left {
+  background: var(--left-shadow-carousel);
+  transition: 0.4s;
+}
 
 // Custom animations
 @keyframes fadeIn {
@@ -105,4 +131,24 @@ body {
 
 .fade-in {
   animation: fadeIn 0.3s;
+}
+
+@keyframes SkeletonAnimation {
+  0% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.1;
+  }
+}
+
+.skeleton-animation {
+  background-color: var(--text-color);
+  opacity: 0.3;
+  animation: SkeletonAnimation 2.2s infinite ease-in-out;
 }

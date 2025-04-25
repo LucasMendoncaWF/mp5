@@ -1,18 +1,19 @@
 import { headers } from 'next/headers';
+import Image from 'next/image';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
-import Header from '@/components/Header';
+import Header from '@/components/Shared/Header';
 import { routing } from '@/i18n/routing';
-
-import nextIntlConfig from '../../next-intl.config';
+import nextIntlConfig from '@/locales/languages';
 
 import './globals.scss';
+import PreRender from '@/components/Shared/PreRender';
 
 async function getThemeFromHeaders() {
   const headersList = headers();
   const theme = (await headersList).get('x-theme');
-  return theme === 'dark' ? 'dark' : 'light';
+  return theme === 'light' ? 'light' : 'dark';
 }
 
 export default async function LocaleLayout({
@@ -32,6 +33,7 @@ export default async function LocaleLayout({
   return (
     <html lang={newLocale} data-theme={theme} className={theme}>
       <body>
+        <PreRender />
         <NextIntlClientProvider>
           <Header />
           {children}

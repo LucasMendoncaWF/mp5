@@ -1,10 +1,9 @@
 'use client';
-import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import nextIntlConfig from '../../../next-intl.config';
+import nextIntlConfig from '@/locales/languages';
 
 export default function LanguageSwitcher() {
   const [isMenuOpen, setMenuOpen] = useState(false);

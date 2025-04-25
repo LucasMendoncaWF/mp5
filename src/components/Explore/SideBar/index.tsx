@@ -2,15 +2,15 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import routes from '@/app/routes';
+import LanguageSwitcher from '@/components/Shared/LanguageSwitcher';
+import ThemeSelector from '@/components/Shared/ThemeSelector';
 
 import PlaylistItem from './PlaylistItem';
-import LanguageSwitcher from '../LanguageSwitcher';
-import ThemeSelector from '../ThemeSelector';
 
 export default function SideBar() {
   const t = useTranslations();
   return (
-    <div className="w-[320px] text-sm bg-background-secondary h-full md:block hidden">
+    <div className="w-full text-sm bg-background-secondary h-full md:block hidden">
       <div className="p-8 h-[85%] overflow-y-auto">
         <div className="pb-2">
           <Link

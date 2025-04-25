@@ -1,6 +1,3 @@
-const nextIntlConfig = {
-  locales: ['en', 'pt'],
-  defaultLocale: 'en',
-};
+import nextIntlConfig from '@/locales/languages';
 
 export default nextIntlConfig;
