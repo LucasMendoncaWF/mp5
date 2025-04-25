@@ -7,15 +7,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postinstall": "npm rebuild lightningcss",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern .next/ --ignore-pattern .netlify/ --ignore-pattern node_modules/ --fix"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.4",
-    "axios": "^1.8.4",
+    "@vercel/node": "^5.1.14",
     "dotenv": "^16.5.0",
-    "lightningcss": "^1.29.3",
     "next-intl": "^4.0.2",
+    "nodemailer": "^6.10.1",
     "postcss": "^8.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -23,10 +22,11 @@
     "tailwindcss": "^4.1.4"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/eslintrc": "^3",
     "@netlify/functions": "^3.1.2",
     "@netlify/plugin-nextjs": "^5.10.7",
     "@types/node": "^20.17.30",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
