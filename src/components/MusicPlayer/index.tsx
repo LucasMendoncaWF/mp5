@@ -52,13 +52,13 @@ export default function MusicPlayer() {
   return (
     <div className="h-[118px] select-none w-full bg-background-secondary">
       <div className="flex items-center justify-center">
-        <button className="tracking-[-5px] mr-2 cursor-pointer transition text-primary text-xl mr-1 hover:opacity-70 hover:scale-108">
+        <button className="tracking-[-5px] mr-2 cursor-pointer transition text-primary text-xl mr-1 hover:opacity-70 active:scale-80">
           ◀◀
         </button>
         <div className="p-2 px-3 bg-background-secondary mt-[-30px] rounded-full">
           <PlayButton onClick={() => {}} width={50} />
         </div>
-        <button className="tracking-[-5px] ml-1 cursor-pointer transition text-primary text-xl hover:opacity-70 hover:scale-108">
+        <button className="tracking-[-5px] ml-1 cursor-pointer transition text-primary text-xl hover:opacity-70 active:scale-80">
           ▶▶
         </button>
       </div>
