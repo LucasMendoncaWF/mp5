@@ -10,12 +10,13 @@ export function middleware(request: NextRequest) {
 
   const initialTheme = request.cookies.get('theme')?.value;
   let theme = 'dark';
+  document.documentElement.classList.remove('light');
+  document.documentElement.classList.remove('dark');
   if (initialTheme === 'light') {
     theme = 'light';
   }
-
+  document.documentElement.classList.add(theme);
   response.headers.set('x-theme', theme);
-
   return response;
 }
 
