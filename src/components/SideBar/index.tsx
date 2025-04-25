@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
+import routes from '@/app/routes';
+
 import PlaylistItem from './PlaylistItem';
 import LanguageSwitcher from '../LanguageSwitcher';
 import ThemeSelector from '../ThemeSelector';
@@ -13,7 +15,7 @@ export default function SideBar() {
         <div className="pb-2">
           <Link
             className="hover:opacity-60 font-bold text-xl capitalize transition"
-            href="/playlists"
+            href={routes.playlists.base}
           >
             {t('playlists')}
           </Link>
@@ -27,7 +29,7 @@ export default function SideBar() {
         <div className="pt-5">
           <Link
             className="hover:opacity-60 font-bold capitalize text-lg  transition"
-            href="/playlists"
+            href={routes.profile.base}
           >
             {t('profile')}
           </Link>
@@ -35,7 +37,7 @@ export default function SideBar() {
         <div className="pt-2">
           <Link
             className="hover:opacity-60 font-bold capitalize text-lg transition"
-            href="/playlists"
+            href={routes.settings.base}
           >
             {t('settings')}
           </Link>

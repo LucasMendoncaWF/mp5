@@ -18,12 +18,12 @@ export default function DropDownMenu() {
         onClick={() => setMenuOpen(!isMenuOpen)}
         className="flex gap-[3px] py-2 cursor-pointer transition hover:opacity-70"
       >
-        <div className="w-2 h-2 rounded-full bg-text-color"></div>
-        <div className="w-2 h-2 rounded-full bg-text-color"></div>
-        <div className="w-2 h-2 rounded-full bg-text-color"></div>
+        <div className="w-[6px] h-[6px] rounded-full bg-text-color"></div>
+        <div className="w-[6px] h-[6px] rounded-full bg-text-color"></div>
+        <div className="w-[6px] h-[6px] rounded-full bg-text-color"></div>
       </button>
       {isMenuOpen && (
-        <div className="bg-text-color w-40 z-9 rounded-md rounded-200 z-9999 right-[50%] absolute bottom-[100%]">
+        <div className="bg-text-color w-40 z-9 rounded-md rounded-200 z-9999 right-[10%] absolute bottom-[100%]">
           <button
             onClick={onCloseMenu}
             className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"

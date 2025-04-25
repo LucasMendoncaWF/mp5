@@ -1,4 +1,5 @@
 'use client';
+import routes from '@/app/routes';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useTranslations } from 'use-intl';
@@ -19,7 +20,7 @@ export default function PlaylistItem() {
       className="capitalize relative py-2 flex items-center justify-between"
     >
       <Link
-        href="/playlist"
+        href={`${routes.playlists.base}/${1}`}
         className="dark:opacity-80 hover:opacity-60 transition text-text-color"
       >
         playlist 4
