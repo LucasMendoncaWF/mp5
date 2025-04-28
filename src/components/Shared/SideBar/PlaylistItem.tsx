@@ -1,8 +1,10 @@
 'use client';
-import routes from '@/app/routes';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useTranslations } from 'use-intl';
+
+import routes from '@/app/routes';
+
 import DropDownMenu from '../DropDownMenu';
 
 export default function PlaylistItem() {

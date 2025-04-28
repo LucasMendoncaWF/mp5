@@ -1,21 +1,29 @@
 'use client';
 import Image from 'next/image';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
-export default function VolumeControl() {
+interface Props {
+  // eslint-disable-next-line no-unused-vars
+  setVolume: (vol: number) => void;
+  volume: number;
+}
+
+export default function VolumeControl({ setVolume, volume }: Props) {
   const barRef = useRef<HTMLDivElement>(null);
-  const [volume, setVolume] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
 
-  const updateVolume = (clientX: number) => {
-    const bar = barRef.current;
-    if (!bar) return;
+  const updateVolume = useCallback(
+    (clientX: number) => {
+      const bar = barRef.current;
+      if (!bar) return;
 
-    const rect = bar.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const newVolume = Math.max(0, Math.min((x / rect.width) * 100, 100));
-    setVolume(newVolume);
-  };
+      const rect = bar.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const newVolume = Math.max(0, Math.min((x / rect.width) * 100, 100));
+      setVolume(newVolume);
+    },
+    [setVolume],
+  );
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -35,7 +43,7 @@ export default function VolumeControl() {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, updateVolume]);
 
   return (
     <div className="flex items-center gap-2 w-full justify-start select-none">

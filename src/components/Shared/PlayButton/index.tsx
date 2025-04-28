@@ -12,6 +12,7 @@ interface Props {
   isSingleTrack?: boolean;
   isPlaylist?: boolean;
   disabled?: boolean;
+  isLoading?: boolean;
 }
 
 export default function PlayButton({
@@ -21,6 +22,7 @@ export default function PlayButton({
   disabled,
   isPlaylist,
   playList,
+  isLoading,
 }: Props) {
   const {
     togglePlay,
@@ -75,7 +77,9 @@ export default function PlayButton({
         className={`play-button__element ${buttonPressed && 'pressed'} bg-primary cursor-pointer relative h-full w-full rounded-full transition duration-300 hover:opacity-80 hover:scale-92`}
       >
         {buttonPressed && <div className="play-button__notes-animation"></div>}
-        {!isCurrentPlaying ? (
+        {isLoading && isCurrentPlaying ? (
+          <div className="play-button__loader"></div>
+        ) : !isCurrentPlaying ? (
           <div
             style={{
               borderWidth: parseValueToPx(width / 3.4),

@@ -8,6 +8,7 @@ import type { TrackModel } from '@/models/tracks';
 
 import DropDownMenu from '../DropDownMenu';
 import PlayButton from '../PlayButton';
+import './MusicItemThumb.scss';
 
 export default function MusicItemThumb({ track }: { track: TrackModel }) {
   const t = useTranslations();
@@ -29,7 +30,7 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
             <div className="p-4 w-full h-full relative z-2">
               <div className="music-thumb-gradient absolute bottom-0 left-0 w-full h-full z-1"></div>
               <div className="flex w-full h-full items-center justify-between  relative z-3">
-                <div className="text-sm line-clamp-2 font-bold dark:text-white w-1/2 ">
+                <div className="text-sm line-clamp-2 font-bold dark:text-white music-item-thumb-title ">
                   {track.title}
                 </div>
                 <PlayButton track={track} />

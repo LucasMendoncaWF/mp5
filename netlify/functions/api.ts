@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const APP_NAME = 'lucas-media-player-mp5';
+export const APP_NAME = 'lucas-media-player-mp5';
 
 interface OptionsRequest {
   params?: Record<string, any>;
@@ -8,7 +8,7 @@ interface OptionsRequest {
   data?: any;
 }
 
-async function getBaseUrl() {
+export async function getBaseUrl() {
   const { data } = await axios.get('https://api.audius.co');
   const firstUrl = data.data[0];
   return firstUrl;

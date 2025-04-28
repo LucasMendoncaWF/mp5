@@ -10,6 +10,7 @@ import ShuffleIcon from '@/svgs/icon-shuffle';
 import VolumeControl from './VolumeControl';
 import './MusicPlayer.scss';
 import DropDownMenu from '../DropDownMenu';
+import { AudioPlayer } from './AudioPlayer';
 
 export default function MusicPlayer() {
   const t = useTranslations();
@@ -30,8 +31,10 @@ export default function MusicPlayer() {
     currentTrack,
     getCurrentMusicSiblings,
   } = useTrackStore();
-  const [percentage, setPercentage] = useState(0);
+  const [progressPercentage, setProgressPercentage] = useState(0);
+  const [volume, setVolume] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const updatePercentage = (clientX: number) => {
     const progressBar = progressBarRef.current;
@@ -40,8 +43,16 @@ export default function MusicPlayer() {
     const rect = progressBar.getBoundingClientRect();
     const x = clientX - rect.left;
     const newPercentage = Math.max(0, Math.min((x / rect.width) * 100, 100));
-    setPercentage(newPercentage);
+    setProgressPercentage(newPercentage);
+    setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (currentTrack) {
+      setIsLoading(true);
+      setProgressPercentage(0);
+    }
+  }, [currentTrack]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -76,7 +87,11 @@ export default function MusicPlayer() {
           ◀◀
         </button>
         <div className="p-2 px-3 bg-background-secondary mt-[-30px] rounded-full">
-          <PlayButton disabled={!currentTrack && !currentPlayList} width={50} />
+          <PlayButton
+            isLoading={isLoading}
+            disabled={!currentTrack && !currentPlayList}
+            width={50}
+          />
         </div>
         <button
           disabled={!hasNext && !isRepeatActive}
@@ -88,7 +103,7 @@ export default function MusicPlayer() {
 
       <div className="w-full mb-3 mt-2 flex items-center justify-center px-6 md:px-10 transform-[translateX()]">
         <div className="w-[100px]">
-          <VolumeControl />
+          <VolumeControl setVolume={setVolume} volume={volume} />
         </div>
         <div className="capitalize music-player__name text-center line-clamp-1">
           {currentTrack?.title}
@@ -122,7 +137,7 @@ export default function MusicPlayer() {
           </DropDownMenu>
         </div>
       </div>
-      <div className="w-full flex justify-center mt-4">
+      <div className="w-full flex gap-3 items-center relative justify-center mt-4">
         <div
           ref={progressBarRef}
           onMouseDown={(e) => updatePercentage(e.clientX)}
@@ -130,19 +145,29 @@ export default function MusicPlayer() {
         >
           <div className="w-full h-full overflow-hidden">
             <div
-              style={{ width: `${percentage}%` }}
+              style={{ width: `${progressPercentage}%` }}
               className="h-full bg-text-color rounded-lg"
             ></div>
           </div>
 
           <div
             onMouseDown={() => setIsDragging(true)}
-            style={{ left: `${percentage - 0.5}%` }}
+            style={{ left: `${progressPercentage - 0.5}%` }}
             className={`h-4 w-4 bottom-[-4px] rounded-full border-2 border-text-color bg-background absolute z-10 transition hover:opacity-80 hover:scale-109 ${
               isDragging ? 'cursor-grabbing' : 'cursor-grab'
             }`}
           ></div>
         </div>
+        {currentTrack && (
+          <AudioPlayer
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            progress={progressPercentage}
+            onChangeProgress={setProgressPercentage}
+            trackId={currentTrack?.id}
+            volume={volume}
+          />
+        )}
       </div>
     </div>
   );

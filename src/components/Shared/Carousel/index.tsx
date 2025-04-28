@@ -74,7 +74,12 @@ export default function Carousel({ children, onRendered }: Props) {
 
   useEffect(() => {
     const handleResize = () => {
-      calcSize();
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current);
+      }
+      resizeTimeout.current = setTimeout(() => {
+        calcSize();
+      }, 100);
     };
 
     window.addEventListener('resize', handleResize);
