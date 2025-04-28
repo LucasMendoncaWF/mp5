@@ -1,26 +1,41 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslations } from 'use-intl';
 
 import routes from '@/app/routes';
 import type { TrackModel } from '@/models/tracks';
+import useTrackStore from '@/stores/trackStore';
 
 import DropDownMenu from '../DropDownMenu';
 import PlayButton from '../PlayButton';
+
 import './MusicItemThumb.scss';
 
 export default function MusicItemThumb({ track }: { track: TrackModel }) {
   const t = useTranslations();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const { addToFavorites, removeFromFavorites, favorites } = useTrackStore();
+  const isOnFavorites = favorites.find((item) => item.id === track.id);
   const onCloseMenu = () => {
     setTimeout(() => {
       setMenuOpen(false);
-    }, 20);
+    }, 50);
+  };
+
+  const onClickFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (isOnFavorites) {
+      removeFromFavorites(track);
+    } else {
+      addToFavorites(track);
+    }
+    onCloseMenu();
   };
 
   return (
-    <div className="py-2 md:px-4 px-2" onBlur={onCloseMenu}>
+    <div className="py-2 md:px-4 px-2" onMouseLeave={onCloseMenu}>
       <Link href={`${routes.track}/${track.id}`}>
         <div
           className="link-hover relative text-text-color md:w-70 md:h-70 w-50 h-50 bg-primary bg-center bg-no-repeat bg-cover flex-wrap items-end flex"
@@ -47,10 +62,10 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
               setMenuOpen={setMenuOpen}
             >
               <button
-                onClick={onCloseMenu}
+                onClick={onClickFavorite}
                 className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
               >
-                {t('addFavorite')}
+                {isOnFavorites ? t('removeFavorite') : t('addFavorite')}
               </button>
               <button
                 onClick={onCloseMenu}

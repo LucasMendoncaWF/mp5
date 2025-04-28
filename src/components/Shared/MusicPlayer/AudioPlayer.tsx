@@ -25,9 +25,10 @@ export function AudioPlayer({
   setIsLoading,
 }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const playTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const changeProgressTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { isPlaying, togglePlay, isRepeatActive, getCurrentMusicSiblings } = useTrackStore();
+  const { isPlaying, setPlaying, isRepeatActive, getCurrentMusicSiblings } = useTrackStore();
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const { hasNext } = getCurrentMusicSiblings();
@@ -81,15 +82,20 @@ export function AudioPlayer({
   }, [progress, duration]);
 
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio || !trackId) {
-      return;
+    if (playTimeout.current) {
+      clearTimeout(playTimeout.current);
     }
-    if (isPlaying) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
+    playTimeout.current = setTimeout(() => {
+      const audio = audioRef.current;
+      if (!audio || !trackId) {
+        return;
+      }
+      if (isPlaying) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }, 100);
   }, [isPlaying, trackId]);
 
   useEffect(() => {
@@ -99,13 +105,14 @@ export function AudioPlayer({
       onChangeProgress(0);
       if (hasNext) {
         //
-      } else if (isRepeatActive) {
+      }
+      if (isRepeatActive) {
         audio.play();
       } else {
-        togglePlay();
+        setPlaying(false);
       }
     }
-  }, [hasNext, isRepeatActive, onChangeProgress, progress, togglePlay]);
+  }, [hasNext, isRepeatActive, onChangeProgress, progress, setPlaying]);
 
   const handleProgress = (event: React.SyntheticEvent<HTMLAudioElement>) => {
     const audio = event.target as HTMLAudioElement;
@@ -135,7 +142,7 @@ export function AudioPlayer({
 
   return (
     <>
-      <span className="text-[11px] absolute top-2 pt-[2px] w-20 text-center">
+      <span className="text-[10px] absolute top-2 pt-[2px] w-20 text-center">
         {!isLoading && (
           <>
             {formatTime(currentTime)}/{formatTime(duration)}

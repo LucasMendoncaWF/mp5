@@ -11,7 +11,6 @@ export default function Header() {
       <Link className="font-secondary hover:scale-108 transition" href={routes.explore}>
         <Image src="/images/logo.png" width="40" height="40" alt="logo" />
       </Link>
-
       <SearchField />
     </div>
   );

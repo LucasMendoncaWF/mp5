@@ -2,17 +2,18 @@
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import { useTrendingMusics } from '@/api/explore';
+import { useGenres } from '@/api/explore';
 import Carousel from '@/components/Shared/Carousel';
 import ErrorMessage from '@/components/Shared/ErrorMessage';
+import GenreItemThumb from '@/components/Shared/GenreItemThumb';
 
-import MusicItemThumb from '../../Shared/MusicItemThumb';
 import TradingListSkeleton from '../skeleton';
 
-export default function TrendingList() {
+export default function GenresList() {
   const t = useTranslations();
   const [isRendered, setIsRendered] = useState(false);
-  const { data, hasError, isLoading } = useTrendingMusics();
+  const { data, hasError, isLoading } = useGenres();
+
   if (isLoading) {
     return <TradingListSkeleton />;
   }
@@ -30,7 +31,7 @@ export default function TrendingList() {
       {data && !isLoading && (
         <div className={!isRendered ? 'overflow-hidden w-0 h-0' : ''}>
           <Carousel onRendered={() => setIsRendered(true)}>
-            {data?.map((track) => <MusicItemThumb track={track} key={track.id} />)}
+            {data?.map((genre) => <GenreItemThumb title={genre} key={genre} />)}
           </Carousel>
         </div>
       )}

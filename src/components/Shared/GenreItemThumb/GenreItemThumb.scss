@@ -1,0 +1,41 @@
+.genre-item-thumb {
+  position: relative;
+
+  &--loading {
+    animation: breathing 1s infinite ;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    top: -1px;
+    left: -1px;
+    box-shadow: inset 2px 2px 8px 8px var(--tertiary);
+  }
+
+  svg {
+    color: var(--text-color);
+  }
+
+  :nth-child(even) {
+    svg {
+      color: var(--primary);
+    }
+  }
+}
+
+@keyframes breathing {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

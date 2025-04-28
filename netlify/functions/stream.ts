@@ -1,4 +1,3 @@
-import type { VercelResponse } from '@vercel/node';
 import axios from 'axios';
 import type { NextRequest } from 'next/server';
 

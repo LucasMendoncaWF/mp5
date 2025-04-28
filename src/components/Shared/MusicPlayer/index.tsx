@@ -78,7 +78,7 @@ export default function MusicPlayer() {
   const { hasPrev, hasNext } = getCurrentMusicSiblings();
 
   return (
-    <div className="h-[118px] select-none w-full bg-background-secondary">
+    <div className="h-[118px] box-shadow-smallselect-none w-full bg-background-secondary relative z-9">
       <div className="flex items-center justify-center">
         <button
           disabled={!hasPrev && !isRepeatActive}
@@ -86,7 +86,7 @@ export default function MusicPlayer() {
         >
           ◀◀
         </button>
-        <div className="p-2 px-3 bg-background-secondary mt-[-30px] rounded-full">
+        <div className="p-2 px-3 box-shadow-small bg-background-secondary mt-[-30px] rounded-full">
           <PlayButton
             isLoading={isLoading}
             disabled={!currentTrack && !currentPlayList}

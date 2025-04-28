@@ -92,13 +92,14 @@ export default function Carousel({ children, onRendered }: Props) {
   const disabledRight = scrolledPercent === 100;
   return (
     <div className="relative overflow-y-hidden z-1">
-      <button
-        onClick={onClickLeft}
-        disabled={disabledLeft}
-        className="arrow-left cursor-pointer hover:opacity-80 transition hover:scale-105"
-      >
-        <div className="arrow"></div>
-      </button>
+      {!disabledLeft && (
+        <button
+          onClick={onClickLeft}
+          className="w-8 h-8 absolute opacity-60 hover:opacity-100 left-0 top-2/5 z-99 cursor-pointer rounded-sm flex items-center justify-center bg-background"
+        >
+          <div className="w-0 h-0 border-8 border-solid border-transparent border-r-black dark:invert mr-3"></div>
+        </button>
+      )}
       {isRendered.current && (
         <div
           style={{ height: `${height}px` }}
@@ -109,7 +110,7 @@ export default function Carousel({ children, onRendered }: Props) {
         ref={scrollableContainerRef}
         style={{ height: `${height}px`, top: `calc(50% - ${height / 2}px)` }}
         onScroll={onScroll}
-        className="overflow-hidden scroll-smooth"
+        className="overflow-y-hidden scroll-smooth scroll-hidden"
       >
         <div
           ref={containerRef}
@@ -125,13 +126,14 @@ export default function Carousel({ children, onRendered }: Props) {
           className={`transition bg-black gradient-right w-5 right-0 absolute ${disabledRight ? 'opacity-0' : 'opacity-100'}`}
         ></div>
       )}
-      <button
-        onClick={onClickRight}
-        disabled={disabledRight}
-        className="arrow-right cursor-pointer hover:opacity-80 transition hover:scale-105"
-      >
-        <div className="arrow"></div>
-      </button>
+      {!disabledRight && (
+        <button
+          onClick={onClickRight}
+          className="w-8 h-8 absolute opacity-60 hover:opacity-100 right-0 top-2/5 z-99 cursor-pointer rounded-sm flex items-center justify-center bg-background"
+        >
+          <div className="w-0 h-0 border-8 border-solid border-transparent border-l-black dark:invert ml-3"></div>
+        </button>
+      )}
     </div>
   );
 }

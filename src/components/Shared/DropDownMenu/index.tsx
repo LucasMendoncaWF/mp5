@@ -22,7 +22,7 @@ export default function DropDownMenu({
 }: Props) {
   const sizeMeasure = 5;
   return (
-    <div className={`relative`}>
+    <div className="relative">
       <button
         onClick={(e) => {
           e.preventDefault();
