@@ -89,7 +89,7 @@ export default function Carousel({ children, onRendered }: Props) {
   });
 
   const disabledLeft = currentScroll <= 0;
-  const disabledRight = scrolledPercent === 100;
+  const disabledRight = scrolledPercent > 95;
   return (
     <div className="relative overflow-y-hidden z-1">
       {!disabledLeft && (
@@ -103,7 +103,7 @@ export default function Carousel({ children, onRendered }: Props) {
       {isRendered.current && (
         <div
           style={{ height: `${height}px` }}
-          className={`transition bg-black gradient-left w-5 left-0 absolute ${disabledLeft ? 'opacity-0' : 'opacity-100'}`}
+          className={`transition bg-black gradient-left w-5 z-9 left-0 absolute ${disabledLeft ? 'opacity-0' : 'opacity-100'}`}
         ></div>
       )}
       <div
@@ -123,7 +123,7 @@ export default function Carousel({ children, onRendered }: Props) {
       {isRendered.current && (
         <div
           style={{ height: `${height}px`, top: `calc(50% - ${height / 2}px)` }}
-          className={`transition bg-black gradient-right w-5 right-0 absolute ${disabledRight ? 'opacity-0' : 'opacity-100'}`}
+          className={`transition bg-black gradient-right w-5 z-9 right-0 absolute ${disabledRight ? 'opacity-0' : 'opacity-100'}`}
         ></div>
       )}
       {!disabledRight && (

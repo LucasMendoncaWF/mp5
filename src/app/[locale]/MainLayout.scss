@@ -10,6 +10,7 @@
 .content-container {
   width: 100%;
   overflow: hidden;
+  height: calc(100dvh - 68px - 100px);
   @media screen and (min-width: 768px) { 
     width: calc(100% - 320px);
   }

@@ -11,9 +11,10 @@ import UserIcon from '@/svgs/icon-user';
 
 export default function MobileMenu() {
   const pathName = usePathname();
-  const iconClasses = 'w-10 h-10 block cursor-pointer hover:opacity-70 hover:scale-110 transition';
+  const iconClasses =
+    'w-10 h-10 block cursor-pointer hover:opacity-70 hover:scale-110 transition drop-shadow-sm drop-shadow-white dark:drop-shadow-black';
   return (
-    <div className="md:hidden flex w-full items-center -translate-y-3">
+    <div className="md:hidden flex w-full relative z-9 items-center -translate-y-3">
       <div className="flex gap-8 items-center justify-center w-1/2 pr-5">
         <Link
           className={`${iconClasses} ${pathName.includes(routes.explore) ? 'text-primary' : 'text-text-color'}`}

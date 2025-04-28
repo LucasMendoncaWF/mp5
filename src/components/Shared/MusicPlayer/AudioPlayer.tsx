@@ -142,7 +142,7 @@ export function AudioPlayer({
 
   return (
     <>
-      <span className="text-[10px] absolute top-2 pt-[2px] w-20 text-center">
+      <span className="text-[10px] absolute top-5 md:top-2 pt-[2px] w-20 text-center">
         {!isLoading && (
           <>
             {formatTime(currentTime)}/{formatTime(duration)}

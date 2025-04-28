@@ -41,10 +41,10 @@ const useTrackStore = create<TrackStore>()(
       currentPlayList: null,
       isShuffleActive: false,
       isRepeatActive: false,
-      addPlayList: (playlist: PlaylistModel) => {},
-      openRemovePlayListModal: (id: string) => {},
+      addPlayList: (_playlist: PlaylistModel) => {},
+      openRemovePlayListModal: (_id: string) => {},
       closeRemovePlayListModal: () => {},
-      removePlayList: (id: string) => {},
+      removePlayList: (_id: string) => {},
       setCurrentPlayList: (playlist: PlaylistModel) => {
         set({ currentPlayList: playlist, currentTrack: playlist.tracks[0] });
       },

@@ -30,6 +30,10 @@ export default function VolumeControl({ setVolume, volume }: Props) {
       if (isDragging) updateVolume(e.clientX);
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (isDragging) updateVolume(e.touches[0].clientX);
+    };
+
     const handleMouseUp = () => {
       if (isDragging) setIsDragging(false);
     };
@@ -37,11 +41,15 @@ export default function VolumeControl({ setVolume, volume }: Props) {
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('touchmove', handleTouchMove);
+      window.addEventListener('touchend', handleMouseUp);
     }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleMouseUp);
     };
   }, [isDragging, updateVolume]);
 
@@ -56,6 +64,10 @@ export default function VolumeControl({ setVolume, volume }: Props) {
       />
       <div
         ref={barRef}
+        onTouchStart={(e) => {
+          setIsDragging(true);
+          updateVolume(e.touches[0].clientX);
+        }}
         onMouseDown={(e) => {
           setIsDragging(true);
           updateVolume(e.clientX);
