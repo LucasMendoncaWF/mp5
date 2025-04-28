@@ -1,8 +1,8 @@
 import React from 'react';
 
-import MusicPlayer from '@/components/Explore/MusicPlayer';
-import SideBar from '@/components/Explore/SideBar';
 import MobileMenu from '@/components/Shared/MobileMenu';
+import MusicPlayer from '@/components/Shared/MusicPlayer';
+import SideBar from '@/components/Shared/SideBar';
 
 export default function RootLayout({
   children,
@@ -15,7 +15,7 @@ export default function RootLayout({
         <div className="md:w-[320px]">
           <SideBar />
         </div>
-        <div className="min-w-100 explore-container">{children}</div>
+        <div className="md:min-w-100 explore-container">{children}</div>
       </div>
       <div>
         <MobileMenu />

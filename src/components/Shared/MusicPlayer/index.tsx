@@ -1,21 +1,37 @@
 'use client';
+import { useTranslations } from 'next-intl';
 import React, { useRef, useState, useEffect } from 'react';
 
 import PlayButton from '@/components/Shared/PlayButton';
+import useTrackStore from '@/stores/trackStore';
 import RandomIcon from '@/svgs/icon-random';
 import ShuffleIcon from '@/svgs/icon-shuffle';
 
-import DropDownMenu from './DropDownMenu';
 import VolumeControl from './VolumeControl';
-
 import './MusicPlayer.scss';
+import DropDownMenu from '../DropDownMenu';
 
 export default function MusicPlayer() {
+  const t = useTranslations();
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const onCloseMenu = () => {
+    setTimeout(() => {
+      setMenuOpen(false);
+    }, 200);
+  };
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const {
+    isShuffleActive,
+    isRepeatActive,
+    toggleRepeat,
+    toggleShuffle,
+    currentPlayList,
+    currentTrack,
+    getCurrentMusicSiblings,
+  } = useTrackStore();
   const [percentage, setPercentage] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [isShuffleActive, setShuffleActive] = useState(false);
-  const [isRepeatActive, setRepeatActive] = useState(false);
 
   const updatePercentage = (clientX: number) => {
     const progressBar = progressBarRef.current;
@@ -48,17 +64,24 @@ export default function MusicPlayer() {
       window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [isDragging]);
+  const { hasPrev, hasNext } = getCurrentMusicSiblings();
 
   return (
     <div className="h-[118px] select-none w-full bg-background-secondary">
       <div className="flex items-center justify-center">
-        <button className="tracking-[-5px] mr-2 cursor-pointer transition text-primary text-xl mr-1 hover:opacity-70">
+        <button
+          disabled={!hasPrev && !isRepeatActive}
+          className="tracking-[-5px] mr-2 cursor-pointer transition text-primary text-xl mr-1 hover:opacity-70"
+        >
           ◀◀
         </button>
         <div className="p-2 px-3 bg-background-secondary mt-[-30px] rounded-full">
-          <PlayButton onClick={() => {}} width={50} />
+          <PlayButton disabled={!currentTrack && !currentPlayList} width={50} />
         </div>
-        <button className="tracking-[-5px] ml-1 cursor-pointer transition text-primary text-xl hover:opacity-70">
+        <button
+          disabled={!hasNext && !isRepeatActive}
+          className="tracking-[-5px] ml-1 cursor-pointer transition text-primary text-xl hover:opacity-70"
+        >
           ▶▶
         </button>
       </div>
@@ -67,21 +90,36 @@ export default function MusicPlayer() {
         <div className="w-[100px]">
           <VolumeControl />
         </div>
-        <div className="capitalize music-player__name text-center line-clamp-1">test</div>
+        <div className="capitalize music-player__name text-center line-clamp-1">
+          {currentTrack?.title}
+        </div>
         <div className="w-[100px] flex items-center md:gap-[14px] justify-end">
           <button
-            onClick={() => setShuffleActive(!isShuffleActive)}
+            onClick={() => toggleShuffle()}
             className={`scale-80 md:scale-100 mr-1 md:mr-0 cursor-pointer transition hover:opacity-80 ${isShuffleActive ? 'text-primary' : 'text-text-color'}`}
           >
             {ShuffleIcon}
           </button>
           <button
-            onClick={() => setRepeatActive(!isRepeatActive)}
+            onClick={() => toggleRepeat()}
             className={`scale-80 md:scale-100 mr-2 md:mr-0 cursor-pointer transition hover:opacity-80 ${isRepeatActive ? 'text-primary' : 'text-text-color'}`}
           >
             {RandomIcon}
           </button>
-          <DropDownMenu />
+          <DropDownMenu size={1.2} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen}>
+            <button
+              onClick={onCloseMenu}
+              className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+            >
+              {t('addFavorite')}
+            </button>
+            <button
+              onClick={onCloseMenu}
+              className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+            >
+              {t('addToPlaylist')}
+            </button>
+          </DropDownMenu>
         </div>
       </div>
       <div className="w-full flex justify-center mt-4">

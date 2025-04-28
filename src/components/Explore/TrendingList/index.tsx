@@ -1,25 +1,28 @@
 'use client';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { TrendingMusics } from '@/api/explore';
 import Carousel from '@/components/Shared/Carousel';
+import ErrorMessage from '@/components/Shared/ErrorMessage';
 
-import MusicItemThumb from '../MusicItemThumb';
 import TradingListSkeleton from './skeleton';
+import MusicItemThumb from '../../Shared/MusicItemThumb';
 
 export default function TrendingList() {
+  const t = useTranslations();
   const [isRendered, setIsRendered] = useState(false);
   const { data, hasError, isLoading } = TrendingMusics();
   if (isLoading) {
     return <TradingListSkeleton />;
   }
 
-  if (!data?.length) {
-    return <div></div>;
+  if (!data?.length && !hasError) {
+    return <ErrorMessage>{t('zeroLengthResponse')}</ErrorMessage>;
   }
 
   if (hasError) {
-    return <div></div>;
+    return <ErrorMessage>{t('errorResponse')}</ErrorMessage>;
   }
 
   return (

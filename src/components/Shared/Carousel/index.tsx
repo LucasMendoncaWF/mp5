@@ -13,31 +13,35 @@ export default function Carousel({ children, onRendered }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const scrollableContainerRef = useRef<HTMLDivElement | null>(null);
   const isRendered = useRef(false);
-  const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resizeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [width, setWidth] = useState(1000);
   const [height, setHeight] = useState(550);
   const [currentScroll, setCurrentScroll] = useState(0);
   const [scrolledPercent, setScrolledPercent] = useState(0);
 
+  const calcSize = () => {
+    const container = containerRef.current;
+    if (!container || !children.length) return;
+
+    const totalWidth = Array.from(container.children).reduce((acc, child) => {
+      const el = child as HTMLElement;
+      return acc + el.offsetWidth;
+    }, 0);
+    setWidth(totalWidth);
+
+    if (container.children[1]) {
+      setHeight(container.children[1].clientHeight);
+    }
+  };
+
   useLayoutEffect(() => {
     setTimeout(() => {
-      const container = containerRef.current;
-      if (!container || !children.length) return;
-
-      const totalWidth = Array.from(container.children).reduce((acc, child) => {
-        const el = child as HTMLElement;
-        return acc + el.offsetWidth;
-      }, 0);
-      setWidth(totalWidth);
-
-      if (container.children[1]) {
-        setHeight(container.children[1].clientHeight);
-      }
-
-      isRendered.current = true;
+      calcSize();
       onRendered();
-    }, 20);
-  }, [children, onRendered]);
+      isRendered.current = true;
+    }, 50);
+  });
 
   useEffect(() => {
     if (scrollableContainerRef.current) {
@@ -52,10 +56,10 @@ export default function Carousel({ children, onRendered }: Props) {
   }, [currentScroll, containerRef]);
 
   const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    if (timeout.current) {
-      clearTimeout(timeout.current);
+    if (scrollTimeout.current) {
+      clearTimeout(scrollTimeout.current);
     }
-    timeout.current = setTimeout(() => {
+    scrollTimeout.current = setTimeout(() => {
       setCurrentScroll((e.target as HTMLDivElement).scrollLeft);
     }, 200);
   };
@@ -67,6 +71,17 @@ export default function Carousel({ children, onRendered }: Props) {
   const onClickLeft = () => {
     setCurrentScroll(currentScroll - 400);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      calcSize();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  });
 
   const disabledLeft = currentScroll <= 0;
   const disabledRight = scrolledPercent === 100;

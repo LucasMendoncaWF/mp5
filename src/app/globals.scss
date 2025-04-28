@@ -58,6 +58,7 @@ html[data-theme='light'] {
   @include apply-theme(light);
   --right-shadow-carousel: linear-gradient(90deg,rgba(40, 40, 40, 0) 30%, rgba(40, 40, 40, 0.3) 100%);
   --left-shadow-carousel: linear-gradient(90deg,rgba(40, 40, 40, 0.3) 0%, rgba(40, 40, 40, 0) 50%);
+  --music-thumb-shadow: linear-gradient(0,rgb(216, 216, 216) 90%, rgba(216, 216, 216, 0) 100%);
   
 }
 
@@ -65,6 +66,7 @@ html[data-theme='dark'] {
   @include apply-theme(dark);
   --right-shadow-carousel: linear-gradient(90deg,rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.8) 100%);
   --left-shadow-carousel: linear-gradient(90deg,rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+  --music-thumb-shadow: linear-gradient(0,rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
 }
 
 html,
@@ -88,16 +90,17 @@ body {
 
 // Custom general classes
 .main-container {
-  height: calc(100vh - 68px - 150px);
+  height: calc(100dvh - 68px - 150px);
   min-height: 400px;
 
   @media screen and (min-width: 768px) {
-    height: calc(100vh - 68px - 110px);
+    height: calc(100dvh - 68px - 110px);
   }
 }
 
 .explore-container {
   width: 100%;
+  overflow: hidden;
   @media screen and (min-width: 768px) { 
     width: calc(100% - 320px);
   }
@@ -116,6 +119,32 @@ button {
 .gradient-left {
   background: var(--left-shadow-carousel);
   transition: 0.4s;
+}
+
+.music-thumb-gradient {
+  background: var(--music-thumb-shadow);
+  transition: 0.4s;
+}
+
+.link-hover {
+  transition: 0.4s;
+
+  &:hover {
+    box-shadow: 8px 8px var(--primary);
+  }
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+  &:hover {
+    transform: scale(1);
+  }
+}
+
+.drop-shadow-modal {
+  box-shadow: 3px 7px 3px 2px var(--background-secondary);
 }
 
 // Custom animations

@@ -15,7 +15,7 @@ export default function SideBar() {
         <div className="pb-2">
           <Link
             className="hover:opacity-60 font-bold text-xl capitalize transition"
-            href={routes.playlists.base}
+            href={routes.playlists}
           >
             {t('playlists')}
           </Link>
@@ -29,7 +29,7 @@ export default function SideBar() {
         <div className="pt-5">
           <Link
             className="hover:opacity-60 font-bold capitalize text-lg  transition"
-            href={routes.profile.base}
+            href={routes.profile}
           >
             {t('profile')}
           </Link>
@@ -37,7 +37,7 @@ export default function SideBar() {
         <div className="pt-2">
           <Link
             className="hover:opacity-60 font-bold capitalize text-lg transition"
-            href={routes.settings.base}
+            href={routes.settings}
           >
             {t('settings')}
           </Link>

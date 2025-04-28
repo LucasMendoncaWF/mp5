@@ -8,5 +8,7 @@
   "edit": "Edit",
   "delete": "Delete",
   "addFavorite": "Add to favorites",
-  "addToPlaylist": "Add to a Playlist"
+  "addToPlaylist": "Add to a Playlist",
+  "errorResponse": "There was an error while trying to load the musics.",
+  "zeroLengthResponse": "No items were found for this search."
 }

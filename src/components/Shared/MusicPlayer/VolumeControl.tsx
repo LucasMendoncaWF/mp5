@@ -39,7 +39,13 @@ export default function VolumeControl() {
 
   return (
     <div className="flex items-center gap-2 w-full justify-start select-none">
-      <Image width="15" height="15" alt="volume icon" src="/images/volume.png" />
+      <Image
+        className="dark:invert"
+        width="15"
+        height="15"
+        alt="volume icon"
+        src="/images/volume.png"
+      />
       <div
         ref={barRef}
         onMouseDown={(e) => {

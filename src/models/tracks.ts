@@ -20,3 +20,12 @@ export interface TrackUserModel {
   follower_count: number;
   bio: string;
 }
+
+export interface PlaylistModel {
+  name?: string;
+  description?: string;
+  date_created?: string;
+  artwork?: string;
+  id: string;
+  tracks: TrackModel[];
+}

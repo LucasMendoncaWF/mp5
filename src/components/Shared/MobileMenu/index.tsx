@@ -16,14 +16,14 @@ export default function MobileMenu() {
     <div className="md:hidden flex w-full items-center -translate-y-3">
       <div className="flex gap-8 items-center justify-center w-1/2 pr-5">
         <Link
-          className={`${iconClasses} ${pathName.includes(routes.explore.base) ? 'text-primary' : 'text-text-color'}`}
-          href={routes.explore.base}
+          className={`${iconClasses} ${pathName.includes(routes.explore) ? 'text-primary' : 'text-text-color'}`}
+          href={routes.explore}
         >
           {HomeIcon}
         </Link>
         <Link
-          className={`${iconClasses} ${pathName.includes(routes.playlists.base) ? 'text-primary' : 'text-text-color'}`}
-          href={routes.playlists.base}
+          className={`${iconClasses} ${pathName.includes(routes.playlists) ? 'text-primary' : 'text-text-color'}`}
+          href={routes.playlists}
         >
           {PlaylistIcon}
         </Link>
@@ -31,14 +31,14 @@ export default function MobileMenu() {
 
       <div className="flex gap-8 justify-center items-center w-1/2 pl-5">
         <Link
-          className={`${iconClasses} ${pathName.includes(routes.profile.base) ? 'text-primary' : 'text-text-color'}`}
-          href={routes.profile.base}
+          className={`${iconClasses} ${pathName.includes(routes.profile) ? 'text-primary' : 'text-text-color'}`}
+          href={routes.profile}
         >
           {UserIcon}
         </Link>
         <Link
-          className={`${iconClasses} ${pathName.includes(routes.settings.base) ? 'text-primary' : 'text-text-color'}`}
-          href={routes.settings.base}
+          className={`${iconClasses} ${pathName.includes(routes.settings) ? 'text-primary' : 'text-text-color'}`}
+          href={routes.settings}
         >
           {SettingsIcon}
         </Link>

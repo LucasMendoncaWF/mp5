@@ -1,18 +1,9 @@
 const routes = {
-  explore: {
-    base: '/explore',
-    subRoutes: {
-      search: '/explore/search',
-    },
-  },
-  playlists: {
-    base: '/playlists',
-  },
-  settings: {
-    base: '/settings',
-  },
-  profile: {
-    base: '/profile',
-  },
+  explore: '/explore',
+  search: '/search',
+  playlists: '/playlists',
+  settings: '/settings',
+  profile: '/profile',
+  track: '/track',
 };
 export default routes;

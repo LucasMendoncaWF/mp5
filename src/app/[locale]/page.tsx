@@ -1,3 +1,3 @@
-import InitialPage from '@/app/page';
+import InitialPage from '../page';
 
 export default InitialPage;

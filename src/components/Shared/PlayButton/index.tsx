@@ -1,19 +1,55 @@
 'use client';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 import './PlayButton.scss';
+import type { PlaylistModel, TrackModel } from '@/models/tracks';
+import useTrackStore from '@/stores/trackStore';
 
 interface Props {
   width?: number;
-  onClick: () => void;
-  isPaused?: boolean;
+  track?: TrackModel;
+  playList?: PlaylistModel;
+  isSingleTrack?: boolean;
+  isPlaylist?: boolean;
+  disabled?: boolean;
 }
 
-export default function PlayButton({ width = 30, onClick, isPaused = true }: Props) {
+export default function PlayButton({
+  width = 30,
+  track,
+  isSingleTrack,
+  disabled,
+  isPlaylist,
+  playList,
+}: Props) {
+  const {
+    togglePlay,
+    isPlaying,
+    setCurrentTrack,
+    currentTrack,
+    setSingleTrack,
+    setCurrentPlayList,
+  } = useTrackStore();
   const [buttonPressed, setButtonPressed] = useState(false);
   const parseValueToPx = (n: number) => `${n}px`;
 
-  const onButtonClick = () => {
-    onClick();
+  const onButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (track || currentTrack) {
+      if (!track || currentTrack === track || !isPlaying) {
+        togglePlay();
+      }
+      if (track && track !== currentTrack) {
+        setCurrentTrack(track);
+        if (isSingleTrack) {
+          setSingleTrack(track);
+        }
+        if (isPlaylist && playList) {
+          setCurrentPlayList(playList);
+        }
+      }
+    }
     if (!buttonPressed) {
       setButtonPressed(true);
       setTimeout(() => {
@@ -21,6 +57,9 @@ export default function PlayButton({ width = 30, onClick, isPaused = true }: Pro
       }, 1000);
     }
   };
+
+  const currentTrackPlaying = currentTrack && currentTrack?.id === track?.id;
+  const isCurrentPlaying = isPlaying && (currentTrackPlaying || !track?.id);
 
   return (
     <div
@@ -31,11 +70,12 @@ export default function PlayButton({ width = 30, onClick, isPaused = true }: Pro
       className="flex play-button relative flex-wrap justify-center content-center rounded-full"
     >
       <button
+        disabled={disabled}
         onClick={onButtonClick}
         className={`play-button__element ${buttonPressed && 'pressed'} bg-primary cursor-pointer relative h-full w-full rounded-full transition duration-300 hover:opacity-80 hover:scale-92`}
       >
         {buttonPressed && <div className="play-button__notes-animation"></div>}
-        {isPaused ? (
+        {!isCurrentPlaying ? (
           <div
             style={{
               borderWidth: parseValueToPx(width / 3.4),

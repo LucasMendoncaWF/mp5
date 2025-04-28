@@ -1,0 +1,91 @@
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+import type { PlaylistModel, TrackModel } from '@/models/tracks';
+
+interface TrackStore {
+  playLists: PlaylistModel[];
+  openDeletePlayListModal: string | null;
+  currentTrack: TrackModel | null;
+  currentPlayList: PlaylistModel | null;
+  isShuffleActive: boolean;
+  isRepeatActive: boolean;
+  isPlaying: boolean;
+  addPlayList: (playlist: PlaylistModel) => void;
+  openRemovePlayListModal: (id: string) => void;
+  closeRemovePlayListModal: () => void;
+  removePlayList: (id: string) => void;
+  setCurrentPlayList: (playList: PlaylistModel) => void;
+  setCurrentTrack: (track: TrackModel) => void;
+  setSingleTrack: (track: TrackModel) => void;
+  toggleShuffle: () => void;
+  toggleRepeat: () => void;
+  togglePlay: () => void;
+  getCurrentMusicSiblings: () => { hasNext?: boolean; hasPrev?: boolean };
+}
+
+// 2. Cria o store com persistência
+const useTrackStore = create<TrackStore>()(
+  persist(
+    (set, get) => ({
+      isPlaying: false,
+      playLists: [],
+      openDeletePlayListModal: null,
+      currentTrack: null,
+      currentPlayList: null,
+      isShuffleActive: false,
+      isRepeatActive: false,
+      addPlayList: (playlist: PlaylistModel) => {},
+      openRemovePlayListModal: (id: string) => {},
+      closeRemovePlayListModal: () => {},
+      removePlayList: (id: string) => {},
+      setCurrentPlayList: (playlist: PlaylistModel) => {
+        set({ currentPlayList: playlist, currentTrack: playlist.tracks[0] });
+      },
+      setCurrentTrack: (newTrack: TrackModel) => {
+        set({ currentTrack: newTrack });
+      },
+      setSingleTrack: (newTrack: TrackModel) => {
+        set({
+          currentTrack: newTrack,
+          playLists: [{ tracks: [newTrack], id: newTrack.id + '_playlist' }],
+        });
+      },
+      toggleShuffle: () => {
+        set({ isShuffleActive: !get().isShuffleActive });
+      },
+      toggleRepeat: () => {
+        set({ isRepeatActive: !get().isRepeatActive });
+      },
+      togglePlay: () => {
+        set({ isPlaying: !get().isPlaying });
+      },
+      getCurrentMusicSiblings: () => {
+        const index = get().currentPlayList?.tracks.findIndex(
+          (track) => get().currentTrack?.id === track.id,
+        );
+        if (!index) return {};
+        const hasPrev = index > 0;
+        const currentPlayListTracksLength = get().currentPlayList?.tracks?.length || 0;
+        const hasNext = index >= 0 && index < currentPlayListTracksLength - 1;
+
+        return {
+          hasPrev,
+          hasNext,
+        };
+      },
+    }),
+    {
+      name: 'track-store',
+      partialize: (state) => ({
+        playLists: state.playLists,
+        currentTrack: state.currentTrack,
+        currentPlayList: state.currentPlayList,
+        isShuffleActive: state.isShuffleActive,
+        isRepeatActive: state.isRepeatActive,
+      }),
+    },
+  ),
+);
+
+export default useTrackStore;
