@@ -95,8 +95,6 @@ export default function MusicPlayer() {
     [currentPlayList.tracks, isShuffleActive, isRepeatActive, getUnplayedTracks],
   );
 
-  console.log(playedSongs, currentPlayList);
-
   const handleTrackEnd = () => {
     if (!currentPlayList.tracks || index === undefined) return;
 
