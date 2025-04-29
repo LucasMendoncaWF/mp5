@@ -14,6 +14,7 @@ type AudioPlayerProps = {
   onChangeProgress: (n: number) => void;
   // eslint-disable-next-line no-unused-vars
   setIsLoading: (value: boolean) => void;
+  onEndSong: () => void;
 };
 
 export function AudioPlayer({
@@ -23,15 +24,23 @@ export function AudioPlayer({
   isLoading,
   onChangeProgress,
   setIsLoading,
+  onEndSong,
 }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const playTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const changeProgressTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { isPlaying, setPlaying, isRepeatActive, getCurrentMusicSiblings } = useTrackStore();
+  const {
+    isPlaying,
+    setPlaying,
+    isRepeatActive,
+    setCurrentTrack,
+    getCurrentMusicSiblings,
+    currentPlayList,
+  } = useTrackStore();
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const { hasNext } = getCurrentMusicSiblings();
+  const { hasNext, hasPrev, index } = getCurrentMusicSiblings();
 
   const streamUrl = `${apiBaseUrl}/stream?trackId=${trackId}`;
 
@@ -100,19 +109,10 @@ export function AudioPlayer({
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
-    if (progress === 100) {
-      onChangeProgress(0);
-      if (hasNext) {
-        //
-      }
-      if (isRepeatActive) {
-        audio.play();
-      } else {
-        setPlaying(false);
-      }
-    }
-  }, [hasNext, isRepeatActive, onChangeProgress, progress, setPlaying]);
+    if (!audio || progress < 100) return;
+    onEndSong();
+    onChangeProgress(0);
+  }, [onChangeProgress, onEndSong, progress]);
 
   const handleProgress = (event: React.SyntheticEvent<HTMLAudioElement>) => {
     const audio = event.target as HTMLAudioElement;

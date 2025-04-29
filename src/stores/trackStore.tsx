@@ -9,7 +9,7 @@ interface TrackStore {
   openDeletePlayListModal: string | null;
   favorites: TrackModel[];
   currentTrack: TrackModel | null;
-  currentPlayList: PlaylistModel | null;
+  currentPlayList: PlaylistModel;
   isShuffleActive: boolean;
   isRepeatActive: boolean;
   isPlaying: boolean;
@@ -23,13 +23,12 @@ interface TrackStore {
   toggleShuffle: () => void;
   toggleRepeat: () => void;
   togglePlay: () => void;
-  getCurrentMusicSiblings: () => { hasNext?: boolean; hasPrev?: boolean };
-  addToFavorites: (track: TrackModel) => void;
-  removeFromFavorites: (track: TrackModel) => void;
+  getCurrentMusicSiblings: () => { hasNext?: boolean; hasPrev?: boolean; index?: number };
+  addOrRemoveToFavorites: (track: TrackModel) => void;
   setPlaying: (value: boolean) => void;
+  addOrRemoveToQueue: (track: TrackModel) => void;
 }
 
-// 2. Cria o store com persistência
 const useTrackStore = create<TrackStore>()(
   persist(
     (set, get) => ({
@@ -38,7 +37,7 @@ const useTrackStore = create<TrackStore>()(
       openDeletePlayListModal: null,
       currentTrack: null,
       favorites: [],
-      currentPlayList: null,
+      currentPlayList: {},
       isShuffleActive: false,
       isRepeatActive: false,
       addPlayList: (_playlist: PlaylistModel) => {},
@@ -46,7 +45,9 @@ const useTrackStore = create<TrackStore>()(
       closeRemovePlayListModal: () => {},
       removePlayList: (_id: string) => {},
       setCurrentPlayList: (playlist: PlaylistModel) => {
-        set({ currentPlayList: playlist, currentTrack: playlist.tracks[0] });
+        if (playlist.tracks) {
+          set({ currentPlayList: playlist, currentTrack: playlist.tracks[0] });
+        }
       },
       setCurrentTrack: (newTrack: TrackModel) => {
         set({ currentTrack: newTrack });
@@ -54,7 +55,7 @@ const useTrackStore = create<TrackStore>()(
       setSingleTrack: (newTrack: TrackModel) => {
         set({
           currentTrack: newTrack,
-          playLists: [{ tracks: [newTrack], id: newTrack.id + '_playlist' }],
+          currentPlayList: { tracks: [newTrack], id: newTrack.id + '_playlist' },
         });
       },
       toggleShuffle: () => {
@@ -70,10 +71,10 @@ const useTrackStore = create<TrackStore>()(
         set({ isPlaying: value });
       },
       getCurrentMusicSiblings: () => {
-        const index = get().currentPlayList?.tracks.findIndex(
+        const index = get().currentPlayList?.tracks?.findIndex(
           (track) => get().currentTrack?.id === track.id,
         );
-        if (!index) return {};
+        if (index === undefined || index < 0) return {};
         const hasPrev = index > 0;
         const currentPlayListTracksLength = get().currentPlayList?.tracks?.length || 0;
         const hasNext = index >= 0 && index < currentPlayListTracksLength - 1;
@@ -81,18 +82,42 @@ const useTrackStore = create<TrackStore>()(
         return {
           hasPrev,
           hasNext,
+          index,
         };
       },
-      addToFavorites: (track) => {
-        const favorites = get().favorites || [];
+      addOrRemoveToFavorites: (track: TrackModel) => {
+        const favorites = [...get().favorites];
         const index = favorites.findIndex((item) => item.id === track.id);
         if (index < 0) {
           set({ favorites: [...favorites, track] });
+        } else {
+          set({ favorites: favorites.filter((item) => item.id !== track.id) });
         }
       },
-      removeFromFavorites: (track) => {
-        const favorites = get().favorites || [];
-        set({ favorites: favorites.filter((item) => item.id !== track.id) });
+      addOrRemoveToQueue: (track: TrackModel) => {
+        const currentPlayList = get().currentPlayList;
+        const newPlayList = currentPlayList.tracks ? { ...get().currentPlayList } : { tracks: [] };
+
+        if (get().currentTrack?.id === track.id) {
+          return;
+        }
+
+        const index = newPlayList.tracks?.findIndex((item) => item.id === track.id);
+        if (index === undefined || index < 0) {
+          newPlayList.tracks?.push(track);
+          if (newPlayList.tracks?.length === 1) {
+            set({ currentTrack: track });
+          }
+          set({ currentPlayList: newPlayList });
+        } else {
+          const filteredPlaylist = {
+            ...newPlayList,
+            tracks: newPlayList.tracks?.filter((currTrack) => currTrack.id !== track.id),
+          };
+          set({
+            currentPlayList: filteredPlaylist,
+          });
+        }
       },
     }),
     {

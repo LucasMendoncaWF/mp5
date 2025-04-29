@@ -13,5 +13,7 @@
   "errorResponse": "There was an error while trying to load the musics.",
   "zeroLengthResponse": "No items were found for this search.",
   "trendingTitle": "Trending now",
-  "genres": "Genres"
+  "genres": "Genres",
+  "addToQueue": "Add to Queue",
+  "removeFromQueue": "Remove from Queue"
 }

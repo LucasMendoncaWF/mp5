@@ -26,6 +26,6 @@ export interface PlaylistModel {
   description?: string;
   date_created?: string;
   artwork?: string;
-  id: string;
-  tracks: TrackModel[];
+  id?: string;
+  tracks?: TrackModel[];
 }

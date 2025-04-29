@@ -15,8 +15,10 @@ import './MusicItemThumb.scss';
 export default function MusicItemThumb({ track }: { track: TrackModel }) {
   const t = useTranslations();
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { addToFavorites, removeFromFavorites, favorites } = useTrackStore();
+  const { addOrRemoveToFavorites, addOrRemoveToQueue, currentPlayList, favorites } =
+    useTrackStore();
   const isOnFavorites = favorites.find((item) => item.id === track.id);
+  const isOnQueue = currentPlayList?.tracks?.find((item) => item.id === track.id);
   const onCloseMenu = () => {
     setTimeout(() => {
       setMenuOpen(false);
@@ -26,11 +28,14 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
   const onClickFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    if (isOnFavorites) {
-      removeFromFavorites(track);
-    } else {
-      addToFavorites(track);
-    }
+    addOrRemoveToFavorites(track);
+    onCloseMenu();
+  };
+
+  const onClickQueue = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    addOrRemoveToQueue(track);
     onCloseMenu();
   };
 
@@ -48,7 +53,7 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
                 <div className="text-sm line-clamp-2 font-bold dark:text-white music-item-thumb-title ">
                   {track.title}
                 </div>
-                <PlayButton track={track} />
+                <PlayButton isSingleTrack track={track} />
               </div>
             </div>
           </div>
@@ -66,6 +71,12 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
                 className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
               >
                 {isOnFavorites ? t('removeFavorite') : t('addFavorite')}
+              </button>
+              <button
+                onClick={onClickQueue}
+                className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+              >
+                {isOnQueue ? t('removeFromQueue') : t('addToQueue')}
               </button>
               <button
                 onClick={onCloseMenu}
