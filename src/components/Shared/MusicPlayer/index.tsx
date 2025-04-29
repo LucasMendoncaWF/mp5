@@ -265,7 +265,7 @@ export default function MusicPlayer() {
         <div className="w-[100px]">
           <VolumeControl setVolume={setVolume} volume={volume} />
         </div>
-        <div className="capitalize music-player__name text-center md:text-sm text-xs line-clamp-1">
+        <div className="capitalize music-player__name md:text-center md:text-sm text-xs line-clamp-1">
           {currentTrack?.title}
         </div>
         <div className="hidden md:flex">{options}</div>

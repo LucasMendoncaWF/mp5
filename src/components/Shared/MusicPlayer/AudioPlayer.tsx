@@ -30,17 +30,9 @@ export function AudioPlayer({
   const playTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const changeProgressTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const {
-    isPlaying,
-    setPlaying,
-    isRepeatActive,
-    setCurrentTrack,
-    getCurrentMusicSiblings,
-    currentPlayList,
-  } = useTrackStore();
+  const { setPlaying, isPlaying } = useTrackStore();
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const { hasNext, hasPrev, index } = getCurrentMusicSiblings();
 
   const streamUrl = `${apiBaseUrl}/stream?trackId=${trackId}`;
 
@@ -74,6 +66,22 @@ export function AudioPlayer({
     if (!audio) return;
     audio.volume = volume / 100;
   }, [volume]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handlePlay = () => setPlaying(true);
+    const handlePause = () => setPlaying(false);
+
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+
+    return () => {
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+    };
+  }, [audioRef, setPlaying]);
 
   useEffect(() => {
     if (changeProgressTimeout.current) {
