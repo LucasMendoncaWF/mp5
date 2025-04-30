@@ -15,5 +15,6 @@
   "trendingTitle": "Trending now",
   "genres": "Genres",
   "addToQueue": "Add to Queue",
-  "removeFromQueue": "Remove from Queue"
+  "removeFromQueue": "Remove from Queue",
+  "recommended": "Recommended musics"
 }

@@ -7,7 +7,22 @@ import api from './api';
 export const useTrendingMusics = () => {
   const { data, isLoading, hasError } = useAutoFetch({
     mutate: async () => {
-      const response = await api.get('trending');
+      const response = await api.get('tracks/trending');
+      return response.data as TrackModel[];
+    },
+  });
+
+  return {
+    data,
+    isLoading,
+    hasError,
+  };
+};
+
+export const useRecommendedMusics = () => {
+  const { data, isLoading, hasError } = useAutoFetch({
+    mutate: async () => {
+      const response = await api.get('tracks/recommended');
       return response.data as TrackModel[];
     },
   });

@@ -1,5 +1,20 @@
 {
-  "music_layout": {
-    "title": "teste pt"
-  }
+  "settings": "Configurações",
+  "profile": "Perfil",
+  "playlists": "Suas Playlists",
+  "english": "Inglês",
+  "portuguese": "Português",
+  "footer": "Desenvolvido por Lucas Mendonça (2025)",
+  "edit": "Editar",
+  "delete": "Excluir",
+  "addFavorite": "Adicionar aos favoritos",
+  "removeFavorite": "Remover dos favoritos",
+  "addToPlaylist": "Adicionar a uma Playlist",
+  "errorResponse": "Ocorreu um erro ao tentar carregar as músicas.",
+  "zeroLengthResponse": "Nenhum item foi encontrado para esta busca.",
+  "trendingTitle": "Em alta agora",
+  "genres": "Gêneros",
+  "addToQueue": "Adicionar à fila",
+  "removeFromQueue": "Remover da fila",
+  "recommended": "Músicas recomendadas"
 }

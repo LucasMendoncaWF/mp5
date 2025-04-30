@@ -5,6 +5,8 @@ import GenresList from '@/components/Explore/Genres';
 import TrendingList from '@/components/Explore/TrendingList';
 import NoteIcon from '@/svgs/icon-note';
 import TrendingIcon from '@/svgs/icon-trending';
+import RecommendedList from '@/components/Explore/RecommendedList';
+import RecommendedIcon from '@/svgs/icon-recommend';
 
 export default function ExplorePage() {
   const t = useTranslations();
@@ -17,6 +19,15 @@ export default function ExplorePage() {
         </h3>
         <div className="px-4">
           <TrendingList />
+        </div>
+      </div>
+      <div className="mb-3">
+        <h3 className="text-2xl font-birdy items-center pl-6 mb-2 md:pt-4 pt-8 flex gap-2 capitalize text-text-color">
+          <div className="w-6 h-6 text-contrast-color">{RecommendedIcon}</div>
+          {t('recommended')}
+        </h3>
+        <div className="px-4">
+          <RecommendedList />
         </div>
       </div>
       <div className="mb-3">
