@@ -39,10 +39,10 @@ export default function PlayButton({
     e.stopPropagation();
     e.preventDefault();
     if (track || currentTrack) {
-      if (!track || currentTrack === track || !isPlaying) {
+      if (!track || currentTrack?.id === track.id || !isPlaying) {
         togglePlay();
       }
-      if (track && track !== currentTrack) {
+      if (track && track.id !== currentTrack?.id) {
         setCurrentTrack(track);
         if (isSingleTrack) {
           setSingleTrack(track);

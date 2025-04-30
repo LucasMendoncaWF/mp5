@@ -5,6 +5,6 @@ const routes = {
   settings: '/settings',
   profile: '/profile',
   track: '/track',
-  genres: '/genres',
+  artist: '/artist',
 };
 export default routes;

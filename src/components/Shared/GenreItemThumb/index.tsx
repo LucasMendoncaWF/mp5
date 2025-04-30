@@ -73,7 +73,7 @@ export default function GenreItemThumb({ title }: { title: string }) {
 
   return (
     <div className="py-2 md:px-4 px-2">
-      <Link href={`${routes.genres}/${title}`}>
+      <Link href={`${routes.search}?genre=${title}`}>
         <div
           ref={divRef}
           className={`${viewBoxCalculated ? '' : 'genre-item-thumb--loading'} genre-item-thumb link-hover relative overflow-hidden md:w-70 md:h-70 w-50 h-50 bg-tertiary`}

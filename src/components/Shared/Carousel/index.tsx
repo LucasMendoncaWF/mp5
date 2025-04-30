@@ -2,14 +2,16 @@ import type { ReactNode } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import React from 'react';
 
+import TradingListSkeleton from '@/components/Explore/skeleton';
+
 interface Props {
   children: ReactNode[];
-  onRendered: () => void;
+  loadingComponent: React.ReactNode;
 }
 
 // TO DO - recalculate on screen resize (and copy function to portfolio carousel)
 
-export default function Carousel({ children, onRendered }: Props) {
+export default function Carousel({ children, loadingComponent }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const scrollableContainerRef = useRef<HTMLDivElement | null>(null);
   const isRendered = useRef(false);
@@ -38,7 +40,6 @@ export default function Carousel({ children, onRendered }: Props) {
   useLayoutEffect(() => {
     setTimeout(() => {
       calcSize();
-      onRendered();
       isRendered.current = true;
     }, 50);
   });
@@ -106,9 +107,13 @@ export default function Carousel({ children, onRendered }: Props) {
           className={`transition bg-black gradient-left w-5 z-9 left-0 absolute ${disabledLeft ? 'opacity-0' : 'opacity-100'}`}
         ></div>
       )}
+      {!isRendered.current && <div>{loadingComponent}</div>}
       <div
         ref={scrollableContainerRef}
-        style={{ height: `${height}px`, top: `calc(50% - ${height / 2}px)` }}
+        style={{
+          height: `${isRendered.current ? height : 0}px`,
+          top: `calc(50% - ${height / 2}px)`,
+        }}
         onScroll={onScroll}
         className="overflow-y-hidden scroll-smooth scroll-hidden"
       >

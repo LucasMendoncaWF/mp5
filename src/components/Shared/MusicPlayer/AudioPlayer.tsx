@@ -8,8 +8,8 @@ import useTrackStore from '@/stores/trackStore';
 type AudioPlayerProps = {
   trackId: string;
   progress: number;
+  duration: number;
   volume: number;
-  isLoading: boolean;
   // eslint-disable-next-line no-unused-vars
   onChangeProgress: (n: number) => void;
   // eslint-disable-next-line no-unused-vars
@@ -19,9 +19,9 @@ type AudioPlayerProps = {
 
 export function AudioPlayer({
   trackId,
+  duration,
   progress,
   volume,
-  isLoading,
   onChangeProgress,
   setIsLoading,
   onEndSong,
@@ -31,7 +31,6 @@ export function AudioPlayer({
   const changeProgressTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { setPlaying, isPlaying } = useTrackStore();
-  const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
   const streamUrl = `${apiBaseUrl}/stream?trackId=${trackId}`;
@@ -47,17 +46,9 @@ export function AudioPlayer({
         onChangeProgress(percent);
       }
     };
-
-    const updateDuration = () => {
-      setDuration(audio.duration);
-    };
-
     audio.addEventListener('timeupdate', updateProgress);
-    audio.addEventListener('loadedmetadata', updateDuration);
-
     return () => {
       audio.removeEventListener('timeupdate', updateProgress);
-      audio.removeEventListener('loadedmetadata', updateDuration);
     };
   }, [onChangeProgress]);
 
@@ -150,8 +141,8 @@ export function AudioPlayer({
 
   return (
     <>
-      <span className="text-[10px] absolute top-5 md:top-2 pt-[2px] w-20 text-center">
-        {!isLoading && (
+      <span className="text-[10px] absolute bottom-8 md:bottom-2 pt-[2px] w-full text-center">
+        {duration && (
           <>
             {formatTime(currentTime)}/{formatTime(duration)}
           </>

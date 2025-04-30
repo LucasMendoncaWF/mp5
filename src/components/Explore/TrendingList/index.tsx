@@ -11,7 +11,6 @@ import TradingListSkeleton from '../skeleton';
 
 export default function TrendingList() {
   const t = useTranslations();
-  const [isRendered, setIsRendered] = useState(false);
   const { data, hasError, isLoading } = useTrendingMusics();
   if (isLoading) {
     return <TradingListSkeleton />;
@@ -28,8 +27,8 @@ export default function TrendingList() {
   return (
     <div>
       {data && !isLoading && (
-        <div className={!isRendered ? 'overflow-hidden w-0 h-0' : ''}>
-          <Carousel onRendered={() => setIsRendered(true)}>
+        <div>
+          <Carousel loadingComponent={<TradingListSkeleton />}>
             {data?.map((track) => <MusicItemThumb track={track} key={track.id} />)}
           </Carousel>
         </div>

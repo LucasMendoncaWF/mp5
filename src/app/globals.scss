@@ -18,7 +18,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-
 $themes: (
   light: (
     text-color: #2e1e17,
@@ -39,7 +38,6 @@ $themes: (
     tertiary: #035f53,
   )
 );
-
 
 @mixin apply-theme($theme-name) {
   $theme-list: map.get($themes, $theme-name);

@@ -9,6 +9,7 @@ export interface TrackModel {
   is_streamable: boolean;
   genre: string;
   user: TrackUserModel;
+  duration: number;
   id: string;
 }
 

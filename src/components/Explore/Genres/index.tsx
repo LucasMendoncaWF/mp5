@@ -11,7 +11,6 @@ import TradingListSkeleton from '../skeleton';
 
 export default function GenresList() {
   const t = useTranslations();
-  const [isRendered, setIsRendered] = useState(false);
   const { data, hasError, isLoading } = useGenres();
 
   if (isLoading) {
@@ -29,8 +28,8 @@ export default function GenresList() {
   return (
     <div>
       {data && !isLoading && (
-        <div className={!isRendered ? 'overflow-hidden w-0 h-0' : ''}>
-          <Carousel onRendered={() => setIsRendered(true)}>
+        <div>
+          <Carousel loadingComponent={<TradingListSkeleton />}>
             {data?.map((genre) => <GenreItemThumb title={genre} key={genre} />)}
           </Carousel>
         </div>

@@ -10,7 +10,7 @@ import PlaylistItem from './PlaylistItem';
 export default function SideBar() {
   const t = useTranslations();
   return (
-    <div className="w-full text-sm bg-background-secondary h-full md:block hidden">
+    <div className="w-full relative z-99 text-sm bg-background-secondary h-full md:block hidden">
       <div className="p-8 h-[85%] overflow-y-auto">
         <div className="pb-2">
           <Link
