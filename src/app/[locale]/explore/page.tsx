@@ -1,12 +1,11 @@
-'use client';
 import { useTranslations } from 'next-intl';
 
-import GenresList from '@/components/Explore/Genres';
-import TrendingList from '@/components/Explore/TrendingList';
+import GenresList from '@/components/Pages/Explore/Genres';
+import RecommendedList from '@/components/Pages/Explore/RecommendedList';
+import TrendingList from '@/components/Pages/Explore/TrendingList';
 import NoteIcon from '@/svgs/icon-note';
-import TrendingIcon from '@/svgs/icon-trending';
-import RecommendedList from '@/components/Explore/RecommendedList';
 import RecommendedIcon from '@/svgs/icon-recommend';
+import TrendingIcon from '@/svgs/icon-trending';
 
 export default function ExplorePage() {
   const t = useTranslations();

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import React from 'react';
 
-import TradingListSkeleton from '@/components/Explore/skeleton';
+import TradingListSkeleton from '@/components/Pages/Explore/skeleton';
 
 interface Props {
   children: ReactNode[];

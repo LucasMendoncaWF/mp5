@@ -7,7 +7,7 @@ import useTrackStore from '@/stores/trackStore';
 import RandomIcon from '@/svgs/icon-random';
 import ShuffleIcon from '@/svgs/icon-shuffle';
 
-import DropDownMenu from '../DropDownMenu';
+import DropDownMenu from '../../Shared/DropDownMenu';
 
 export default function MusicPlayerOptions() {
   const t = useTranslations();

@@ -1,0 +1,8 @@
+.music-list-item {
+  background-color: var(--background);
+  border: 1px solid var(--border-color);
+
+  &:nth-child(odd) {
+    background-color: var(--background-secondary);
+  }
+}

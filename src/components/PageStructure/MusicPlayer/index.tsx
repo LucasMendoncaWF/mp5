@@ -8,9 +8,9 @@ import useTrackStore from '@/stores/trackStore';
 
 import { AudioPlayer } from './AudioPlayer';
 import MusicPlayerOptions from './MusicPlayerOptions';
+import ProgressBar from './ProgressBar';
 import VolumeControl from './VolumeControl';
 import './MusicPlayer.scss';
-import ProgressBar from './ProgressBar';
 
 export default function MusicPlayer() {
   const [progressPercentage, setProgressPercentage] = useState(0);
@@ -35,18 +35,18 @@ export default function MusicPlayer() {
 
   // audio player functions
 
-  const hasOnlyOneSong = (currentPlayList.tracks?.length || 0) <= 1;
+  const hasOnlyOneSong = (currentPlayList?.tracks?.length || 0) <= 1;
 
   const { hasNext, index } = getCurrentMusicSiblings();
 
   const getUnplayedTracks = useCallback(() => {
-    if (!currentPlayList.tracks) return [];
-    return currentPlayList.tracks.filter((track) => !playedSongs.includes(track.id));
-  }, [currentPlayList.tracks, playedSongs]);
+    if (!currentPlayList?.tracks) return [];
+    return currentPlayList?.tracks.filter((track) => !playedSongs.includes(track.id));
+  }, [currentPlayList?.tracks, playedSongs]);
 
   const selectRandomIndex = () => {
-    return currentPlayList.tracks?.length
-      ? Math.floor(Math.random() * currentPlayList.tracks?.length)
+    return currentPlayList?.tracks?.length
+      ? Math.floor(Math.random() * currentPlayList?.tracks?.length)
       : 0;
   };
 
@@ -64,14 +64,14 @@ export default function MusicPlayer() {
   };
 
   const handleNext = () => {
-    if (!hasOnlyOneSong && currentPlayList.tracks) {
+    if (!hasOnlyOneSong && currentPlayList?.tracks) {
       let unplayedTracks = getUnplayedTracks();
       let nextIndex = 0;
       let shouldRestart = false;
 
       // if repeat is active, it remounts the unplayed tracks
       if (isRepeatActive && !unplayedTracks.length) {
-        unplayedTracks = currentPlayList.tracks;
+        unplayedTracks = currentPlayList?.tracks;
         shouldRestart = true;
       }
 
@@ -81,21 +81,21 @@ export default function MusicPlayer() {
           let randomIndex = selectRandomIndex();
           // it loops until it gets an unplayed track
           while (
-            ![...unplayedTracks].includes(currentPlayList.tracks[randomIndex]) ||
-            currentPlayList.tracks[randomIndex] === currentTrack
+            ![...unplayedTracks].includes(currentPlayList?.tracks[randomIndex]) ||
+            currentPlayList?.tracks[randomIndex] === currentTrack
           ) {
             randomIndex = selectRandomIndex();
           }
-          addToPlayedSongsAndReproduce(currentPlayList.tracks[randomIndex], shouldRestart);
+          addToPlayedSongsAndReproduce(currentPlayList?.tracks[randomIndex], shouldRestart);
         } else if (index !== undefined) {
           nextIndex = index + 1;
           // if has next song and is not shuffle, it gets the next index on the playlist
-          if (currentPlayList.tracks[nextIndex]) {
-            addToPlayedSongsAndReproduce(currentPlayList.tracks[nextIndex], shouldRestart);
+          if (currentPlayList?.tracks[nextIndex]) {
+            addToPlayedSongsAndReproduce(currentPlayList?.tracks[nextIndex], shouldRestart);
 
             // if doesnt have a next song, but the repeat is active, it restarts the playlist
           } else if (isRepeatActive) {
-            addToPlayedSongsAndReproduce(currentPlayList.tracks[0], shouldRestart);
+            addToPlayedSongsAndReproduce(currentPlayList?.tracks[0], shouldRestart);
           }
         }
 
@@ -104,16 +104,18 @@ export default function MusicPlayer() {
       }
 
       // Resets to 0
-      setProgressPercentage(0);
+    } else if (isRepeatActive) {
+      setPlaying(true);
     }
+    setProgressPercentage(0);
   };
 
   const handlePrev = () => {
-    if (!hasOnlyOneSong && currentPlayList.tracks && currentTrack) {
+    if (!hasOnlyOneSong && currentPlayList?.tracks && currentTrack) {
       const currentIndex = playedSongs.findIndex((item) => item === currentTrack.id);
       // if has a previous track, it moves back
       if (playedSongs[currentIndex - 1]) {
-        const nextTrack = currentPlayList.tracks.find(
+        const nextTrack = currentPlayList?.tracks.find(
           (track) => track.id === playedSongs[currentIndex - 1],
         );
         if (nextTrack) {
@@ -122,8 +124,8 @@ export default function MusicPlayer() {
         // if doesnt have a previous track on the player array, but is on repeat, it starts from the end of the array again
       } else if (isRepeatActive) {
         setCurrentTrack(
-          currentPlayList.tracks[(index || 0) - 1] ||
-            currentPlayList.tracks[currentPlayList.tracks.length - 1],
+          currentPlayList?.tracks[(index || 0) - 1] ||
+            currentPlayList?.tracks[currentPlayList?.tracks.length - 1],
         );
       }
       //it's remove from the played array in either cases
@@ -177,7 +179,7 @@ export default function MusicPlayer() {
         <div className="p-2 px-3 box-shadow-small bg-background-secondary mt-[-30px] rounded-full">
           <PlayButton
             isLoading={isLoading}
-            disabled={!currentTrack && !currentPlayList.tracks}
+            disabled={!currentTrack && !currentPlayList?.tracks}
             width={50}
           />
         </div>

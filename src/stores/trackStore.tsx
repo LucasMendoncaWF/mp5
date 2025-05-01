@@ -96,7 +96,7 @@ const useTrackStore = create<TrackStore>()(
       },
       addOrRemoveToQueue: (track: TrackModel) => {
         const currentPlayList = get().currentPlayList;
-        const newPlayList = currentPlayList.tracks ? { ...get().currentPlayList } : { tracks: [] };
+        const newPlayList = currentPlayList?.tracks ? { ...get().currentPlayList } : { tracks: [] };
 
         if (get().currentTrack?.id === track.id) {
           return;

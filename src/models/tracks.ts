@@ -3,12 +3,9 @@ export interface TrackModel {
     '150x150': string;
     '480x480': string;
   };
+  genre: string;
   description: string;
   title: string;
-  track_cid: string;
-  is_streamable: boolean;
-  genre: string;
-  user: TrackUserModel;
   duration: number;
   id: string;
 }
@@ -20,13 +17,19 @@ export interface TrackUserModel {
   };
   follower_count: number;
   bio: string;
+  id: string;
 }
 
 export interface PlaylistModel {
   name?: string;
   description?: string;
-  date_created?: string;
   artwork?: string;
   id?: string;
   tracks?: TrackModel[];
+  user?: TrackUserModel;
+}
+
+export interface RequestSearchParams {
+  query: string;
+  genre: string | null;
 }

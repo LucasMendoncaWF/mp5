@@ -21,7 +21,11 @@ export async function makeRequest(endpoint: string, options: OptionsRequest = { 
 
   if (options.params) {
     for (const [key, value] of Object.entries(options.params)) {
-      url.searchParams.append(key, value);
+      if (Array.isArray(value)) {
+        value.forEach((v) => url.searchParams.append(key, v));
+      } else {
+        url.searchParams.append(key, value);
+      }
     }
   }
 

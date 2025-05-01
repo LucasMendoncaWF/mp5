@@ -16,5 +16,10 @@
   "genres": "Genres",
   "addToQueue": "Add to Queue",
   "removeFromQueue": "Remove from Queue",
-  "recommended": "Recommended musics"
+  "recommended": "Recommended musics",
+  "musicsFound": "Musics",
+  "playlistsFound": "Playlists",
+  "artistsFound": "Artists",
+  "savePlaylist": "Save Playlist",
+  "noResult": "No results were found for this search"
 }

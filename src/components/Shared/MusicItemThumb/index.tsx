@@ -44,7 +44,9 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
       <Link href={`${routes.track}/${track.id}`}>
         <div
           className="link-hover relative text-text-color md:w-70 md:h-70 w-50 h-50 bg-primary bg-center bg-no-repeat bg-cover flex-wrap items-end flex"
-          style={{ backgroundImage: `url(${track.artwork['480x480']})` }}
+          style={{
+            backgroundImage: `url(${track.artwork['480x480'] || '/images/placeholder.jpg'})`,
+          }}
         >
           <div className="w-full md:h-1/4 h-1/3">
             <div className="p-4 w-full h-full relative z-2">

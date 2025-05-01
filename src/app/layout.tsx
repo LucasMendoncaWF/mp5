@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
-import Header from '@/components/Shared/Header';
+import Header from '@/components/PageStructure/Header';
 import PreRender from '@/components/Shared/PreRender';
 import { routing } from '@/i18n/routing';
 import nextIntlConfig from '@/locales/languages';

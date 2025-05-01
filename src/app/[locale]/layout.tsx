@@ -1,8 +1,8 @@
 import React from 'react';
 
+import MusicPlayer from '@/components/PageStructure/MusicPlayer';
 import MobileMenu from '@/components/Shared/MobileMenu';
-import MusicPlayer from '@/components/Shared/MusicPlayer';
-import SideBar from '@/components/Shared/SideBar';
+import SideBar from '@/components/PageStructure/SideBar';
 
 import './MainLayout.scss';
 

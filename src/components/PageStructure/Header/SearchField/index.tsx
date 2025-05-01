@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
+import routes from '@/app/routes';
+
 export default function SearchField() {
   const pathname = usePathname();
   const router = useRouter();
@@ -17,10 +19,11 @@ export default function SearchField() {
     }
     timeout.current = setTimeout(() => {
       if (searchQuery !== null) {
-        router.push(`/explore/search?query=${searchQuery}`);
+        const genre = searchParams.get('genre');
+        router.push(`${routes.search}?query=${searchQuery}${genre ? `&genre=${genre}` : ''}`);
       }
-    }, 300);
-  }, [searchQuery, router]);
+    }, 200);
+  }, [searchQuery, router, searchParams]);
 
   useEffect(() => {
     const search = searchParams.get('query');
@@ -30,7 +33,7 @@ export default function SearchField() {
   }, [searchQuery, searchParams]);
 
   useEffect(() => {
-    if (!pathname.includes('explore/search')) {
+    if (!pathname.includes(routes.search)) {
       setSearchQuery(null);
     }
   }, [pathname]);

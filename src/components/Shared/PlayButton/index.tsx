@@ -29,6 +29,7 @@ export default function PlayButton({
     isPlaying,
     setCurrentTrack,
     currentTrack,
+    currentPlayList,
     setSingleTrack,
     setCurrentPlayList,
   } = useTrackStore();
@@ -38,20 +39,12 @@ export default function PlayButton({
   const onButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    if (track || currentTrack) {
-      if (!track || currentTrack?.id === track.id || !isPlaying) {
-        togglePlay();
-      }
-      if (track && track.id !== currentTrack?.id) {
-        setCurrentTrack(track);
-        if (isSingleTrack) {
-          setSingleTrack(track);
-        }
-        if (isPlaylist && playList) {
-          setCurrentPlayList(playList);
-        }
-      }
+    if (playList) {
+      onPlayPlaylist();
+    } else if (track || currentTrack) {
+      onPlayTrack();
     }
+    // do animation
     if (!buttonPressed) {
       setButtonPressed(true);
       setTimeout(() => {
@@ -60,8 +53,31 @@ export default function PlayButton({
     }
   };
 
-  const currentTrackPlaying = currentTrack && currentTrack?.id === track?.id;
-  const isCurrentPlaying = isPlaying && (currentTrackPlaying || !track?.id);
+  const onPlayTrack = () => {
+    if (!track || currentTrack?.id === track.id || !isPlaying) {
+      togglePlay();
+    }
+    if (track && track.id !== currentTrack?.id) {
+      setCurrentTrack(track);
+      if (isSingleTrack) {
+        setSingleTrack(track);
+      }
+    }
+  };
+
+  const onPlayPlaylist = () => {
+    if (!playList || currentPlayList?.id === playList.id || !isPlaying) {
+      togglePlay();
+    }
+    if (playList && playList.id !== currentPlayList?.id) {
+      setCurrentPlayList(playList);
+    }
+  };
+
+  const currentTrackPlaying =
+    !!(isPlaylist && currentPlayList?.id === playList?.id) ||
+    !!(isSingleTrack && currentTrack?.id === track?.id);
+  const isCurrentPlaying = isPlaying && (currentTrackPlaying || (!track?.id && !playList?.id));
 
   return (
     <div

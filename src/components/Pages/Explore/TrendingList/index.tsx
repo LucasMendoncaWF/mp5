@@ -6,7 +6,7 @@ import { useTrendingMusics } from '@/api/explore';
 import Carousel from '@/components/Shared/Carousel';
 import ErrorMessage from '@/components/Shared/ErrorMessage';
 
-import MusicItemThumb from '../../Shared/MusicItemThumb';
+import MusicItemThumb from '../../../Shared/MusicItemThumb';
 import TradingListSkeleton from '../skeleton';
 
 export default function TrendingList() {

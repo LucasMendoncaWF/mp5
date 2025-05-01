@@ -5,7 +5,7 @@ import { useTranslations } from 'use-intl';
 
 import routes from '@/app/routes';
 
-import DropDownMenu from '../DropDownMenu';
+import DropDownMenu from '../../Shared/DropDownMenu';
 
 export default function PlaylistItem() {
   const t = useTranslations();

@@ -1,6 +1,5 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 
 import { useGenres } from '@/api/explore';
 import Carousel from '@/components/Shared/Carousel';
