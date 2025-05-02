@@ -4,11 +4,15 @@ import type { PlaylistModel } from '@/models/tracks';
 
 import api from './api';
 
-export const useUserPlaylist = () => {
+export const useUserPlaylist = ({ enabled = true }: { enabled?: boolean }) => {
   const { data, isLoading, hasError } = useAutoFetch({
     mutate: async () => {
-      const response = await api.get('playlists');
-      return response.data as PlaylistModel[];
+      if (enabled) {
+        const response = await api.get('playlists');
+        return response.data as PlaylistModel[];
+      } else {
+        return [];
+      }
     },
   });
 
