@@ -22,7 +22,7 @@ export default function SearchField() {
         const genre = searchParams.get('genre');
         router.push(`${routes.search}?query=${searchQuery}${genre ? `&genre=${genre}` : ''}`);
       }
-    }, 200);
+    }, 500);
   }, [searchQuery, router, searchParams]);
 
   useEffect(() => {

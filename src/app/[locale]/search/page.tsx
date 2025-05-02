@@ -44,11 +44,12 @@ export default function SearchPage() {
   });
 
   const onClickGenreTag = () => {
-    if (query) {
+    if (genre) {
       router.push(`${routes.search}${query ? `?query=${query}` : ''}`);
     }
   };
 
+  const isLessThen10Tracks = tracks?.length && tracks?.length < 10 && !isLoadingTracks;
   const isTracksEmpty = !tracks?.length && !isLoadingTracks;
   const isPlaylistEmpty = !playlists?.length && !isLoadingPlaylists;
   const isArtistsEmpty = !artists?.length && !isLoadingArtists;
@@ -70,10 +71,12 @@ export default function SearchPage() {
         )}
       </div>
       <div className="px-6 md:px-2 pb-16 normal-case md:flex flex-wrap">
-        <div className={`${isPlaylistEmpty && isArtistsEmpty ? '' : 'lg:w-1/2'} lg:pl-6  w-full`}>
+        <div
+          className={`${(isPlaylistEmpty && isArtistsEmpty) || isLessThen10Tracks ? '' : 'lg:w-1/2'} lg:pl-6  w-full`}
+        >
           <SearchTracks data={tracks} hasError={hasErrorTracks} isLoading={isLoadingTracks} />
         </div>
-        <div className={`${!isTracksEmpty ? 'lg:w-1/2' : 'w-full'} lg:px-6`}>
+        <div className={`${!isTracksEmpty && !isLessThen10Tracks ? 'lg:w-1/2' : 'w-full'} lg:px-6`}>
           <SearchArtists data={artists} hasError={hasErrorArtists} isLoading={isLoadingArtists} />
           <SearchPlaylists
             data={playlists}

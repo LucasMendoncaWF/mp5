@@ -7,7 +7,7 @@ export default function ThemeSelector() {
   const toggleTheme = () => {
     const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
     const newTheme = theme === 'dark' ? 'light' : 'dark';
-    document.cookie = `theme=${newTheme}; path=/; max-age=31536000`;
+    document.cookie = `theme=${newTheme}; path=/; SameSite=Lax; Secure`;
 
     document.documentElement.classList.remove(theme);
     document.documentElement.classList.add(newTheme);
