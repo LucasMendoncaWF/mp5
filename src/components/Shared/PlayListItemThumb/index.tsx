@@ -1,11 +1,11 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useTranslations } from 'use-intl';
 
 import routes from '@/app/routes';
 import type { PlaylistModel } from '@/models/tracks';
+import useTrackStore from '@/stores/trackStore';
 
 import DropDownMenu from '../DropDownMenu';
 import PlayButton from '../PlayButton';
@@ -15,11 +15,20 @@ import './PlaylistThumbItem.scss';
 export default function PlaylistThumbItem({ playlist }: { playlist: PlaylistModel }) {
   const t = useTranslations();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const { addPlayList } = useTrackStore();
   const onCloseMenu = () => {
     setTimeout(() => {
       setMenuOpen(false);
     }, 50);
   };
+
+  const onSavePlaylist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addPlayList(playlist);
+    onCloseMenu();
+  };
+
   return (
     <div className="py-2 md:px-4 px-2 2xl:w-1/3 w-1/2 aspect-square" onMouseLeave={onCloseMenu}>
       <Link href={`${routes.playlists}/${playlist.id}`}>
@@ -50,7 +59,7 @@ export default function PlaylistThumbItem({ playlist }: { playlist: PlaylistMode
               setMenuOpen={setMenuOpen}
             >
               <button
-                onClick={onCloseMenu}
+                onClick={onSavePlaylist}
                 className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
               >
                 {t('savePlaylist')}

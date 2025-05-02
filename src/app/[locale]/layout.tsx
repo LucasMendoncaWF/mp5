@@ -1,9 +1,9 @@
 import React from 'react';
 
+import DeletePlayListModal from '@/components/PageStructure/DeletePlayListModal';
 import MusicPlayer from '@/components/PageStructure/MusicPlayer';
-import MobileMenu from '@/components/Shared/MobileMenu';
 import SideBar from '@/components/PageStructure/SideBar';
-
+import MobileMenu from '@/components/Shared/MobileMenu';
 import './MainLayout.scss';
 
 export default function RootLayout({
@@ -13,6 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <div className="h-full">
+      <DeletePlayListModal />
       <div className="flex main-container bg-background">
         <div className="md:w-[320px]">
           <SideBar />

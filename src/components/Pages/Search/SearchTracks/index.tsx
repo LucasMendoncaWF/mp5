@@ -27,7 +27,7 @@ export default function SearchTracks({ isLoading, hasError, data }: Props) {
   }
 
   return (
-    <div className="lg:pl-6 lg:w-1/2 w-full">
+    <div>
       <h3 className="text-2xl font-birdy items-center pl-6 mb-4 lg:pt-4 pt-8 flex gap-2 capitalize text-text-color">
         <div className="w-6 h-6 text-contrast-color">{NoteIcon}</div>
         {t('musicsFound')}

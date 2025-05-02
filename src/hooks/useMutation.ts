@@ -38,12 +38,14 @@ export function useMutation<T = any>({
   mutate,
   onSuccess,
   onError,
+  startLoading,
 }: {
   mutate: MutateFn<T>;
   onSuccess?: Callback<T>;
   onError?: Callback<unknown>;
+  startLoading?: boolean;
 }) {
-  const { data, isLoading, hasError, run } = useHandler(mutate, onSuccess, onError);
+  const { data, isLoading, hasError, run } = useHandler(mutate, onSuccess, onError, startLoading);
   return { data, isLoading, hasError, runMutation: run };
 }
 

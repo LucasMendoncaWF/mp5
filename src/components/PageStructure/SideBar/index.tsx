@@ -5,7 +5,7 @@ import routes from '@/app/routes';
 import LanguageSwitcher from '@/components/Shared/LanguageSwitcher';
 import ThemeSelector from '@/components/Shared/ThemeSelector';
 
-import PlaylistItem from './PlaylistItem';
+import PlaylistList from './PlaylistList';
 
 export default function SideBar() {
   const t = useTranslations();
@@ -20,10 +20,7 @@ export default function SideBar() {
             {t('playlists')}
           </Link>
           <div className="mt-2">
-            <PlaylistItem />
-            <PlaylistItem />
-            <PlaylistItem />
-            <PlaylistItem />
+            <PlaylistList />
           </div>
         </div>
         <div className="pt-5">

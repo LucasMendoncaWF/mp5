@@ -21,6 +21,7 @@ export const useSearchTracks = (params: RequestSearchParams) => {
   };
   const { data, isLoading, hasError, runMutation } = useMutation({
     mutate: searchTrack,
+    startLoading: true,
   });
 
   useEffect(() => {
@@ -50,6 +51,7 @@ export const useSearchPlaylists = (params: RequestSearchParams) => {
   };
   const { data, isLoading, hasError, runMutation } = useMutation({
     mutate: searchTrack,
+    startLoading: true,
   });
 
   useEffect(() => {
@@ -79,6 +81,7 @@ export const useSearchArtists = (params: RequestSearchParams) => {
   };
   const { data, isLoading, hasError, runMutation } = useMutation({
     mutate: searchTrack,
+    startLoading: true,
   });
 
   useEffect(() => {

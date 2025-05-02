@@ -5,17 +5,18 @@ import { persist } from 'zustand/middleware';
 import type { PlaylistModel, TrackModel } from '@/models/tracks';
 
 interface TrackStore {
-  playLists: PlaylistModel[];
-  openDeletePlayListModal: string | null;
+  playlists: PlaylistModel[];
+  openDeletePlayListModalId: string | null;
   favorites: TrackModel[];
   currentTrack: TrackModel | null;
   currentPlayList: PlaylistModel;
   isShuffleActive: boolean;
   isRepeatActive: boolean;
   isPlaying: boolean;
+  setUserPlaylists: (playlists: PlaylistModel[]) => void;
   addPlayList: (playlist: PlaylistModel) => void;
-  openRemovePlayListModal: (id: string) => void;
-  closeRemovePlayListModal: () => void;
+  setOpenRemovePlayListModal: (id: string) => void;
+  onCloseRemovePlayListModal: () => void;
   removePlayList: (id: string) => void;
   setCurrentPlayList: (playList: PlaylistModel) => void;
   setCurrentTrack: (track: TrackModel) => void;
@@ -33,17 +34,39 @@ const useTrackStore = create<TrackStore>()(
   persist(
     (set, get) => ({
       isPlaying: false,
-      playLists: [],
-      openDeletePlayListModal: null,
+      playlists: [],
+      openDeletePlayListModalId: null,
       currentTrack: null,
       favorites: [],
       currentPlayList: {},
       isShuffleActive: false,
       isRepeatActive: false,
-      addPlayList: (_playlist: PlaylistModel) => {},
-      openRemovePlayListModal: (_id: string) => {},
-      closeRemovePlayListModal: () => {},
-      removePlayList: (_id: string) => {},
+      addPlayList: (playlist: PlaylistModel) => {
+        const storePlaylists = get().playlists;
+        if (!storePlaylists.find((item) => item.id === playlist.id)) {
+          set({ playlists: [...storePlaylists, playlist] });
+        }
+      },
+      setOpenRemovePlayListModal: (id: string) => {
+        set({ openDeletePlayListModalId: id });
+      },
+      onCloseRemovePlayListModal: () => {
+        set({ openDeletePlayListModalId: null });
+      },
+      removePlayList: (id: string) => {
+        const storePlaylists = get().playlists;
+        set({ playlists: storePlaylists.filter((item) => item.id !== id) });
+      },
+      setUserPlaylists: (playlists: PlaylistModel[]) => {
+        const newPlaylists = [...playlists, ...get().playlists];
+        const newSet = new Set();
+        const uniqueById = newPlaylists.filter((item) => {
+          if (newSet.has(item.id)) return false;
+          newSet.add(item.id);
+          return true;
+        });
+        set({ playlists: uniqueById });
+      },
       setCurrentPlayList: (playlist: PlaylistModel) => {
         if (playlist.tracks) {
           set({ currentPlayList: playlist, currentTrack: playlist.tracks[0] });
@@ -123,7 +146,7 @@ const useTrackStore = create<TrackStore>()(
     {
       name: 'track-store',
       partialize: (state) => ({
-        playLists: state.playLists,
+        playlists: state.playlists,
         currentTrack: state.currentTrack,
         currentPlayList: state.currentPlayList,
         isShuffleActive: state.isShuffleActive,

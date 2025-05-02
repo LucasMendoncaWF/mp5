@@ -50,10 +50,9 @@ export default function SearchPage() {
   };
 
   const isTracksEmpty = !tracks?.length && !isLoadingTracks;
-  const isPlaylistEmpty = !tracks?.length && !isLoadingTracks;
-  const isArtistsEmpty = !tracks?.length && !isLoadingTracks;
+  const isPlaylistEmpty = !playlists?.length && !isLoadingPlaylists;
+  const isArtistsEmpty = !artists?.length && !isLoadingArtists;
   const noResults = isTracksEmpty && isArtistsEmpty && isPlaylistEmpty;
-
   if (noResults) {
     return <ErrorMessage>{t('noResult')}</ErrorMessage>;
   }
@@ -71,7 +70,9 @@ export default function SearchPage() {
         )}
       </div>
       <div className="px-6 md:px-2 pb-16 normal-case md:flex flex-wrap">
-        <SearchTracks data={tracks} hasError={hasErrorTracks} isLoading={isLoadingTracks} />
+        <div className={`${isPlaylistEmpty && isArtistsEmpty ? '' : 'lg:w-1/2'} lg:pl-6  w-full`}>
+          <SearchTracks data={tracks} hasError={hasErrorTracks} isLoading={isLoadingTracks} />
+        </div>
         <div className={`${!isTracksEmpty ? 'lg:w-1/2' : 'w-full'} lg:px-6`}>
           <SearchArtists data={artists} hasError={hasErrorArtists} isLoading={isLoadingArtists} />
           <SearchPlaylists
