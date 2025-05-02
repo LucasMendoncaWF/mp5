@@ -16,7 +16,6 @@ export default function LanguageSwitcher() {
     const newPath = pathname.replace(`/${currentLocale}`, `/${value}`);
     router.push(newPath);
     window.location.href = newPath;
-    document.cookie = `NEXT-lang=${value}; path=/; SameSite=Lax; Secure`;
     setMenuOpen(false);
   };
 

@@ -14,9 +14,6 @@ export function middleware(request: NextRequest) {
     theme = 'light';
   }
 
-  const initialLanguage = request.cookies.get('NEXT-lang')?.value || 'en';
-  response.headers.set('Content-Language', initialLanguage);
-  response.headers.set('NEXT-lang', initialLanguage);
   response.headers.set('theme', theme);
   response.headers.set('x-theme', theme);
   return response;

@@ -24,7 +24,7 @@ export default async function LocaleLayout({
 }) {
   const theme = await getThemeFromHeaders();
   const { locale } = await params;
-  let newLocale = nextIntlConfig.defaultLocale;
+  let newLocale = await nextIntlConfig.defaultLocale;
   if (hasLocale(routing.locales, locale)) {
     newLocale = locale;
   }
