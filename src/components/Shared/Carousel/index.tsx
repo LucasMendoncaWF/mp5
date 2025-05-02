@@ -2,14 +2,10 @@ import type { ReactNode } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import React from 'react';
 
-import TradingListSkeleton from '@/components/Pages/Explore/skeleton';
-
 interface Props {
   children: ReactNode[];
   loadingComponent: React.ReactNode;
 }
-
-// TO DO - recalculate on screen resize (and copy function to portfolio carousel)
 
 export default function Carousel({ children, loadingComponent }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);

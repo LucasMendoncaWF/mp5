@@ -12,7 +12,6 @@ import './globals.scss';
 async function getThemeFromHeaders() {
   const headersList = headers();
   const theme = (await headersList).get('theme');
-  console.log(theme)
   return theme === 'light' ? 'light' : 'dark';
 }
 
