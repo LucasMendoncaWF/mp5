@@ -1,4 +1,4 @@
-export default function PlaylistDetailPage() {
+export default function PlaylistsPage() {
   // TODO
   return (
     <div>
