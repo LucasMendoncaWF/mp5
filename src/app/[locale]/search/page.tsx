@@ -1,13 +1,20 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { useSearchArtists, useSearchPlaylists, useSearchTracks } from '@/api/search';
 import routes from '@/app/routes';
-import SearchArtists from '@/components/Pages/Search/SearchArtists';
-import SearchPlaylists from '@/components/Pages/Search/SearchPlaylists';
-import SearchTracks from '@/components/Pages/Search/SearchTracks';
-import ErrorMessage from '@/components/Shared/ErrorMessage';
+const SearchArtists = dynamic(() => import('@/components/Pages/Search/SearchArtists'), {
+  ssr: false,
+});
+const SearchPlaylists = dynamic(() => import('@/components/Pages/Search/SearchPlaylists'), {
+  ssr: false,
+});
+const SearchTracks = dynamic(() => import('@/components/Pages/Search/SearchTracks'), {
+  ssr: false,
+});
+const ErrorMessage = dynamic(() => import('@/components/Shared/ErrorMessage'), { ssr: false });
 
 export default function SearchPage() {
   const t = useTranslations();

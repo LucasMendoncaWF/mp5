@@ -1,11 +1,19 @@
+'use client';
+
+import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 
-import GenresList from '@/components/Pages/Explore/Genres';
-import RecommendedList from '@/components/Pages/Explore/RecommendedList';
-import TrendingList from '@/components/Pages/Explore/TrendingList';
 import NoteIcon from '@/svgs/icon-note';
 import RecommendedIcon from '@/svgs/icon-recommend';
 import TrendingIcon from '@/svgs/icon-trending';
+
+const GenresList = dynamic(() => import('@/components/Pages/Explore/Genres'), { ssr: false });
+const RecommendedList = dynamic(() => import('@/components/Pages/Explore/RecommendedList'), {
+  ssr: false,
+});
+const TrendingList = dynamic(() => import('@/components/Pages/Explore/TrendingList'), {
+  ssr: false,
+});
 
 export default function ExplorePage() {
   const t = useTranslations();
