@@ -13,10 +13,8 @@ export const handler = async (event: HandlerEvent) => {
     return getRecommended();
   }
 
-  return {
-    statusCode: 404,
-    body: JSON.stringify({ message: 'Endpoint not found' }),
-  };
+  const splitted = path.split('/');
+  return getById(splitted[splitted.length - 1]);
 };
 
 const getTrending = async () => {
@@ -47,6 +45,21 @@ const getRecommended = async () => {
       },
     });
 
+    return {
+      statusCode: 200,
+      body: JSON.stringify(response),
+    };
+  } catch (error: any) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Error on searching trending musics', error: error.message }),
+    };
+  }
+};
+
+const getById = async (id: string) => {
+  try {
+    const response = await makeRequest(`/tracks/${id}`);
     return {
       statusCode: 200,
       body: JSON.stringify(response),

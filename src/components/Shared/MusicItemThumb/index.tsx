@@ -11,6 +11,7 @@ import DropDownMenu from '../DropDownMenu';
 import PlayButton from '../PlayButton';
 
 import './MusicItemThumb.scss';
+import MusicITemDropDown from '../MusicListItem/MusicItemDropDown';
 
 export default function MusicItemThumb({ track }: { track: TrackModel }) {
   const t = useTranslations();
@@ -60,33 +61,7 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
             </div>
           </div>
           <div className="absolute top-1 right-2 z-2">
-            <DropDownMenu
-              direction="bottom"
-              hasBorder
-              size={1.4}
-              gap={1}
-              isMenuOpen={isMenuOpen}
-              setMenuOpen={setMenuOpen}
-            >
-              <button
-                onClick={onClickFavorite}
-                className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-              >
-                {isOnFavorites ? t('removeFavorite') : t('addFavorite')}
-              </button>
-              <button
-                onClick={onClickQueue}
-                className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-              >
-                {isOnQueue ? t('removeFromQueue') : t('addToQueue')}
-              </button>
-              <button
-                onClick={onCloseMenu}
-                className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-              >
-                {t('addToPlaylist')}
-              </button>
-            </DropDownMenu>
+            <MusicITemDropDown track={track} />
           </div>
         </div>
       </Link>

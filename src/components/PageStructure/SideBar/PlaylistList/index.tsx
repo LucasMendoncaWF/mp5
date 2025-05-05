@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
 import { useUserPlaylist } from '@/api/userPlaylists';
@@ -9,7 +10,8 @@ import PlayListSkeleton from './PlaylistSkeleton';
 import PlaylistItem from '../../../Shared/PlaylistItem';
 
 export default function PlaylistList() {
-  const { setUserPlaylists, playlists } = useTrackStore();
+  const t = useTranslations();
+  const { setUserPlaylists, playlists, favorites } = useTrackStore();
   const { isLoading, data, hasError } = useUserPlaylist({ enabled: !playlists.length });
 
   useEffect(() => {
@@ -28,6 +30,7 @@ export default function PlaylistList() {
 
   return (
     <div>
+      <PlaylistItem isSidebar playlist={{ id: 'fav', name: t('favorites'), tracks: favorites }} />
       {playlists.slice(0, 7).map((playlist) => (
         <PlaylistItem isSidebar key={playlist.id} playlist={playlist} />
       ))}

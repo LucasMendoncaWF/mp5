@@ -67,7 +67,7 @@ export default function SearchPage() {
 
   return (
     <div className="h-full overflow-y-auto">
-      <div className="pt-6 px-6 md:px-8 flex">
+      <div className="md:pt-6 px-6 md:px-8 flex">
         {genre && (
           <button
             onClick={onClickGenreTag}
@@ -77,7 +77,7 @@ export default function SearchPage() {
           </button>
         )}
       </div>
-      <div className="px-6 md:px-2 pb-16 normal-case md:flex flex-wrap">
+      <div className="px-4 md:px-2 pb-16 normal-case md:flex flex-wrap">
         <div
           className={`${(isPlaylistEmpty && isArtistsEmpty) || isLessThen10Tracks ? '' : 'lg:w-1/2'} lg:pl-6  w-full`}
         >

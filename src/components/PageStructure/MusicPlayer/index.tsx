@@ -110,6 +110,7 @@ export default function MusicPlayer() {
     setProgressPercentage(0);
   };
 
+  // TODO: is not coming back if has 2 musics
   const handlePrev = () => {
     if (!hasOnlyOneSong && currentPlayList?.tracks && currentTrack) {
       const currentIndex = playedSongs.findIndex((item) => item === currentTrack.id);

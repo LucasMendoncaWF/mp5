@@ -9,14 +9,16 @@ interface Props {
   isLoading?: boolean;
   hasError: boolean;
   data: TrackModel[] | null;
+  fullWidth?: boolean;
+  title?: string;
 }
 
-export default function SearchTracks({ isLoading, hasError, data }: Props) {
+export default function SearchTracks({ isLoading, hasError, data, fullWidth, title }: Props) {
   const t = useTranslations();
 
   if (isLoading) {
     return (
-      <div className="lg:w-1/2">
+      <div className={fullWidth ? 'w-full' : 'lg:w-1/2'}>
         <Loader width="100%" height="20dvh" />
       </div>
     );
@@ -30,7 +32,7 @@ export default function SearchTracks({ isLoading, hasError, data }: Props) {
     <div>
       <h3 className="text-2xl font-birdy items-center pl-6 mb-4 lg:pt-4 pt-8 flex gap-2 capitalize text-text-color">
         <div className="w-6 h-6 text-contrast-color">{NoteIcon}</div>
-        {t('musicsFound')}
+        {title || t('musicsFound')}
       </h3>
       <div>{data?.map((track) => <MusicListItem key={track.id} track={track} />)}</div>
     </div>

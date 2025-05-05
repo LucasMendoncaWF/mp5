@@ -49,7 +49,7 @@ export default function PlaylistItem({ playlist, isSidebar }: Props) {
       className="capitalize relative py-2 flex items-center justify-between"
     >
       <div className="flex gap-2 items-center">
-        {!isSidebar && (
+        {!isSidebar && !!playlist.tracks?.length && (
           <div className="min-w-10">
             <PlayButton isPlaylist playList={playlist} />
           </div>
@@ -63,6 +63,7 @@ export default function PlaylistItem({ playlist, isSidebar }: Props) {
       </div>
       <DropDownMenu direction="bottom" setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen}>
         <button
+          disabled={!playlist.tracks?.length}
           onClick={onClickPlay}
           className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
