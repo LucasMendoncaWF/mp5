@@ -3,22 +3,22 @@
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 
-import TradingListSkeleton from '@/components/Pages/Explore/skeleton';
+import TrendingListSkeleton from '@/components/Pages/Explore/skeleton';
 import NoteIcon from '@/svgs/icon-note';
 import RecommendedIcon from '@/svgs/icon-recommend';
 import TrendingIcon from '@/svgs/icon-trending';
 
 const GenresList = dynamic(() => import('@/components/Pages/Explore/Genres'), {
   ssr: false,
-  loading: () => <TradingListSkeleton />,
+  loading: () => <TrendingListSkeleton />,
 });
 const RecommendedList = dynamic(() => import('@/components/Pages/Explore/RecommendedList'), {
   ssr: false,
-  loading: () => <TradingListSkeleton />,
+  loading: () => <TrendingListSkeleton />,
 });
 const TrendingList = dynamic(() => import('@/components/Pages/Explore/TrendingList'), {
   ssr: false,
-  loading: () => <TradingListSkeleton />,
+  loading: () => <TrendingListSkeleton />,
 });
 
 export default function ExplorePage() {

@@ -6,13 +6,13 @@ import Carousel from '@/components/Shared/Carousel';
 import ErrorMessage from '@/components/Shared/ErrorMessage';
 
 import MusicItemThumb from '../../../Shared/MusicItemThumb';
-import TradingListSkeleton from '../skeleton';
+import TrendingListSkeleton from '../skeleton';
 
 export default function RecommendedList() {
   const t = useTranslations();
   const { data, hasError, isLoading } = useRecommendedMusics();
   if (isLoading) {
-    return <TradingListSkeleton />;
+    return <TrendingListSkeleton />;
   }
 
   if (!data?.length && !hasError) {
@@ -27,7 +27,7 @@ export default function RecommendedList() {
     <div>
       {data && !isLoading && (
         <div>
-          <Carousel loadingComponent={<TradingListSkeleton />}>
+          <Carousel loadingComponent={<TrendingListSkeleton />}>
             {data?.map((track) => <MusicItemThumb track={track} key={track.id} />)}
           </Carousel>
         </div>

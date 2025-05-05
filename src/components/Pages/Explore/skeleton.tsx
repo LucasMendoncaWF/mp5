@@ -1,4 +1,4 @@
-export default function TradingListSkeleton() {
+export default function TrendingListSkeleton() {
   return (
     <div className="max-w-full w-full md:ml-0 ml-[-9px] py-2 overflow-hidden">
       <div className="flex w-800 ">

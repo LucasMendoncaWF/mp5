@@ -6,14 +6,14 @@ import Carousel from '@/components/Shared/Carousel';
 import ErrorMessage from '@/components/Shared/ErrorMessage';
 import GenreItemThumb from '@/components/Shared/GenreItemThumb';
 
-import TradingListSkeleton from '../skeleton';
+import TrendingListSkeleton from '../skeleton';
 
 export default function GenresList() {
   const t = useTranslations();
   const { data, hasError, isLoading } = useGenres();
 
   if (isLoading) {
-    return <TradingListSkeleton />;
+    return <TrendingListSkeleton />;
   }
 
   if (!data?.length && !hasError) {
@@ -28,7 +28,7 @@ export default function GenresList() {
     <div>
       {data && !isLoading && (
         <div>
-          <Carousel loadingComponent={<TradingListSkeleton />}>
+          <Carousel loadingComponent={<TrendingListSkeleton />}>
             {data?.map((genre) => <GenreItemThumb title={genre} key={genre} />)}
           </Carousel>
         </div>
