@@ -29,13 +29,7 @@ export default function ArtistPage() {
       </div>
       <div className="p-6 pb-20">
         {data.tracks && (
-          <SearchTracks
-            title={t('similarMusics')}
-            isLoading={isLoading}
-            hasError={hasError}
-            data={data.tracks}
-            fullWidth
-          />
+          <SearchTracks isLoading={isLoading} hasError={hasError} data={data.tracks} fullWidth />
         )}
       </div>
     </div>
