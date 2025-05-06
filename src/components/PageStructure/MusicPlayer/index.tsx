@@ -1,15 +1,17 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useCallback } from 'react';
 
 import PlayButton from '@/components/Shared/PlayButton';
 import type { TrackModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 
-import { AudioPlayer } from './AudioPlayer';
-import MusicPlayerOptions from './MusicPlayerOptions';
-import ProgressBar from './ProgressBar';
-import VolumeControl from './VolumeControl';
+const AudioPlayer = dynamic(() => import('./AudioPlayer'));
+const MusicPlayerOptions = dynamic(() => import('./MusicPlayerOptions'));
+const ProgressBar = dynamic(() => import('./ProgressBar'));
+const VolumeControl = dynamic(() => import('./VolumeControl'));
+
 import './MusicPlayer.scss';
 
 export default function MusicPlayer() {
@@ -170,6 +172,7 @@ export default function MusicPlayer() {
       <div className="flex items-center justify-center">
         {hasMounted && (
           <button
+            aria-label="previous"
             onClick={handlePrev}
             disabled={!currentTrack}
             className="tracking-[-5px] mr-2 cursor-pointer transition text-primary text-xl hover:opacity-70"
@@ -186,6 +189,7 @@ export default function MusicPlayer() {
         </div>
         {hasMounted && (
           <button
+            aria-label="next"
             onClick={handleNext}
             disabled={
               !!(!hasNext && !isRepeatActive && !isShuffleActive) ||

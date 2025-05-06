@@ -41,12 +41,19 @@ export default function SearchField() {
   return (
     <div className="relative md:w-100">
       <input
+        id="search-field"
         type="text"
         onChange={(e) => setSearchQuery(e.target.value)}
         value={searchQuery || ''}
         maxLength={150}
         className="text-[13px] w-full text-text-color px-5 py-2 pr-10 border-2 border-text-color rounded-full"
       />
+      <label
+        htmlFor="search-field"
+        className="normal-case opacity-80 absolute text-text-color left-6 top-3 text-xs"
+      >
+        {!searchQuery ? 'Search' : ''}
+      </label>
       <Image
         className="dark:invert absolute right-5 top-[13px]"
         width="15"

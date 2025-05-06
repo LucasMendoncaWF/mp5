@@ -91,6 +91,7 @@ export default function Carousel({ children, loadingComponent }: Props) {
     <div className="relative overflow-y-hidden z-1">
       {!disabledLeft && (
         <button
+          aria-label="Move right"
           onClick={onClickLeft}
           className="w-8 h-8 absolute opacity-60 hover:opacity-100 left-0 top-2/5 z-99 cursor-pointer rounded-sm flex items-center justify-center bg-background"
         >
@@ -129,6 +130,7 @@ export default function Carousel({ children, loadingComponent }: Props) {
       )}
       {!disabledRight && (
         <button
+          aria-label="Move Left"
           onClick={onClickRight}
           className="w-8 h-8 absolute opacity-60 hover:opacity-100 right-0 top-2/5 z-99 cursor-pointer rounded-sm flex items-center justify-center bg-background"
         >

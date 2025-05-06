@@ -41,12 +41,14 @@ export default function MusicPlayerOptions() {
   return (
     <div onBlur={onCloseMenu} className="w-[100px] flex items-center md:gap-[14px] justify-end">
       <button
+        aria-label="Toggle Shuffle"
         onClick={toggleShuffle}
         className={`scale-80 md:scale-100 mr-1 md:mr-0 cursor-pointer transition hover:opacity-80 ${isShuffleActive ? 'text-primary' : 'text-text-color'}`}
       >
         {ShuffleIcon}
       </button>
       <button
+        aria-label="Toggle Repeat"
         onClick={toggleRepeat}
         className={`scale-80 md:scale-100 mr-2 md:mr-0 cursor-pointer transition hover:opacity-80 ${isRepeatActive ? 'text-primary' : 'text-text-color'}`}
       >
@@ -54,14 +56,16 @@ export default function MusicPlayerOptions() {
       </button>
       <DropDownMenu size={1.2} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen}>
         <button
+          aria-label="Add or Remove to favorites"
           onClick={onClickFavorite}
-          className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
           {isOnFavorites ? t('removeFavorite') : t('addFavorite')}
         </button>
         <button
+          aria-label="Add to playlist"
           onClick={() => setTimeout(() => setMenuOpen(false), 200)}
-          className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
           {t('addToPlaylist')}
         </button>

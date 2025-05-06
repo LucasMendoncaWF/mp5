@@ -31,7 +31,7 @@ export default function PlaylistThumbItem({ playlist }: { playlist: PlaylistMode
 
   return (
     <div className="py-2 md:px-4 px-2 2xl:w-1/3 w-1/2 aspect-square" onMouseLeave={onCloseMenu}>
-      <Link href={`${routes.playlists}/${playlist.id}`}>
+      <Link aria-label="Playlist Details" href={`${routes.playlists}/${playlist.id}`}>
         <div
           className="link-hover relative text-text-color h-full w-full  bg-primary bg-center bg-no-repeat bg-cover flex-wrap items-end flex"
           style={{
@@ -59,8 +59,9 @@ export default function PlaylistThumbItem({ playlist }: { playlist: PlaylistMode
               setMenuOpen={setMenuOpen}
             >
               <button
+                aria-label="Save Playlist"
                 onClick={onSavePlaylist}
-                className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+                className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
               >
                 {t('savePlaylist')}
               </button>

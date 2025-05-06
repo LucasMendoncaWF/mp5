@@ -70,6 +70,7 @@ export default function SearchPage() {
       <div className="md:pt-6 px-6 md:px-8 flex">
         {genre && (
           <button
+            aria-label="close"
             onClick={onClickGenreTag}
             className="bg-text-color cursor-pointer mb-4 px-3 py-1 pr-6 relative text-background rounded-2xl hover:opacity-60 transition"
           >

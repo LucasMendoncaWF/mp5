@@ -17,7 +17,7 @@ type AudioPlayerProps = {
   onEndSong: () => void;
 };
 
-export function AudioPlayer({
+export default function AudioPlayer({
   trackId,
   duration,
   progress,

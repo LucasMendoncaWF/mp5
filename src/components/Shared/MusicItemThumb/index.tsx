@@ -1,48 +1,18 @@
 'use client';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { useTranslations } from 'use-intl';
 
 import routes from '@/app/routes';
 import type { TrackModel } from '@/models/tracks';
-import useTrackStore from '@/stores/trackStore';
 
-import DropDownMenu from '../DropDownMenu';
+import MusicITemDropDown from '../MusicListItem/MusicItemDropDown';
 import PlayButton from '../PlayButton';
 
 import './MusicItemThumb.scss';
-import MusicITemDropDown from '../MusicListItem/MusicItemDropDown';
 
 export default function MusicItemThumb({ track }: { track: TrackModel }) {
-  const t = useTranslations();
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const { addOrRemoveToFavorites, addOrRemoveToQueue, currentPlayList, favorites } =
-    useTrackStore();
-  const isOnFavorites = favorites.find((item) => item.id === track.id);
-  const isOnQueue = currentPlayList?.tracks?.find((item) => item.id === track.id);
-  const onCloseMenu = () => {
-    setTimeout(() => {
-      setMenuOpen(false);
-    }, 50);
-  };
-
-  const onClickFavorite = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    addOrRemoveToFavorites(track);
-    onCloseMenu();
-  };
-
-  const onClickQueue = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    addOrRemoveToQueue(track);
-    onCloseMenu();
-  };
-
   return (
-    <div className="py-2 md:px-4 px-2" onMouseLeave={onCloseMenu}>
-      <Link href={`${routes.track}/${track.id}`}>
+    <div className="py-2 md:px-4 px-2">
+      <Link aria-label="Music Details" href={`${routes.track}/${track.id}`}>
         <div
           className="link-hover relative text-text-color md:w-70 md:h-70 w-50 h-50 bg-primary bg-center bg-no-repeat bg-cover flex-wrap items-end flex"
           style={{
@@ -53,7 +23,7 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
             <div className="p-4 w-full h-full relative z-2">
               <div className="music-thumb-gradient absolute bottom-0 left-0 w-full h-full z-1"></div>
               <div className="flex w-full h-full items-center justify-between  relative z-3">
-                <div className="text-sm line-clamp-2 font-bold dark:text-white music-item-thumb-title ">
+                <div className="text-sm line-clamp-2 max-w-[70%] font-bold dark:text-white music-item-thumb-title ">
                   {track.title}
                 </div>
                 <PlayButton isSingleTrack track={track} />

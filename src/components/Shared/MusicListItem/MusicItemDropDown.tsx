@@ -45,20 +45,23 @@ export default function MusicITemDropDown({ track }: { track: TrackModel }) {
         setMenuOpen={setMenuOpen}
       >
         <button
+          aria-label="Add or Remove from Favorites"
           onClick={onClickFavorite}
-          className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
           {isOnFavorites ? t('removeFavorite') : t('addFavorite')}
         </button>
         <button
+          aria-label="Add or Remove from Queue"
           onClick={onClickQueue}
-          className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
           {isOnQueue ? t('removeFromQueue') : t('addToQueue')}
         </button>
         <button
+          aria-label="Add to playlist"
           onClick={onCloseMenu}
-          className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
           {t('addToPlaylist')}
         </button>

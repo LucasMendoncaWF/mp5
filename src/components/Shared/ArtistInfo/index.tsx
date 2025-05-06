@@ -27,7 +27,11 @@ export default function ArtistInfo({ user }: { user: TrackUserModel }) {
       <div className="text-text-color normal-case mt-2">
         <div className="normal-case text-primary font-bold text-xl mb-2">{t('artist')}</div>
         <div className="mb-1 text-xl">
-          <Link className="hover:underline" href={`${routes.artist}/${user.id}`}>
+          <Link
+            aria-label="Artist page"
+            className="hover:underline"
+            href={`${routes.artist}/${user.id}`}
+          >
             {user.name}
           </Link>
         </div>
@@ -36,6 +40,7 @@ export default function ArtistInfo({ user }: { user: TrackUserModel }) {
             <div className="w-5 h-5">{UserIcon}</div> {getFollowerCount(user.follower_count)}
           </div>
           <Link
+            aria-label="Artist Instagram"
             href={`https://www.instagram.com/${user.instagram_handle}`}
             className="cursor-pointer hover:underline flex gap-2 mb-1 items-center"
           >

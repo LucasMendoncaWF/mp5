@@ -14,6 +14,7 @@ export default function SideBar() {
       <div className="p-8 h-[85%] overflow-y-auto">
         <div className="pb-2">
           <Link
+            aria-label="Your playlists"
             className="hover:opacity-60 font-bold text-xl capitalize transition"
             href={routes.playlists}
           >
@@ -25,6 +26,7 @@ export default function SideBar() {
         </div>
         <div className="pt-5">
           <Link
+            aria-label="Your profile"
             className="hover:opacity-60 font-bold capitalize text-lg  transition"
             href={routes.profile}
           >
@@ -33,6 +35,7 @@ export default function SideBar() {
         </div>
         <div className="pt-2">
           <Link
+            aria-label="Settings"
             className="hover:opacity-60 font-bold capitalize text-lg transition"
             href={routes.settings}
           >

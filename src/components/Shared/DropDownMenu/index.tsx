@@ -29,6 +29,7 @@ export default function DropDownMenu({
           e.stopPropagation();
           setMenuOpen(!isMenuOpen);
         }}
+        aria-label="Open menu"
         style={{ gap: `${gap}px`, padding: `${size * 5}px` }}
         className={`flex cursor-pointer transition hover:opacity-70`}
       >

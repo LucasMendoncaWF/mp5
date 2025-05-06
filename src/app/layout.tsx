@@ -31,6 +31,10 @@ export default async function LocaleLayout({
 
   return (
     <html lang={newLocale} data-theme={theme} className={theme}>
+      <head>
+        <title>Music Player</title>
+        <meta name="description" content="Music Player demo for portfolio" />
+      </head>
       <body>
         <PreRender />
         <NextIntlClientProvider>

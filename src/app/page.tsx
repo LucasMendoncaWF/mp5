@@ -10,5 +10,5 @@ export default async function InitialPage({ params }: { params: Promise<{ locale
   if (hasLocale(routing.locales, locale)) {
     newLocale = locale;
   }
-  redirect(`${newLocale}/explore`);
+  redirect(`${newLocale}/`);
 }

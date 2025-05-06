@@ -55,6 +55,7 @@ export default function PlaylistItem({ playlist, isSidebar }: Props) {
           </div>
         )}
         <Link
+          aria-label="Playlist details"
           href={`${routes.playlists}/${playlist.id}`}
           className="dark:opacity-80 hover:opacity-60 transition text-text-color"
         >
@@ -63,18 +64,23 @@ export default function PlaylistItem({ playlist, isSidebar }: Props) {
       </div>
       <DropDownMenu direction="bottom" setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen}>
         <button
+          aria-label="Play playlist"
           disabled={!playlist.tracks?.length}
           onClick={onClickPlay}
-          className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
           {t('play')}
         </button>
-        <button className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer">
+        <button
+          aria-label="Edit Playlist"
+          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+        >
           {t('edit')}
         </button>
         <button
           onClick={onClickDelete}
-          className="w-full text-[12px] dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
+          aria-label="Delete playlist"
+          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
           {t('delete')}
         </button>

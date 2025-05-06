@@ -1,5 +1,5 @@
 const routes = {
-  explore: '/explore',
+  explore: '/',
   search: '/search',
   playlists: '/playlists',
   settings: '/settings',

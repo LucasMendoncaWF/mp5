@@ -88,6 +88,7 @@ export default function PlayButton({
       className="flex play-button relative flex-wrap justify-center content-center rounded-full"
     >
       <button
+        aria-label="Play or Pause Music"
         disabled={disabled}
         onClick={onButtonClick}
         className={`play-button__element ${buttonPressed && 'pressed'} bg-primary cursor-pointer relative h-full w-full rounded-full transition duration-300 hover:opacity-80 hover:scale-92`}

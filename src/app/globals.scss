@@ -26,7 +26,8 @@ $themes: (
     border-color: #dcd2cb,
     background: #fef9f6,
     background-secondary: #f0eae7,
-    tertiary: #43cfbd,
+    tertiary: #c089ff,
+    secondary: #43cfbd,
   ),
   dark: (
     text-color: #f5eee9,
@@ -35,7 +36,8 @@ $themes: (
     border-color: #130d0a,
     background: #2b2623,
     background-secondary: #1c1512,
-    tertiary: #035f53,
+    tertiary: #8c46dd,
+    secondary: #028573,
   )
 );
 
@@ -118,8 +120,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 // Custom general classes
 .font-birdy {
   font-family: birdy;
@@ -143,7 +143,7 @@ button {
   }
 }
 
-button:disabled {
+button:disabled, input:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 

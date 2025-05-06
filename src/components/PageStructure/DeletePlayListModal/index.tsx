@@ -25,12 +25,14 @@ export default function DeletePlayListModal() {
         <div className="text-text-color text-2xl font-bold">{t('confirmPlaylistDeletion')}</div>
         <div className="flex justify-between mt-5">
           <button
+            aria-label="confirm delete"
             onClick={onClickDelete}
             className="py-2 px-4 bg-text-color text-background rounded-xl cursor-pointer hover:opacity-80 hover:scale-105 transition"
           >
             {t('yesDelete')}
           </button>
           <button
+            aria-label="cancel action"
             className="py-2 px-4 bg-background-secondary rounded-xl cursor-pointer hover:opacity-80 hover:scale-105 transition"
             onClick={onCloseRemovePlayListModal}
           >

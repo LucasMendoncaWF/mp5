@@ -26,6 +26,7 @@ export default function ThemeSelector() {
 
   return (
     <button
+      aria-label="Toggle theme"
       className={`theme-toggle-button theme-toggle-button--${buttonTheme}`}
       onClick={toggleTheme}
     >
