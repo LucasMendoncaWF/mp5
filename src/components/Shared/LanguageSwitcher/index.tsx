@@ -14,6 +14,7 @@ export default function LanguageSwitcher() {
 
   const onClick = (value: string) => {
     const newPath = pathname.replace(`/${currentLocale}`, `/${value}`);
+    document.cookie = `NEXT_LOCALE=${value}; path=/; max-age=31536000; SameSite=Lax; Secure`;
     router.push(newPath);
     window.location.href = newPath;
     setMenuOpen(false);

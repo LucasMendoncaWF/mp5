@@ -1,21 +1,23 @@
-import type { NextRequest } from 'next/server';
-import createMiddleware from 'next-intl/middleware';
+import { NextResponse, type NextRequest } from 'next/server';
 
-import { routing } from './i18n/routing';
-
-const intlMiddleware = createMiddleware(routing);
+function getLocaleFromCookie(request: NextRequest) {
+  const cookie = request.cookies.get('NEXT_LOCALE');
+  return cookie ? cookie.value : 'en';
+}
 
 export function middleware(request: NextRequest) {
-  const response = intlMiddleware(request);
+  const response = NextResponse.next();
 
   const initialTheme = request.cookies.get('theme')?.value;
-  let theme = 'dark';
-  if (initialTheme === 'light') {
-    theme = 'light';
+  let theme = 'light';
+  if (initialTheme === 'dark') {
+    theme = 'dark';
   }
-
-  response.headers.set('theme', theme);
   response.headers.set('x-theme', theme);
+
+  const locale = getLocaleFromCookie(request) || 'en';
+  response.headers.set('x-locale', locale);
+
   return response;
 }
 
