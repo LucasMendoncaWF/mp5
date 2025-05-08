@@ -27,7 +27,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (data) {
-      setForm(data as any);
+      setForm((prev) => ({ ...prev, ...data }));
     }
   }, [data]);
 

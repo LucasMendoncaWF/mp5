@@ -121,6 +121,24 @@ body {
 }
 
 // Custom general classes
+.main-container {
+  height: calc(100dvh - 68px - 150px);
+  min-height: 400px;
+
+  @media screen and (min-width: 768px) {
+    height: calc(100dvh - 68px - 110px);
+  }
+}
+
+.content-container {
+  width: 100%;
+  overflow: hidden;
+  height: calc(100dvh - 68px - 100px);
+  @media screen and (min-width: 768px) { 
+    width: calc(100% - 320px);
+  }
+}
+
 .font-birdy {
   font-family: birdy;
 }

@@ -1,5 +1,4 @@
 'use client';
-import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -8,15 +7,11 @@ import nextIntlConfig from '@/locales/languages';
 export default function LanguageSwitcher() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const t = useTranslations();
-  const router = useRouter();
-  const pathname = usePathname();
   const currentLocale = useLocale();
 
   const onClick = (value: string) => {
-    const newPath = pathname.replace(`/${currentLocale}`, `/${value}`);
     document.cookie = `NEXT_LOCALE=${value}; path=/; max-age=31536000; SameSite=Lax; Secure`;
-    router.push(newPath);
-    window.location.href = newPath;
+    location.reload();
     setMenuOpen(false);
   };
 

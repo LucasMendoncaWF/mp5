@@ -1,13 +1,7 @@
-import type { LocalePrefix, LocalePrefixMode } from 'next-intl/routing';
-
-const nextIntlConfig: {
-  locales: string[];
-  defaultLocale: string;
-  localePrefix: LocalePrefix<string[], LocalePrefixMode>;
-} = {
+const nextIntlConfig = {
   locales: ['en', 'pt'],
   defaultLocale: 'en',
-  localePrefix: 'always',
+  localePrefix: 'never',
 };
 
 export default nextIntlConfig;
