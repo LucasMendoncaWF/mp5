@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-import nextIntlConfig from '../../next-intl.config';
+import nextIntlConfig from '@/../next-intl.config';
 
 export async function getLanguageFromCookies() {
   const cookieStore = await cookies();

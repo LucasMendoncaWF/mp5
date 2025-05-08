@@ -2,7 +2,8 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import nextIntlConfig from '@/locales/languages';
+import nextIntlConfig from '@/../next-intl.config';
+
 import DropDownButton from '../DropDownMenu/DropDownButton';
 
 export default function LanguageSwitcher() {
