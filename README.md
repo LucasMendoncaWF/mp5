@@ -26,7 +26,7 @@ MP5 is a minimalist music streaming platform inspired by Spotify, powered by the
 - [Next.js](https://nextjs.org/)
 - React
 - Audius API
-- Scss
+- Scss | Tailwind CSS
 - TypeScript
 - Zustand
 - Netlify for deployment
