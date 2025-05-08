@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 
 import TrendingListSkeleton from '@/components/Pages/Explore/skeleton';
 import NoteIcon from '@/svgs/icon-note';
@@ -23,6 +24,14 @@ const TrendingList = dynamic(() => import('@/components/Pages/Explore/TrendingLi
 
 export default function ExplorePage() {
   const t = useTranslations();
+
+  useEffect(() => {
+    if (localStorage.getItem('alert_viewed') !== 'ok') {
+      alert('Website Under Construction, missing playlists page and settings');
+    }
+    localStorage.setItem('alert_viewed', 'ok');
+  }, []);
+
   return (
     <div className="w-full pb-4 md:pt-4 max-h-full overflow-auto md:px-8 pb-20">
       <div className="mb-3">
