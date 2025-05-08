@@ -202,7 +202,7 @@ export default function MusicPlayer() {
           </button>
         )}
       </div>
-      <div className="md:hidden block w-full capitalize text-center md:text-sm text-xs line-clamp-1">
+      <div className="md:hidden w-full capitalize text-center md:text-sm text-xs line-clamp-1 px-10">
         {currentTrack?.title}
       </div>
       <div className="w-full md:mb-3 mt-1 md:mt-2 flex items-center justify-between md:justify-center px-6 md:px-10">
