@@ -3,12 +3,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
 const DeletePlayListModal = dynamic(() => import('@/components/PageStructure/DeletePlayListModal'));
-const MusicPlayer = dynamic(() => import('@/components/PageStructure/MusicPlayer'));
-const SideBar = dynamic(() => import('@/components/PageStructure/SideBar'));
-const MobileMenu = dynamic(() => import('@/components/Shared/MobileMenu'));
 import Header from '@/components/PageStructure/Header';
-import HidePlayerWrapper from '@/components/PageStructure/playerWrapper';
-import PlayerWrapper from '@/components/PageStructure/playerWrapper';
+import PlayerWrapper from '@/components/PageStructure/PlayerWrapper';
 import PreRender from '@/components/Shared/PreRender';
 import './globals.scss';
 import { getLanguageFromCookies, getThemeFromCookies } from '@/utils/handleCookies';

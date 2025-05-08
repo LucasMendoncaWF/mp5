@@ -1,10 +1,11 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-import MusicPlayer from './MusicPlayer';
-import SideBar from './SideBar';
-import MobileMenu from '../Shared/MobileMenu';
+const MusicPlayer = dynamic(() => import('@/components/PageStructure/MusicPlayer'));
+const SideBar = dynamic(() => import('@/components/PageStructure/SideBar'));
+const MobileMenu = dynamic(() => import('@/components/Shared/MobileMenu'));
 
 export default function PlayerWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
