@@ -27,7 +27,7 @@ export default function ExplorePage() {
 
   useEffect(() => {
     if (localStorage.getItem('alert_viewed') !== 'ok') {
-      alert('Website Under Construction, missing playlists page and settings');
+      alert('Website Under Construction, missing playlists and settings pages');
     }
     localStorage.setItem('alert_viewed', 'ok');
   }, []);
