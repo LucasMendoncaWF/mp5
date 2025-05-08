@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import { useGetUserProfile } from '@/api/userProfile';
+import PrimaryButton from '@/components/Shared/Buttons/PrimaryButton';
 import Subscriptions from '@/components/Shared/Subscriptions';
 
 export default function ProfilePage() {
@@ -88,12 +89,7 @@ export default function ProfilePage() {
                 className="p-2 mb-3 px-4 border-text-color border-1 rounded-lg w-full"
               />
             </div>
-            <button
-              className="p-2 cursor-pointer px-4 font-bold rounded-xl bg-primary text-white hover:opacity-80 transition"
-              aria-label="save changes"
-            >
-              {t('saveChanges')}
-            </button>
+            <PrimaryButton ariaLabel="save changes">{t('saveChanges')}</PrimaryButton>
           </div>
         </div>
         <div className="text-text-color px-6 py-8 md:py-10 flex justify-center w-full normal-case text-sm">
@@ -125,12 +121,7 @@ export default function ProfilePage() {
                 className="mb-3 p-2 px-4 border-text-color border-1 rounded-lg w-full"
               />
             </div>
-            <button
-              className="p-2 cursor-pointer px-4 font-bold rounded-xl bg-primary text-white hover:opacity-80 transition"
-              aria-label="save changes"
-            >
-              {t('saveChanges')}
-            </button>
+            <PrimaryButton ariaLabel="save changes">{t('saveChanges')}</PrimaryButton>
           </div>
         </div>
         <div className="p-6 rounded-3xl">

@@ -11,6 +11,7 @@ import DropDownMenu from '../DropDownMenu';
 import PlayButton from '../PlayButton';
 
 import './PlaylistThumbItem.scss';
+import DropDownButton from '../DropDownMenu/DropDownButton';
 
 export default function PlaylistThumbItem({ playlist }: { playlist: PlaylistModel }) {
   const t = useTranslations();
@@ -58,13 +59,9 @@ export default function PlaylistThumbItem({ playlist }: { playlist: PlaylistMode
               isMenuOpen={isMenuOpen}
               setMenuOpen={setMenuOpen}
             >
-              <button
-                aria-label="Save Playlist"
-                onClick={onSavePlaylist}
-                className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-              >
+              <DropDownButton ariaLabel="Save Playlist" onClick={onSavePlaylist}>
                 {t('savePlaylist')}
-              </button>
+              </DropDownButton>
             </DropDownMenu>
           </div>
         </div>

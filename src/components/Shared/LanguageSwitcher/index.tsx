@@ -3,6 +3,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import nextIntlConfig from '@/locales/languages';
+import DropDownButton from '../DropDownMenu/DropDownButton';
 
 export default function LanguageSwitcher() {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -42,14 +43,9 @@ export default function LanguageSwitcher() {
       {isMenuOpen && (
         <div className="bg-text-color z-9 rounded-md rounded-200 left-2 absolute bottom-[115%]">
           {nextIntlConfig.locales.map((locale, index) => (
-            <button
-              aria-label="Select language"
-              className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-              key={index}
-              onClick={() => onClick(locale)}
-            >
+            <DropDownButton key={index} ariaLabel="Select language" onClick={() => onClick(locale)}>
               {languages[locale].name}
-            </button>
+            </DropDownButton>
           ))}
           <div className="absolute text-text-color top-14 left-1 z-[-1]">▼</div>
         </div>

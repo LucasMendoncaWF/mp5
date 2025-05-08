@@ -5,6 +5,7 @@ import type { TrackModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 
 import DropDownMenu from '../DropDownMenu';
+import DropDownButton from '../DropDownMenu/DropDownButton';
 
 export default function MusicITemDropDown({ track }: { track: TrackModel }) {
   const t = useTranslations();
@@ -44,27 +45,17 @@ export default function MusicITemDropDown({ track }: { track: TrackModel }) {
         isMenuOpen={isMenuOpen}
         setMenuOpen={setMenuOpen}
       >
-        <button
-          aria-label="Add or Remove from Favorites"
-          onClick={onClickFavorite}
-          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-        >
+        <DropDownButton ariaLabel="Add or Remove from Favorites" onClick={onClickFavorite}>
           {isOnFavorites ? t('removeFavorite') : t('addFavorite')}
-        </button>
-        <button
-          aria-label="Add or Remove from Queue"
-          onClick={onClickQueue}
-          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-        >
+        </DropDownButton>
+
+        <DropDownButton ariaLabel="Add or Remove from Queue" onClick={onClickQueue}>
           {isOnQueue ? t('removeFromQueue') : t('addToQueue')}
-        </button>
-        <button
-          aria-label="Add to playlist"
-          onClick={onCloseMenu}
-          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-        >
+        </DropDownButton>
+
+        <DropDownButton ariaLabel="Add to playlist" onClick={onCloseMenu}>
           {t('addToPlaylist')}
-        </button>
+        </DropDownButton>
       </DropDownMenu>
     </div>
   );

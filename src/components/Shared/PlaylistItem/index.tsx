@@ -9,6 +9,7 @@ import type { PlaylistModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 
 import PlayButton from '../PlayButton';
+import DropDownButton from '../DropDownMenu/DropDownButton';
 
 interface Props {
   playlist: PlaylistModel;
@@ -63,27 +64,15 @@ export default function PlaylistItem({ playlist, isSidebar }: Props) {
         </Link>
       </div>
       <DropDownMenu direction="bottom" setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen}>
-        <button
-          aria-label="Play playlist"
-          disabled={!playlist.tracks?.length}
-          onClick={onClickPlay}
-          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-        >
+        <DropDownButton ariaLabel="Play playlist" onClick={onClickPlay}>
           {t('play')}
-        </button>
-        <button
-          aria-label="Edit Playlist"
-          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-        >
+        </DropDownButton>
+        <DropDownButton ariaLabel="Edit Playlist" onClick={() => {}}>
           {t('edit')}
-        </button>
-        <button
-          onClick={onClickDelete}
-          aria-label="Delete playlist"
-          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-        >
+        </DropDownButton>
+        <DropDownButton ariaLabel="Delete playlist" onClick={onClickDelete}>
           {t('delete')}
-        </button>
+        </DropDownButton>
       </DropDownMenu>
     </div>
   );

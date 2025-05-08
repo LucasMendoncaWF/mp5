@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
+import DropDownButton from '@/components/Shared/DropDownMenu/DropDownButton';
 import useTrackStore from '@/stores/trackStore';
 import RandomIcon from '@/svgs/icon-random';
 import ShuffleIcon from '@/svgs/icon-shuffle';
@@ -55,20 +56,15 @@ export default function MusicPlayerOptions() {
         {RandomIcon}
       </button>
       <DropDownMenu size={1.2} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen}>
-        <button
-          aria-label="Add or Remove to favorites"
-          onClick={onClickFavorite}
-          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
-        >
+        <DropDownButton ariaLabel="Add or Remove to favorites" onClick={onClickFavorite}>
           {isOnFavorites ? t('removeFavorite') : t('addFavorite')}
-        </button>
-        <button
-          aria-label="Add to playlist"
+        </DropDownButton>
+        <DropDownButton
+          ariaLabel="Add to playlist"
           onClick={() => setTimeout(() => setMenuOpen(false), 200)}
-          className="w-full text-xs dark:text-black text-white p-2 px-5 hover:opacity-80 hover:bg-[rgba(0,0,0,0.1)] transition cursor-pointer"
         >
           {t('addToPlaylist')}
-        </button>
+        </DropDownButton>
       </DropDownMenu>
     </div>
   );
