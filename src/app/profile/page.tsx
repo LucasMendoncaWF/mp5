@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import { useGetUserProfile } from '@/api/userProfile';
-import PrimaryButton from '@/components/Shared/Buttons/PrimaryButton';
-import Subscriptions from '@/components/Shared/Subscriptions';
+import PrimaryButton from '@/components/Shared/Material/Buttons/PrimaryButton';
+import Subscriptions from '@/components/Shared/Sections/Subscriptions';
 
 export default function ProfilePage() {
   const { data, isLoading, hasError } = useGetUserProfile();

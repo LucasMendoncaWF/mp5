@@ -14,7 +14,9 @@ const SearchPlaylists = dynamic(() => import('@/components/Pages/Search/SearchPl
 const SearchTracks = dynamic(() => import('@/components/Pages/Search/SearchTracks'), {
   ssr: false,
 });
-const ErrorMessage = dynamic(() => import('@/components/Shared/ErrorMessage'), { ssr: false });
+const ErrorMessage = dynamic(() => import('@/components/Shared/Material/ErrorMessage'), {
+  ssr: false,
+});
 
 export default function SearchPage() {
   const t = useTranslations();

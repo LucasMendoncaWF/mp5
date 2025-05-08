@@ -1,4 +1,4 @@
-import Loader from '../Loader';
+import Loader from '../../Material/Loader';
 
 export default function ArtistInfoLoader({ hasMusics }: { hasMusics?: boolean }) {
   return (

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import useTrackStore from '@/stores/trackStore';
 
 import './DeletePlaylistModal.scss';
-import PrimaryButton from '@/components/Shared/Buttons/PrimaryButton';
+import PrimaryButton from '@/components/Shared/Material/Buttons/PrimaryButton';
 
 export default function DeletePlayListModal() {
   const t = useTranslations();

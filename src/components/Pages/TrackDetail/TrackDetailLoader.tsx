@@ -1,4 +1,4 @@
-import ArtistInfoLoader from '@/components/Shared/ArtistInfo/ArtistInfoLoader';
+import ArtistInfoLoader from '@/components/Shared/Sections/ArtistInfo/ArtistInfoLoader';
 
 export default function TrackDetailLoader() {
   return (

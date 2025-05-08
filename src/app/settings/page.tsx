@@ -1,6 +1,6 @@
 'use client';
 
-import Subscriptions from '@/components/Shared/Subscriptions';
+import Subscriptions from '@/components/Shared/Sections/Subscriptions';
 
 export default function SettingsPage() {
   // TODO

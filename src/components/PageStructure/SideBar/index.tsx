@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import routes from '@/app/routes';
-import LanguageSwitcher from '@/components/Shared/LanguageSwitcher';
-import ThemeSelector from '@/components/Shared/ThemeSelector';
+import LanguageSwitcher from '@/components/Shared/Material/LanguageSwitcher';
+import ThemeSelector from '@/components/Shared/Material/ThemeSelector';
 
 import PlaylistList from './PlaylistList';
 

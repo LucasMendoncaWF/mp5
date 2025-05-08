@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
-import Loader from '@/components/Shared/Loader';
-import PlaylistThumbItem from '@/components/Shared/PlayListItemThumb';
+import Loader from '@/components/Shared/Material/Loader';
+import PlaylistThumbItem from '@/components/Shared/Thumbs/PlayListItemThumb';
 import type { PlaylistModel } from '@/models/tracks';
 import PlaylistIcon from '@/svgs/icon-playlist';
 

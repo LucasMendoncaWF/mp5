@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import { useTranslations } from 'use-intl';
 
 import routes from '@/app/routes';
-import DropDownMenu from '@/components/Shared/DropDownMenu';
+import DropDownMenu from '@/components/Shared/Material/DropDownMenu';
 import type { PlaylistModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 
-import PlayButton from '../PlayButton';
-import DropDownButton from '../DropDownMenu/DropDownButton';
+import PlayButton from '../../Material/Buttons/PlayButton';
+import DropDownButton from '../../Material/DropDownMenu/DropDownButton';
 
 interface Props {
   playlist: PlaylistModel;

@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import type { TrackModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 
-import DropDownMenu from '../DropDownMenu';
-import DropDownButton from '../DropDownMenu/DropDownButton';
+import DropDownMenu from '../../Material/DropDownMenu';
+import DropDownButton from '../../Material/DropDownMenu/DropDownButton';
 
-export default function MusicITemDropDown({ track }: { track: TrackModel }) {
+export default function MusicItemDropDown({ track }: { track: TrackModel }) {
   const t = useTranslations();
   const { favorites, currentPlayList, addOrRemoveToQueue, addOrRemoveToFavorites } =
     useTrackStore();

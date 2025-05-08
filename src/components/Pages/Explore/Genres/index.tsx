@@ -2,9 +2,9 @@
 import { useTranslations } from 'next-intl';
 
 import { useGenres } from '@/api/explore';
-import Carousel from '@/components/Shared/Carousel';
-import ErrorMessage from '@/components/Shared/ErrorMessage';
-import GenreItemThumb from '@/components/Shared/GenreItemThumb';
+import Carousel from '@/components/Shared/Material/Carousel';
+import ErrorMessage from '@/components/Shared/Material/ErrorMessage';
+import GenreItemThumb from '@/components/Shared/Thumbs/GenreItemThumb';
 
 import TrendingListSkeleton from '../skeleton';
 

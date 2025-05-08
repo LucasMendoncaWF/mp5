@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useCallback } from 'react';
 
-import PlayButton from '@/components/Shared/PlayButton';
+import PlayButton from '@/components/Shared/Material/Buttons/PlayButton';
 import type { TrackModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 

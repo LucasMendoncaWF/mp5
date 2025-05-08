@@ -4,8 +4,8 @@ import Link from 'next/link';
 import routes from '@/app/routes';
 import type { TrackModel } from '@/models/tracks';
 
-import MusicITemDropDown from '../MusicListItem/MusicItemDropDown';
-import PlayButton from '../PlayButton';
+import MusicItemDropDown from '../../ListItems/MusicListItem/MusicItemDropDown';
+import PlayButton from '../../Material/Buttons/PlayButton';
 
 import './MusicItemThumb.scss';
 
@@ -31,7 +31,7 @@ export default function MusicItemThumb({ track }: { track: TrackModel }) {
             </div>
           </div>
           <div className="absolute top-1 right-2 z-2">
-            <MusicITemDropDown track={track} />
+            <MusicItemDropDown track={track} />
           </div>
         </div>
       </Link>

@@ -7,11 +7,11 @@ import routes from '@/app/routes';
 import type { PlaylistModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 
-import DropDownMenu from '../DropDownMenu';
-import PlayButton from '../PlayButton';
+import DropDownMenu from '../../Material/DropDownMenu';
+import PlayButton from '../../Material/Buttons/PlayButton';
 
 import './PlaylistThumbItem.scss';
-import DropDownButton from '../DropDownMenu/DropDownButton';
+import DropDownButton from '../../Material/DropDownMenu/DropDownButton';
 
 export default function PlaylistThumbItem({ playlist }: { playlist: PlaylistModel }) {
   const t = useTranslations();

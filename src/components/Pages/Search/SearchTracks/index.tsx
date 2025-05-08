@@ -1,7 +1,7 @@
 import { useTranslations } from 'use-intl';
 
-import Loader from '@/components/Shared/Loader';
-import MusicListItem from '@/components/Shared/MusicListItem';
+import Loader from '@/components/Shared/Material/Loader';
+import MusicListItem from '@/components/Shared/ListItems/MusicListItem';
 import type { TrackModel } from '@/models/tracks';
 import NoteIcon from '@/svgs/icon-note';
 

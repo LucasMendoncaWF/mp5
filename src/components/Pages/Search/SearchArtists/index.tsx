@@ -1,7 +1,7 @@
 import { useTranslations } from 'use-intl';
 
-import ArtistThumb from '@/components/Shared/ArtistThumb';
-import Loader from '@/components/Shared/Loader';
+import ArtistThumb from '@/components/Shared/Thumbs/ArtistThumb';
+import Loader from '@/components/Shared/Material/Loader';
 import type { TrackUserModel } from '@/models/tracks';
 import UserIcon from '@/svgs/icon-user';
 

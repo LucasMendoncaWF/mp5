@@ -7,10 +7,10 @@ import React from 'react';
 import { useGetTrack } from '@/api/track';
 import SimilarTracks from '@/components/Pages/TrackDetail/SimilarTracks';
 import TrackDetailLoader from '@/components/Pages/TrackDetail/TrackDetailLoader';
-import ArtistInfo from '@/components/Shared/ArtistInfo';
-import ErrorMessage from '@/components/Shared/ErrorMessage';
-import MusicITemDropDown from '@/components/Shared/MusicListItem/MusicItemDropDown';
-import PlayButton from '@/components/Shared/PlayButton';
+import ArtistInfo from '@/components/Shared/Sections/ArtistInfo';
+import ErrorMessage from '@/components/Shared/Material/ErrorMessage';
+import MusicItemDropDown from '@/components/Shared/ListItems/MusicListItem/MusicItemDropDown';
+import PlayButton from '@/components/Shared/Material/Buttons/PlayButton';
 
 export default function TrackPage() {
   const t = useTranslations();
@@ -29,7 +29,7 @@ export default function TrackPage() {
     <div className="w-full max-h-full overflow-auto pb-20">
       <div className="p-6 relative">
         <div className="absolute md:right-5 right-8 md:top-5 top-8 z-9">
-          <MusicITemDropDown track={trackData} />
+          <MusicItemDropDown track={trackData} />
         </div>
         <div className="absolute right-5 bottom-6">
           <PlayButton isSingleTrack track={trackData} />

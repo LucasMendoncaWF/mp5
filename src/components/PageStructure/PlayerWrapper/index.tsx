@@ -5,7 +5,7 @@ import React from 'react';
 
 const MusicPlayer = dynamic(() => import('@/components/PageStructure/MusicPlayer'));
 const SideBar = dynamic(() => import('@/components/PageStructure/SideBar'));
-const MobileMenu = dynamic(() => import('@/components/Shared/MobileMenu'));
+const MobileMenu = dynamic(() => import('@/components/PageStructure/MobileMenu'));
 
 export default function PlayerWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

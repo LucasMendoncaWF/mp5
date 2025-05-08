@@ -7,7 +7,7 @@ import { useUserPlaylist } from '@/api/userPlaylists';
 import useTrackStore from '@/stores/trackStore';
 
 import PlayListSkeleton from './PlaylistSkeleton';
-import PlaylistItem from '../../../Shared/PlaylistItem';
+import PlaylistItem from '../../../Shared/ListItems/PlaylistItem';
 
 export default function PlaylistList() {
   const t = useTranslations();
