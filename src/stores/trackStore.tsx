@@ -13,6 +13,7 @@ interface TrackStore {
   isRepeatActive: boolean;
   isPlaying: boolean;
   isAddingPlaylist: boolean;
+  playedSongs: string[];
   setUserPlaylists: (playlists: PlaylistModel[]) => void;
   addPlayList: (playlist: PlaylistModel) => void;
   setOpenRemovePlayListModal: (id: string) => void;
@@ -28,6 +29,7 @@ interface TrackStore {
   setPlaying: (value: boolean) => void;
   addOrRemoveToQueue: (track: TrackModel) => void;
   toggleIsAddingPlaylist: (value: boolean) => void;
+  setPlayedSongs: (value: string[]) => void;
 }
 
 const useTrackStore = create<TrackStore>()(
@@ -41,6 +43,7 @@ const useTrackStore = create<TrackStore>()(
       currentPlayList: {},
       isShuffleActive: false,
       isRepeatActive: false,
+      playedSongs: [],
       addPlayList: (playlist: PlaylistModel) => {
         const storePlaylists = get().playlists;
         if (!storePlaylists.find((item) => item.id === playlist.id)) {
@@ -109,6 +112,8 @@ const useTrackStore = create<TrackStore>()(
         };
       },
       addOrRemoveToQueue: (track: TrackModel) => {
+        if (track.id === get().currentTrack?.id) return;
+
         const currentPlayList = get().currentPlayList;
         const newPlayList = currentPlayList?.tracks ? { ...get().currentPlayList } : { tracks: [] };
 
@@ -136,6 +141,9 @@ const useTrackStore = create<TrackStore>()(
       toggleIsAddingPlaylist: (value) => {
         set({ isAddingPlaylist: value });
       },
+      setPlayedSongs: (playedSongs) => {
+        set({ playedSongs });
+      },
     }),
     {
       name: 'track-store',
@@ -145,6 +153,7 @@ const useTrackStore = create<TrackStore>()(
         currentPlayList: state.currentPlayList,
         isShuffleActive: state.isShuffleActive,
         isRepeatActive: state.isRepeatActive,
+        playedSongs: state.playedSongs,
       }),
     },
   ),

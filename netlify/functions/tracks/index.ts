@@ -13,6 +13,10 @@ export const handler = async (event: HandlerEvent) => {
     return getRecommended();
   }
 
+  if (path.endsWith('/list')) {
+    return getList(event.body);
+  }
+
   const splitted = path.split('/');
   return getById(splitted[splitted.length - 1]);
 };
@@ -68,6 +72,25 @@ const getById = async (id: string) => {
     return {
       statusCode: 500,
       body: JSON.stringify({ message: 'Error on searching trending musics', error: error.message }),
+    };
+  }
+};
+
+const getList = async (body: any) => {
+  try {
+    const response = await makeRequest('/tracks/', {
+      params: {
+        ids: body.ids,
+      },
+    });
+    return {
+      statusCode: 200,
+      body: JSON.stringify(response),
+    };
+  } catch (error: any) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Error on searching musics', error: error.message }),
     };
   }
 };

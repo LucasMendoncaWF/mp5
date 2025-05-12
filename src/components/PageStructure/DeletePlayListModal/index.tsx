@@ -1,7 +1,9 @@
 'use client';
 
+import { redirect } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
+import routes from '@/app/routes';
 import PrimaryButton from '@/components/Shared/Material/Buttons/PrimaryButton';
 import useTrackStore from '@/stores/trackStore';
 
@@ -16,6 +18,9 @@ export default function DeletePlayListModal() {
   const onClickDelete = () => {
     removePlayList(openDeletePlayListModalId);
     onCloseRemovePlayListModal();
+    if (location.href.includes(routes.playlists)) {
+      redirect(routes.playlists);
+    }
   };
 
   return (

@@ -21,8 +21,10 @@ export default function PlaylistDropDown({ playlist }: { playlist: PlaylistModel
   const onClickPlay = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    setCurrentPlayList(playlist);
-    setPlaying(true);
+    if (playlist.tracks?.length) {
+      setCurrentPlayList(playlist);
+      setPlaying(true);
+    }
     onCloseMenu();
   };
 

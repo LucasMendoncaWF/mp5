@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import PlayButton from '@/components/Shared/Material/Buttons/PlayButton';
 import type { TrackModel } from '@/models/tracks';
@@ -18,7 +18,6 @@ export default function MusicPlayer() {
   const [progressPercentage, setProgressPercentage] = useState(0);
   const [volume, setVolume] = useState(50);
   const [isLoading, setIsLoading] = useState(false);
-  const playedSongs = useRef<string[]>([]);
   const [hasMounted, setHasMounted] = useState(false);
 
   const {
@@ -26,6 +25,8 @@ export default function MusicPlayer() {
     isRepeatActive,
     currentPlayList,
     currentTrack,
+    playedSongs,
+    setPlayedSongs,
     setPlaying,
     setCurrentTrack,
     getCurrentMusicSiblings,
@@ -43,8 +44,8 @@ export default function MusicPlayer() {
 
   const getUnplayedTracks = useCallback(() => {
     if (!currentPlayList?.tracks) return [];
-    return currentPlayList?.tracks.filter((track) => !playedSongs.current.includes(track.id));
-  }, [currentPlayList?.tracks]);
+    return currentPlayList?.tracks.filter((track) => !playedSongs.includes(track.id));
+  }, [currentPlayList?.tracks, playedSongs]);
 
   const selectRandomIndex = () => {
     return currentPlayList?.tracks?.length
@@ -59,9 +60,9 @@ export default function MusicPlayer() {
   const addToPlayedSongsAndReproduce = (track: TrackModel, shouldRestart: boolean) => {
     setCurrentTrack(track);
     if (shouldRestart) {
-      playedSongs.current = [track.id];
+      setPlayedSongs([track.id]);
     } else {
-      playedSongs.current = [...playedSongs.current.filter((item) => item !== track.id), track.id];
+      setPlayedSongs([...playedSongs.filter((item) => item !== track.id), track.id]);
     }
   };
 
@@ -112,7 +113,6 @@ export default function MusicPlayer() {
     setProgressPercentage(0);
   };
 
-  // TODO: is not coming back if has 2 musics
   const handlePrev = () => {
     if (progressPercentage > 5) {
       setPlaying(true);
@@ -121,17 +121,17 @@ export default function MusicPlayer() {
     }
 
     if (!hasOnlyOneSong && currentPlayList?.tracks && currentTrack) {
-      const currentIndex = playedSongs.current.findIndex((item) => item === currentTrack.id);
+      const currentIndex = playedSongs.findIndex((item) => item === currentTrack.id);
       // if has a previous track, it moves back
 
       //it's remove from the played array in either cases
-      if (playedSongs.current[currentIndex - 1] || isRepeatActive) {
-        playedSongs.current = [...playedSongs.current.filter((item) => item !== currentTrack.id)];
+      if (playedSongs[currentIndex - 1] || isRepeatActive) {
+        setPlayedSongs([...playedSongs.filter((item) => item !== currentTrack.id)]);
       }
 
-      if (playedSongs.current[currentIndex - 1]) {
+      if (playedSongs[currentIndex - 1]) {
         const nextTrack = currentPlayList?.tracks.find(
-          (track) => track.id === playedSongs.current[currentIndex - 1],
+          (track) => track.id === playedSongs[currentIndex - 1],
         );
         if (nextTrack) {
           setCurrentTrack(nextTrack);
@@ -150,17 +150,15 @@ export default function MusicPlayer() {
   };
 
   // UI functions
-
   useEffect(() => {
     if (currentTrack) {
-      playedSongs.current = [
-        ...playedSongs.current.filter((item) => item !== currentTrack.id),
-        currentTrack.id,
-      ];
+      if (!playedSongs.includes(currentTrack.id)) {
+        setPlayedSongs([...playedSongs, currentTrack.id]);
+      }
       setIsLoading(true);
       setProgressPercentage(0);
     }
-  }, [currentTrack]);
+  }, [currentTrack, playedSongs, setPlayedSongs]);
 
   const hasUnplayed = getUnplayedTracks().length;
   return (
