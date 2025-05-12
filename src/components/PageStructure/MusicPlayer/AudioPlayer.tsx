@@ -82,7 +82,7 @@ export default function AudioPlayer({
       const audio = audioRef.current;
       if (!audio || duration === 0) return;
       const newTime = (progress / 100) * duration;
-      if (Math.abs(audio.currentTime - newTime) > 0.5) {
+      if (Math.abs(audio.currentTime - newTime) > 1.5) {
         audio.currentTime = newTime;
         setCurrentTime(newTime);
       }

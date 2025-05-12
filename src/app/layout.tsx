@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
 const DeletePlayListModal = dynamic(() => import('@/components/PageStructure/DeletePlayListModal'));
+import AddPlaylistModal from '@/components/PageStructure/AddPlaylistModal';
 import Header from '@/components/PageStructure/Header';
 import PlayerWrapper from '@/components/PageStructure/PlayerWrapper';
 import PreRender from '@/components/Shared/PreRender';
@@ -24,6 +25,7 @@ export default async function LocaleLayout({ children }: { children: React.React
         <NextIntlClientProvider>
           <Header />
           <div className="h-full">
+            <AddPlaylistModal />
             <DeletePlayListModal />
             <PlayerWrapper>{children}</PlayerWrapper>
           </div>

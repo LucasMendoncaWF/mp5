@@ -1,6 +1,7 @@
+import Loader from '@/components/Shared/Material/Loader';
 import ArtistInfoLoader from '@/components/Shared/Sections/ArtistInfo/ArtistInfoLoader';
 
-export default function TrackDetailLoader() {
+export default function TrackDetailLoader({ hasArtist }: { hasArtist?: boolean }) {
   return (
     <div className="w-full max-h-full overflow-auto pb-20">
       <div className="p-6 relative">
@@ -19,7 +20,13 @@ export default function TrackDetailLoader() {
         </div>
       </div>
       <div className="p-6 bg-background-secondary">
-        <ArtistInfoLoader />
+        {hasArtist ? (
+          <ArtistInfoLoader />
+        ) : (
+          <div className="p-5 flex justify-center">
+            <Loader />
+          </div>
+        )}
       </div>
     </div>
   );

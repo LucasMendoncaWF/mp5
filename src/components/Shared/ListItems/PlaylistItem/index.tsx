@@ -1,53 +1,23 @@
-'use client';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { useTranslations } from 'use-intl';
+import React from 'react';
 
 import routes from '@/app/routes';
-import DropDownMenu from '@/components/Shared/Material/DropDownMenu';
 import type { PlaylistModel } from '@/models/tracks';
-import useTrackStore from '@/stores/trackStore';
 
 import PlayButton from '../../Material/Buttons/PlayButton';
-import DropDownButton from '../../Material/DropDownMenu/DropDownButton';
+import './PlaylistListItem.scss';
+import PlaylistDropDown from './PlaylistDropDown';
 
 interface Props {
   playlist: PlaylistModel;
   isSidebar?: boolean;
+  isAlternate?: boolean;
 }
 
-export default function PlaylistItem({ playlist, isSidebar }: Props) {
-  const t = useTranslations();
-  const { setCurrentPlayList, setPlaying, setOpenRemovePlayListModal } = useTrackStore();
-  const [isMenuOpen, setMenuOpen] = useState(false);
-
-  const onCloseMenu = () => {
-    setTimeout(() => {
-      setMenuOpen(false);
-    }, 100);
-  };
-
-  const onClickPlay = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setCurrentPlayList(playlist);
-    setPlaying(true);
-    onCloseMenu();
-  };
-
-  const onClickDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (playlist.id) {
-      setOpenRemovePlayListModal(playlist.id);
-    }
-    onCloseMenu();
-  };
-
+export default function PlaylistItem({ playlist, isSidebar, isAlternate }: Props) {
   return (
     <div
-      onBlur={onCloseMenu}
-      className="capitalize relative py-2 flex items-center justify-between"
+      className={`${isAlternate ? 'playlist-list-item px-6 py-3' : ''} capitalize relative py-2 flex items-center justify-between`}
     >
       <div className="flex gap-2 items-center">
         {!isSidebar && !!playlist.tracks?.length && (
@@ -63,17 +33,7 @@ export default function PlaylistItem({ playlist, isSidebar }: Props) {
           <div className="line-clamp-1 pr-4">{playlist.name}</div>
         </Link>
       </div>
-      <DropDownMenu direction="bottom" setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen}>
-        <DropDownButton ariaLabel="Play playlist" onClick={onClickPlay}>
-          {t('play')}
-        </DropDownButton>
-        <DropDownButton ariaLabel="Edit Playlist" onClick={() => {}}>
-          {t('edit')}
-        </DropDownButton>
-        <DropDownButton ariaLabel="Delete playlist" onClick={onClickDelete}>
-          {t('delete')}
-        </DropDownButton>
-      </DropDownMenu>
+      <PlaylistDropDown playlist={playlist} />
     </div>
   );
 }

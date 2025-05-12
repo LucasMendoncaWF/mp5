@@ -7,12 +7,12 @@ import type { PlaylistModel, TrackModel } from '@/models/tracks';
 interface TrackStore {
   playlists: PlaylistModel[];
   openDeletePlayListModalId: string | null;
-  favorites: TrackModel[];
   currentTrack: TrackModel | null;
   currentPlayList: PlaylistModel;
   isShuffleActive: boolean;
   isRepeatActive: boolean;
   isPlaying: boolean;
+  isAddingPlaylist: boolean;
   setUserPlaylists: (playlists: PlaylistModel[]) => void;
   addPlayList: (playlist: PlaylistModel) => void;
   setOpenRemovePlayListModal: (id: string) => void;
@@ -25,9 +25,9 @@ interface TrackStore {
   toggleRepeat: () => void;
   togglePlay: () => void;
   getCurrentMusicSiblings: () => { hasNext?: boolean; hasPrev?: boolean; index?: number };
-  addOrRemoveToFavorites: (track: TrackModel) => void;
   setPlaying: (value: boolean) => void;
   addOrRemoveToQueue: (track: TrackModel) => void;
+  toggleIsAddingPlaylist: (value: boolean) => void;
 }
 
 const useTrackStore = create<TrackStore>()(
@@ -36,8 +36,8 @@ const useTrackStore = create<TrackStore>()(
       isPlaying: false,
       playlists: [],
       openDeletePlayListModalId: null,
+      isAddingPlaylist: false,
       currentTrack: null,
-      favorites: [],
       currentPlayList: {},
       isShuffleActive: false,
       isRepeatActive: false,
@@ -108,15 +108,6 @@ const useTrackStore = create<TrackStore>()(
           index,
         };
       },
-      addOrRemoveToFavorites: (track: TrackModel) => {
-        const favorites = [...get().favorites];
-        const index = favorites.findIndex((item) => item.id === track.id);
-        if (index < 0) {
-          set({ favorites: [...favorites, track] });
-        } else {
-          set({ favorites: favorites.filter((item) => item.id !== track.id) });
-        }
-      },
       addOrRemoveToQueue: (track: TrackModel) => {
         const currentPlayList = get().currentPlayList;
         const newPlayList = currentPlayList?.tracks ? { ...get().currentPlayList } : { tracks: [] };
@@ -141,6 +132,9 @@ const useTrackStore = create<TrackStore>()(
             currentPlayList: filteredPlaylist,
           });
         }
+      },
+      toggleIsAddingPlaylist: (value) => {
+        set({ isAddingPlaylist: value });
       },
     }),
     {

@@ -1,7 +1,7 @@
 import { useTranslations } from 'use-intl';
 
-import Loader from '@/components/Shared/Material/Loader';
 import MusicListItem from '@/components/Shared/ListItems/MusicListItem';
+import Loader from '@/components/Shared/Material/Loader';
 import type { TrackModel } from '@/models/tracks';
 import NoteIcon from '@/svgs/icon-note';
 
@@ -11,9 +11,17 @@ interface Props {
   data: TrackModel[] | null;
   fullWidth?: boolean;
   title?: string;
+  hideTitle?: boolean;
 }
 
-export default function SearchTracks({ isLoading, hasError, data, fullWidth, title }: Props) {
+export default function SearchTracks({
+  isLoading,
+  hasError,
+  data,
+  fullWidth,
+  title,
+  hideTitle,
+}: Props) {
   const t = useTranslations();
 
   if (isLoading) {
@@ -30,10 +38,12 @@ export default function SearchTracks({ isLoading, hasError, data, fullWidth, tit
 
   return (
     <div>
-      <h3 className="text-2xl font-birdy items-center pl-6 mb-4 lg:pt-4 pt-8 flex gap-2 capitalize text-text-color">
-        <div className="w-6 h-6 text-contrast-color">{NoteIcon}</div>
-        {title || t('musicsFound')}
-      </h3>
+      {!hideTitle && (
+        <h3 className="text-2xl font-birdy items-center pl-6 mb-4 lg:pt-4 pt-5 flex gap-2 capitalize text-text-color">
+          <div className="w-6 h-6 text-contrast-color">{NoteIcon}</div>
+          {title || t('musicsFound')}
+        </h3>
+      )}
       <div>{data?.map((track) => <MusicListItem key={track.id} track={track} />)}</div>
     </div>
   );

@@ -7,10 +7,10 @@ import React from 'react';
 import { useGetTrack } from '@/api/track';
 import SimilarTracks from '@/components/Pages/TrackDetail/SimilarTracks';
 import TrackDetailLoader from '@/components/Pages/TrackDetail/TrackDetailLoader';
-import ArtistInfo from '@/components/Shared/Sections/ArtistInfo';
-import ErrorMessage from '@/components/Shared/Material/ErrorMessage';
 import MusicItemDropDown from '@/components/Shared/ListItems/MusicListItem/MusicItemDropDown';
 import PlayButton from '@/components/Shared/Material/Buttons/PlayButton';
+import ErrorMessage from '@/components/Shared/Material/ErrorMessage';
+import ArtistInfo from '@/components/Shared/Sections/ArtistInfo';
 
 export default function TrackPage() {
   const t = useTranslations();
@@ -18,7 +18,7 @@ export default function TrackPage() {
   const { data: trackData, isLoading, hasError } = useGetTrack(params.track_id as string);
 
   if (isLoading) {
-    return <TrackDetailLoader />;
+    return <TrackDetailLoader hasArtist />;
   }
 
   if (hasError || !trackData) {

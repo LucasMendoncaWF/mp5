@@ -22,3 +22,21 @@ export const useUserPlaylist = ({ enabled = true }: { enabled?: boolean }) => {
     hasError,
   };
 };
+
+export const usePlaylistDetails = (id: string) => {
+  const { data, isLoading, hasError } = useAutoFetch({
+    mutate: async () => {
+      if (id) {
+        const response = await api.get(`playlists/details/${id}`);
+        return response.data as PlaylistModel;
+      }
+      return {};
+    },
+  });
+
+  return {
+    data,
+    isLoading,
+    hasError,
+  };
+};

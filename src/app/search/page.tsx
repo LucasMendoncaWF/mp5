@@ -69,7 +69,7 @@ export default function SearchPage() {
 
   return (
     <div className="h-full overflow-y-auto">
-      <div className="md:pt-6 px-6 md:px-8 flex">
+      <div className="md:pt-6 pt-4 px-6 md:px-8 flex">
         {genre && (
           <button
             aria-label="close"

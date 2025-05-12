@@ -13,15 +13,7 @@ import DropDownMenu from '../../Shared/Material/DropDownMenu';
 export default function MusicPlayerOptions() {
   const t = useTranslations();
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const {
-    currentTrack,
-    isRepeatActive,
-    isShuffleActive,
-    favorites,
-    addOrRemoveToFavorites,
-    toggleRepeat,
-    toggleShuffle,
-  } = useTrackStore();
+  const { isRepeatActive, isShuffleActive, toggleRepeat, toggleShuffle } = useTrackStore();
 
   const onCloseMenu = () => {
     setTimeout(() => {
@@ -29,16 +21,6 @@ export default function MusicPlayerOptions() {
     }, 100);
   };
 
-  const onClickFavorite = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (currentTrack) {
-      addOrRemoveToFavorites(currentTrack);
-    }
-    onCloseMenu();
-  };
-
-  const isOnFavorites = favorites.find((item) => item.id === currentTrack?.id);
   return (
     <div onBlur={onCloseMenu} className="w-[100px] flex items-center md:gap-[14px] justify-end">
       <button
@@ -56,9 +38,6 @@ export default function MusicPlayerOptions() {
         {RandomIcon}
       </button>
       <DropDownMenu size={1.2} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen}>
-        <DropDownButton ariaLabel="Add or Remove to favorites" onClick={onClickFavorite}>
-          {isOnFavorites ? t('removeFavorite') : t('addFavorite')}
-        </DropDownButton>
         <DropDownButton
           ariaLabel="Add to playlist"
           onClick={() => setTimeout(() => setMenuOpen(false), 200)}

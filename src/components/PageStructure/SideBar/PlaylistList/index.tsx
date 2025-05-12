@@ -11,7 +11,7 @@ import PlaylistItem from '../../../Shared/ListItems/PlaylistItem';
 
 export default function PlaylistList() {
   const t = useTranslations();
-  const { setUserPlaylists, playlists, favorites } = useTrackStore();
+  const { setUserPlaylists, playlists } = useTrackStore();
   const { isLoading, data, hasError } = useUserPlaylist({ enabled: !playlists.length });
 
   useEffect(() => {
@@ -30,7 +30,6 @@ export default function PlaylistList() {
 
   return (
     <div>
-      <PlaylistItem isSidebar playlist={{ id: 'fav', name: t('favorites'), tracks: favorites }} />
       {playlists.slice(0, 7).map((playlist) => (
         <PlaylistItem isSidebar key={playlist.id} playlist={playlist} />
       ))}

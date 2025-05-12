@@ -18,13 +18,15 @@ export default function PlayerWrapper({ children }: { children: React.ReactNode 
           <SideBar />
         </div>
         <div
-          className={`md:min-w-100  ${!hidePlayer ? 'content-container inner-shadow' : 'w-full bg-background-secondary'}`}
+          className={`md:min-w-100  ${hidePlayer ? 'w-full bg-background-secondary md:pb-0 pb-20' : 'content-container inner-shadow'}`}
         >
           {children}
         </div>
       </div>
-      <div className={`${hidePlayer ? 'w-0 h-0 overflow-hidden' : ''}`}>
+      <div className={`${hidePlayer ? 'fixed bottom-5 w-full' : ''}`}>
         <MobileMenu />
+      </div>
+      <div className={`${hidePlayer ? 'w-0 h-0 overflow-hidden' : ''}`}>
         <MusicPlayer />
       </div>
     </>
