@@ -4,9 +4,9 @@ import React from 'react';
 import routes from '@/app/routes';
 import type { PlaylistModel } from '@/models/tracks';
 
+import PlaylistDropDown from './PlaylistDropDown';
 import PlayButton from '../../Material/Buttons/PlayButton';
 import './PlaylistListItem.scss';
-import PlaylistDropDown from './PlaylistDropDown';
 
 interface Props {
   playlist: PlaylistModel;

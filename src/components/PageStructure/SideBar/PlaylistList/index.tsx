@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
 import { useUserPlaylist } from '@/api/userPlaylists';
@@ -10,7 +9,6 @@ import PlayListSkeleton from './PlaylistSkeleton';
 import PlaylistItem from '../../../Shared/ListItems/PlaylistItem';
 
 export default function PlaylistList() {
-  const t = useTranslations();
   const { setUserPlaylists, playlists } = useTrackStore();
   const { isLoading, data, hasError } = useUserPlaylist({ enabled: !playlists.length });
 

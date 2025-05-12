@@ -7,9 +7,8 @@ import routes from '@/app/routes';
 import type { PlaylistModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 
-import DropDownMenu from '../../Material/DropDownMenu';
 import PlayButton from '../../Material/Buttons/PlayButton';
-
+import DropDownMenu from '../../Material/DropDownMenu';
 import './PlaylistThumbItem.scss';
 import DropDownButton from '../../Material/DropDownMenu/DropDownButton';
 

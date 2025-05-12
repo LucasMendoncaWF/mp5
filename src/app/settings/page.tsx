@@ -36,7 +36,7 @@ export default function SettingsPage() {
           <div className="flex justify-center opacity-80 dark:invert">
             <Image alt="family" src="/images/family.png" width="200" height="200" />
           </div>
-          <div className='flex justify-center'>
+          <div className="flex justify-center">
             <PrimaryButton ariaLabel="create">{t('createFamilyGroup')}</PrimaryButton>
           </div>
         </div>

@@ -4,9 +4,9 @@ import React from 'react';
 import routes from '@/app/routes';
 import type { TrackModel } from '@/models/tracks';
 
+import MusicItemDropDown from './MusicItemDropDown';
 import PlayButton from '../../Material/Buttons/PlayButton';
 import './MusicListItem.scss';
-import MusicItemDropDown from './MusicItemDropDown';
 
 interface Props {
   track: TrackModel;

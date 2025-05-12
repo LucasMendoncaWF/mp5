@@ -5,9 +5,9 @@ import { useTranslations } from 'next-intl';
 
 import { useGetArtist } from '@/api/artist';
 import SearchTracks from '@/components/Pages/Search/SearchTracks';
+import ErrorMessage from '@/components/Shared/Material/ErrorMessage';
 import ArtistInfo from '@/components/Shared/Sections/ArtistInfo';
 import ArtistInfoLoader from '@/components/Shared/Sections/ArtistInfo/ArtistInfoLoader';
-import ErrorMessage from '@/components/Shared/Material/ErrorMessage';
 
 export default function ArtistPage() {
   const t = useTranslations();
