@@ -14,6 +14,7 @@ interface TrackStore {
   isPlaying: boolean;
   isAddingPlaylist: boolean;
   playedSongs: string[];
+  addToPlaylistModal: TrackModel | null;
   setUserPlaylists: (playlists: PlaylistModel[]) => void;
   addPlayList: (playlist: PlaylistModel) => void;
   setOpenRemovePlayListModal: (id: string) => void;
@@ -30,6 +31,7 @@ interface TrackStore {
   addOrRemoveToQueue: (track: TrackModel) => void;
   toggleIsAddingPlaylist: (value: boolean) => void;
   setPlayedSongs: (value: string[]) => void;
+  handleAddToPlaylistModal: (track: TrackModel | null) => void;
 }
 
 const useTrackStore = create<TrackStore>()(
@@ -44,6 +46,7 @@ const useTrackStore = create<TrackStore>()(
       isShuffleActive: false,
       isRepeatActive: false,
       playedSongs: [],
+      addToPlaylistModal: null,
       addPlayList: (playlist: PlaylistModel) => {
         const storePlaylists = get().playlists;
         if (!storePlaylists.find((item) => item.id === playlist.id)) {
@@ -140,6 +143,9 @@ const useTrackStore = create<TrackStore>()(
       },
       toggleIsAddingPlaylist: (value) => {
         set({ isAddingPlaylist: value });
+      },
+      handleAddToPlaylistModal: (track) => {
+        set({ addToPlaylistModal: track });
       },
       setPlayedSongs: (playedSongs) => {
         set({ playedSongs });

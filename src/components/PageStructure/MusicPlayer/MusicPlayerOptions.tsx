@@ -13,12 +13,26 @@ import DropDownMenu from '../../Shared/Material/DropDownMenu';
 export default function MusicPlayerOptions() {
   const t = useTranslations();
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { isRepeatActive, isShuffleActive, toggleRepeat, toggleShuffle } = useTrackStore();
+  const {
+    isRepeatActive,
+    currentTrack,
+    isShuffleActive,
+    toggleRepeat,
+    toggleShuffle,
+    handleAddToPlaylistModal,
+  } = useTrackStore();
 
   const onCloseMenu = () => {
     setTimeout(() => {
       setMenuOpen(false);
     }, 100);
+  };
+
+  const onAddToPlaylist = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    handleAddToPlaylistModal(currentTrack);
+    onCloseMenu();
   };
 
   return (
@@ -38,10 +52,7 @@ export default function MusicPlayerOptions() {
         {RandomIcon}
       </button>
       <DropDownMenu size={1.2} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen}>
-        <DropDownButton
-          ariaLabel="Add to playlist"
-          onClick={() => setTimeout(() => setMenuOpen(false), 200)}
-        >
+        <DropDownButton ariaLabel="Add to playlist" onClick={onAddToPlaylist}>
           {t('addToPlaylist')}
         </DropDownButton>
       </DropDownMenu>

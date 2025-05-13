@@ -50,5 +50,8 @@
   "changeTheme": "Trocar Tema",
   "changeLanguage": "Trocar Idioma",
   "createFamilyGroup": "Criar grupo familiar",
-  "familyGroup": "Grupo Familiar"
+  "familyGroup": "Grupo Familiar",
+  "cantEditOfficialPlaylist": "Playlists oficiais não podem ser editadas",
+  "stopEdit": "Parar de editar",
+  "remove": "Remover"
 }

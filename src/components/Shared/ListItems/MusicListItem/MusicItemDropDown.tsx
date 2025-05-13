@@ -7,9 +7,15 @@ import useTrackStore from '@/stores/trackStore';
 import DropDownMenu from '../../Material/DropDownMenu';
 import DropDownButton from '../../Material/DropDownMenu/DropDownButton';
 
-export default function MusicItemDropDown({ track }: { track: TrackModel }) {
+interface Props {
+  track: TrackModel;
+  // eslint-disable-next-line no-unused-vars
+  onRemove?: (track: TrackModel) => void;
+}
+
+export default function MusicItemDropDown({ track, onRemove }: Props) {
   const t = useTranslations();
-  const { currentPlayList, addOrRemoveToQueue } = useTrackStore();
+  const { currentPlayList, addOrRemoveToQueue, handleAddToPlaylistModal } = useTrackStore();
 
   const isOnQueue = currentPlayList?.tracks?.find((item) => item.id === track.id);
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -26,6 +32,14 @@ export default function MusicItemDropDown({ track }: { track: TrackModel }) {
     addOrRemoveToQueue(track);
     onCloseMenu();
   };
+
+  const onAddToPlaylist = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    handleAddToPlaylistModal(track);
+    onCloseMenu();
+  };
+
   return (
     <div onBlur={onCloseMenu}>
       <DropDownMenu
@@ -40,9 +54,14 @@ export default function MusicItemDropDown({ track }: { track: TrackModel }) {
           {isOnQueue ? t('removeFromQueue') : t('addToQueue')}
         </DropDownButton>
 
-        <DropDownButton ariaLabel="Add to playlist" onClick={onCloseMenu}>
+        <DropDownButton ariaLabel="Add to playlist" onClick={onAddToPlaylist}>
           {t('addToPlaylist')}
         </DropDownButton>
+        {onRemove && (
+          <DropDownButton ariaLabel="Add to playlist" onClick={() => onRemove(track)}>
+            {t('remove')}
+          </DropDownButton>
+        )}
       </DropDownMenu>
     </div>
   );

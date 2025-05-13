@@ -11,17 +11,9 @@ interface Props {
   data: TrackModel[] | null;
   fullWidth?: boolean;
   title?: string;
-  hideTitle?: boolean;
 }
 
-export default function SearchTracks({
-  isLoading,
-  hasError,
-  data,
-  fullWidth,
-  title,
-  hideTitle,
-}: Props) {
+export default function SearchTracks({ isLoading, hasError, data, fullWidth, title }: Props) {
   const t = useTranslations();
 
   if (isLoading) {
@@ -38,12 +30,10 @@ export default function SearchTracks({
 
   return (
     <div>
-      {!hideTitle && (
-        <h3 className="text-2xl font-birdy items-center pl-6 mb-4 lg:pt-4 pt-5 flex gap-2 capitalize text-text-color">
-          <div className="w-6 h-6 text-contrast-color">{NoteIcon}</div>
-          {title || t('musicsFound')}
-        </h3>
-      )}
+      <h3 className="text-2xl font-birdy items-center pl-6 mb-4 lg:pt-4 pt-5 flex gap-2 capitalize text-text-color">
+        <div className="w-6 h-6 text-contrast-color">{NoteIcon}</div>
+        {title || t('musicsFound')}
+      </h3>
       <div>{data?.map((track) => <MusicListItem key={track.id} track={track} />)}</div>
     </div>
   );

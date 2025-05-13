@@ -8,8 +8,9 @@ import routes from '@/app/routes';
 import PrimaryButton from '@/components/Shared/Material/Buttons/PrimaryButton';
 import ErrorMessage from '@/components/Shared/Material/ErrorMessage';
 import useTrackStore from '@/stores/trackStore';
+import { localPlaylistString } from '@/utils/general';
 
-export default function AddPlaylistModal() {
+export default function CreatePlaylistModal() {
   const t = useTranslations();
   const [nameInput, setNameInput] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -22,20 +23,21 @@ export default function AddPlaylistModal() {
 
   const onAdd = async () => {
     if (nameInput) {
-      const id = await generateHashSHA256(nameInput);
+      const hash = await generateHashSHA256(nameInput);
+      const id = `${localPlaylistString}_${hash}`;
       if (playlists.find((item) => item.name === nameInput)) {
         setError(t('PlaylistIdError'));
         return;
       }
       addPlayList({
-        id: `local_playlist_` + id,
+        id,
         name: nameInput,
         description: descriptionInput,
       });
       toggleIsAddingPlaylist(false);
       setNameInput('');
       setDescriptionInput('');
-      redirect(`${routes.playlists}/${id}/edit`);
+      redirect(`${routes.playlists}/${id}?mode=edit`);
     }
     setError(t('PlaylistNameError'));
 
@@ -58,13 +60,13 @@ export default function AddPlaylistModal() {
       <div className="bg-background rounded-xl normal-case absolute min-w-80 top-1/5 left-1/10 w-8/10 p-6 lg:left-5/13 lg:w-3/13 absolute">
         <div className="text-text-color text-2xl font-bold">{t('addPlaylist')}</div>
         <div className="relative">
-          <label className="absolute left-4 top-6 text-text-color" htmlFor="playlist_name">
+          <label className="absolute left-4 top-6 text-text-color" htmlFor="playlist_name_modal">
             {nameInput ? '' : `${t('playlistName')}*`}
           </label>
           <input
             className="border-2 border-text-color rounded-md w-full mt-4 px-4 py-2 text-text-color"
             type="text"
-            id="playlist_name"
+            id="playlist_name_modal"
             maxLength={100}
             value={nameInput}
             onChange={(e) => {
@@ -74,12 +76,15 @@ export default function AddPlaylistModal() {
         </div>
 
         <div className="relative">
-          <label className="absolute left-4 top-6 text-text-color" htmlFor="playlist_name">
+          <label
+            className="absolute left-4 top-6 text-text-color"
+            htmlFor="playlist_description_modal"
+          >
             {descriptionInput ? '' : t('playlistDescription')}
           </label>
           <textarea
             className="border-2 border-text-color min-h-15 rounded-md w-full mt-4 px-4 py-2 text-text-color"
-            id="playlist_name"
+            id="playlist_description_modal"
             rows={5}
             value={descriptionInput}
             onChange={(e) => {

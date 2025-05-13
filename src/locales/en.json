@@ -52,5 +52,8 @@
   "changeTheme": "Change Theme",
   "changeLanguage": "Change Language",
   "createFamilyGroup": "Create Family Group",
-  "familyGroup": "Family Group"
+  "familyGroup": "Family Group",
+  "cantEditOfficialPlaylist": "Official Playlists can't be edited.",
+  "stopEdit": "Stop Editing",
+  "remove": "Remove"
 }

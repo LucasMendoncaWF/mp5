@@ -1,9 +1,10 @@
 'use client';
-import { useAutoFetch } from '@/hooks/useMutation';
+import { useAutoFetch, useMutation } from '@/hooks/useMutation';
 import type { PlaylistModel } from '@/models/tracks';
 import useTrackStore from '@/stores/trackStore';
 
 import api from './api';
+import { isLocalPlaylist } from '@/utils/general';
 
 export const useUserPlaylist = ({ enabled = true }: { enabled?: boolean }) => {
   const { data, isLoading, hasError } = useAutoFetch({
@@ -26,12 +27,11 @@ export const useUserPlaylist = ({ enabled = true }: { enabled?: boolean }) => {
 
 export const usePlaylistDetails = (id: string) => {
   const { playlists } = useTrackStore();
-  const { data, isLoading, hasError } = useAutoFetch({
+  const { data, isLoading, hasError } = useMutation({
     mutate: async () => {
       if (id) {
-        if (id.includes('local_playlist')) {
-          const newPlaylist = playlists.find((item) => item.id === id);
-          return newPlaylist;
+        if (isLocalPlaylist(id)) {
+          return;
         }
         const response = await api.get(`playlists/details/${id}`);
         return response.data as PlaylistModel;
@@ -41,7 +41,7 @@ export const usePlaylistDetails = (id: string) => {
   });
 
   return {
-    data,
+    data: data || playlists?.find((item) => item.id === id),
     isLoading,
     hasError,
   };

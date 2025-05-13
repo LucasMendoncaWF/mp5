@@ -9,7 +9,13 @@ import useTrackStore from '@/stores/trackStore';
 import DropDownMenu from '../../Material/DropDownMenu';
 import DropDownButton from '../../Material/DropDownMenu/DropDownButton';
 
-export default function PlaylistDropDown({ playlist }: { playlist: PlaylistModel }) {
+export default function PlaylistDropDown({
+  playlist,
+  isEditing,
+}: {
+  playlist: PlaylistModel;
+  isEditing?: boolean;
+}) {
   const { setCurrentPlayList, setPlaying, setOpenRemovePlayListModal } = useTrackStore();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const onCloseMenu = () => {
@@ -42,7 +48,7 @@ export default function PlaylistDropDown({ playlist }: { playlist: PlaylistModel
     e.preventDefault();
     onCloseMenu();
     if (playlist.id) {
-      redirect(`${routes.playlists}/${playlist.id}/edit`);
+      redirect(`${routes.playlists}/${playlist.id}${isEditing ? '' : '?mode=edit'}`);
     }
   };
   const t = useTranslations();
@@ -52,7 +58,7 @@ export default function PlaylistDropDown({ playlist }: { playlist: PlaylistModel
         {t('play')}
       </DropDownButton>
       <DropDownButton ariaLabel="Edit Playlist" onClick={onClickEdit}>
-        {t('edit')}
+        {isEditing ? t('stopEdit') : t('edit')}
       </DropDownButton>
       <DropDownButton ariaLabel="Delete playlist" onClick={onClickDelete}>
         {t('delete')}
