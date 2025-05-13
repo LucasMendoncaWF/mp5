@@ -18,7 +18,7 @@ export default function MobileMenu() {
       <div className="flex gap-8 items-center justify-center w-1/2 pr-5">
         <Link
           aria-label="Home"
-          className={`${iconClasses} ${pathName.includes(routes.explore) ? 'text-primary' : 'text-text-color'}`}
+          className={`${iconClasses} ${pathName === '/' ? 'text-primary' : 'text-text-color'}`}
           href={routes.explore}
         >
           {HomeIcon}

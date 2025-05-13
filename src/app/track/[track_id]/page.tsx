@@ -35,12 +35,14 @@ export default function TrackPage() {
           <PlayButton isSingleTrack track={trackData} />
         </div>
         <div className="flex flex-wrap items-end gap-5">
-          <div
-            className="link-hover relative text-text-color md:w-70 md:h-70 w-full aspect-square bg-primary bg-center bg-no-repeat bg-cover"
-            style={{
-              backgroundImage: `url(${trackData.artwork['1000x1000'] || '/images/placeholder.jpg'})`,
-            }}
-          ></div>
+          <div className="md:block flex justify-center md:w-auto w-full">
+            <div
+              className="link-hover relative text-text-color md:w-70 md:h-70 w-45 aspect-square bg-primary bg-center bg-no-repeat bg-cover"
+              style={{
+                backgroundImage: `url(${trackData.artwork['1000x1000'] || '/images/placeholder.jpg'})`,
+              }}
+            ></div>
+          </div>
           <div className="pr-15 mt-3  text-text-color">
             <div className="font-birdy capitalize md:text-2xl">{trackData.title}</div>
             <div className="normal-case w-full break-all">{trackData.description}</div>

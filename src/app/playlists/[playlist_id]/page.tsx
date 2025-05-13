@@ -68,16 +68,26 @@ export default function PlaylistDetailPage() {
     }
   };
 
-  if (isLoading || (!isOfficialPlaylist && !data)) {
+  if ((isLoading || !data) && !hasError) {
     return <TrackDetailLoader />;
   }
 
-  if (hasError || !data) {
+  if (hasError) {
+    return <ErrorMessage>{t('playlistError')}</ErrorMessage>;
+  }
+
+  if (!data) {
     return <ErrorMessage>{t('playlistError')}</ErrorMessage>;
   }
 
   return (
     <div className="w-full max-h-full overflow-auto">
+      {isOfficialPlaylist && isEditing && (
+        <div className="p-6 bg-background-secondary text-red-600 normal-case">
+          {t('cantEditOfficialPlaylist')}
+        </div>
+      )}
+
       <div className="p-6 relative">
         <div className="absolute md:right-5 right-8 md:top-5 top-8 z-9">
           <PlaylistDropDown isEditing={canEdit} playlist={data} />
@@ -86,12 +96,14 @@ export default function PlaylistDetailPage() {
           <PlayButton isPlaylist playList={data} />
         </div>
         <div className="flex flex-wrap items-end gap-5">
-          <div
-            className="link-hover relative text-text-color md:w-70 md:h-70 w-full aspect-square bg-primary bg-center bg-no-repeat bg-cover"
-            style={{
-              backgroundImage: `url(${data.artwork || '/images/placeholder.jpg'})`,
-            }}
-          ></div>
+          <div className="md:block flex justify-center md:w-auto w-full">
+            <div
+              className="link-hover relative text-text-color md:w-70 md:h-70 w-45 aspect-square bg-primary bg-center bg-no-repeat bg-cover"
+              style={{
+                backgroundImage: `url(${data.artwork || '/images/placeholder.jpg'})`,
+              }}
+            ></div>
+          </div>
           {canEdit ? (
             <EditPlaylistFields data={data} />
           ) : (
@@ -102,13 +114,6 @@ export default function PlaylistDetailPage() {
           )}
         </div>
       </div>
-
-      {isOfficialPlaylist && isEditing && (
-        <div className="p-6 bg-background-secondary text-red-600 normal-case">
-          {t('cantEditOfficialPlaylist')}
-        </div>
-      )}
-
       <div className="p-6 pb-20">
         {tracks.map((track, index) => (
           <div

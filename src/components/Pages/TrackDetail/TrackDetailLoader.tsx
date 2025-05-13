@@ -12,7 +12,9 @@ export default function TrackDetailLoader({ hasArtist }: { hasArtist?: boolean }
           <div className="skeleton-animation w-10 h-10"></div>
         </div>
         <div className="flex flex-wrap items-end gap-5">
-          <div className="relative skeleton-animation md:w-70 md:h-70 w-full aspect-square"></div>
+          <div className="md:block flex justify-center md:w-auto w-full">
+            <div className="relative skeleton-animation md:w-70 md:h-70 w-45 aspect-square"></div>
+          </div>
           <div className="pr-15 mt-3 text-text-color">
             <div className="md:text-2xl w-60 h-10 skeleton-animation"></div>
             <div className="w-80 h-10 mt-1 skeleton-animation"></div>

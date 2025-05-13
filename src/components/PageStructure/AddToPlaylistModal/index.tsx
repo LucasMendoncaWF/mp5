@@ -62,6 +62,13 @@ export default function AddToPlaylistModal() {
               </button>
             ))}
         </div>
+        <button
+          aria-label="cancel action"
+          className="py-2 px-4 mt-4 bg-background-secondary rounded-xl cursor-pointer hover:opacity-80 hover:scale-105 transition"
+          onClick={() => handleAddToPlaylistModal(null)}
+        >
+          {t('cancel')}
+        </button>
       </div>
     </div>
   );

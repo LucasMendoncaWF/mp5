@@ -21,7 +21,7 @@ export default function EditPlaylistFields({ data }: { data: PlaylistModel }) {
     redirect(`${routes.playlists}/${data.id}`);
   };
   return (
-    <div className="w-1/2">
+    <div className="md:w-1/2 w-full">
       <div className="relative">
         <label className="absolute left-4 top-6 text-text-color" htmlFor="playlist_name">
           {name ? '' : `${t('playlistName')}*`}

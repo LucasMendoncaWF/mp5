@@ -37,7 +37,7 @@ export default function CreatePlaylistModal() {
       toggleIsAddingPlaylist(false);
       setNameInput('');
       setDescriptionInput('');
-      redirect(`${routes.playlists}/${id}?mode=edit`);
+      redirect(`${routes.playlists}/${id}`);
     }
     setError(t('PlaylistNameError'));
 
